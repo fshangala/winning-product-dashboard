@@ -1,0 +1,10 @@
+.topbar {
+  &:link, &:visited {
+    text-decoration: none;
+    background-color: $primary-color;
+    color: $on-primary-color;
+    display: block;
+    text-align: center;
+    padding: $padding;
+  }
+}
