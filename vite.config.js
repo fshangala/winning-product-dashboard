@@ -13,4 +13,13 @@ export default defineConfig({
     },
     host: '0.0.0.0'
   }*/
+  server:{
+    proxy: {
+      '/tiktok-ads-api': {
+        target: 'https://open.tiktokapis.com',
+        changeOrigin: true,
+        rewrite: (path)=>path.replace(/^\/tiktok-ads-api/,"")
+      }
+    }
+  },
 })

@@ -12,6 +12,7 @@ import Login from './routes/login.jsx'
 import UserProvider from './context/UserContext.jsx'
 import FacebookAds from './routes/facebook_ads.jsx'
 import { initFacebookSdk } from './vendor/facebook.jsx'
+import TiktokAds from './routes/tiktok_ads.jsx'
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path:'/',
         element:<FacebookAds />
+      },
+      {
+        path:'/tiktok-ads',
+        element:<TiktokAds />
       }
     ]
   },
@@ -31,7 +36,8 @@ const router = createBrowserRouter([
   }
 ])
 
-initFacebookSdk().then(startApp)
+//initFacebookSdk().then(startApp)
+startApp()
 
 function startApp(){
   ReactDOM.createRoot(document.getElementById('root')).render(

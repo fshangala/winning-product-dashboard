@@ -17,21 +17,25 @@ export default function Root() {
         onGoogleLogin(user)
       }
     }
-  })
+  },[user,profile])
 
   const onGoogleLogin = function(credentials) {
     fetch(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${credentials.access_token}`, {
       headers: {
-        Authorization: `Bearer ${credentials.access_token}`,
-        Accept: 'application/json'
+        "Authorization": `Bearer ${credentials.access_token}`,
+        "Accept": 'application/json'
       }
     }).then((response)=>{
       response.json().then((data)=>{
-        setProfile(data)
-        console.log(data)
+        if(data.error) {
+          navigate("/login")
+        } else {
+          setProfile(data)
+        }
       })
     }).catch((error)=>{
       console.log(error)
+      navigate("/login")
     })
   }
 
@@ -43,8 +47,9 @@ export default function Root() {
           <img src={brandImage} alt="logo" />
         </a>
         <div className="topnav">
-          <a href="#" className="topnav-link active">Facebook Ads</a>
+          <Link to="/" className="topnav-link">Facebook Ads</Link>
           <a href="#" className="topnav-link">Meta Advertisers</a>
+          <Link to="/tiktok-ads" className="topnav-link">Tiktok Ads</Link>
           <a href="#" className="topnav-link">Tiktok Creative Center</a>
           <a href="#" className="topnav-link">Sales Tracker</a>
           <a href="#" className="topnav-link">Magic AI</a>

@@ -1,0 +1,35 @@
+.alerts-container {
+  position: absolute;
+  bottom: 0;
+  .alert {
+    background-color: $primary-color;
+    color: $on-primary-color;
+    border-radius: $border-radius;
+    box-shadow: $shadow;
+    opacity: 0.8;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  
+    .body {
+      flex-grow: 10;
+      padding: $padding;
+    }
+  
+    .actions {
+      .close-btn {
+        padding: $padding;
+        border: none;
+        background-color: $primary-color;
+        border-radius: $border-radius;
+        color: red;
+  
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

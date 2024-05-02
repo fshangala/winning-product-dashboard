@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react'
 import facebookLogo from '../assets/images/facebook.svg'
 import { supabase } from "../supabase-client"
-import { Alert, AlertsContainer } from '../components/alert'
 
-export default function FacebookAds() {
+export default function TiktokAds() {
   const [loadAds,setLoadAds] = useState({
     session:"",
     loading:false,
     ads:[]
   })
+  const [access_token,setAccessToken] = useState(null)
   const [alerts,setAlerts] = useState([]);
 
   const dismissAlert = function(index) {
@@ -19,35 +19,45 @@ export default function FacebookAds() {
   }
 
   useEffect(()=>{
-    if(loadAds.session != "" && loadAds.loading) {
-      var channel = supabase.channel("facebookads").on("postgres_changes",{event:"*",schema:"public",table:"facebookads"},(payload)=>{
-        console.log(payload.new.session);
-        if(payload.new.session == loadAds.session){
-          setLoadAds({
-            session:loadAds.session,
-            loading:false,
-            ads:payload.new.data.ads
-          })
-        }
-      }).subscribe()
-    }
-  })
-
-  const fetchAds = function(){
-    fetch("http://localhost:8000/facebook-ads/",{
-      method:"GET",
-    }).then((value)=>{
-      value.json().then((value)=>{
-        setLoadAds({
-          session:value.session,
-          loading:true,
-          ads:loadAds.ads
-        })
+    if (access_token == null) {
+      var urlBody = new URLSearchParams({
+        "client_key":"awger5ovlqqj478t",
+        "client_secret":"Sh0CjimiKTDSGL0cmJJqZv4dwdHljZrc",
+        "grant_type":"client_credentials"
       })
-    }).catch((reason)=>{
-      console.log(reason)
-    })
-  }
+      fetch("/tiktok-ads-api/v2/oauth/token/",{
+        method:"post",
+        headers:{
+          "Content-Type":"application/x-www-form-urlencoded",
+        },
+        body: urlBody
+      }).then(response=>response.json()).then((data)=>{
+        setAccessToken(data.access_token)
+      }).catch((reason)=>{
+        console.log(reason)
+      })
+    } else {
+      console.log(`Bearer ${access_token}`)
+      fetch("/tiktok-ads-api/v2/research/adlib/ad/query/?fields=ad.id",{
+        method:"post",
+        mode:"no-cors",
+        headers:{
+          "authorization":`bearer ${access_token}`,
+          "Content-Type":"application/json"
+        },
+        body: {
+          filters: {
+            country:"ZM"
+          },
+          search_term: "coffee"
+        }
+      }).then(value => value.json()).then((data)=>{
+        console.log(data)
+      }).catch((reason)=>{
+        console.log(reason)
+      })
+    }
+  },[access_token])
 
   return (
     <>
@@ -138,13 +148,13 @@ export default function FacebookAds() {
       </select>
     </div>
     <div className="input-group filter">
-      <button className="input" /*x-bind:className="sortDirection == 'ascending' ? 'active' : ''"*/>
+      <button className="input" x-bind:className="sortDirection == 'ascending' ? 'active' : ''">
         <div className="row">
           <img src="assets/images/arrow.svg" width="25px" />
           <img src="assets/images/sort.svg" width="25px" />
         </div>
       </button>
-      <button className="input" /*x-bind:className="sortDirection == 'ascending' ? '' : 'active'"*/>
+      <button className="input" x-bind:className="sortDirection == 'ascending' ? '' : 'active'">
         <div className="row">
           <img src="assets/images/arrow.svg" style={{transform: 'scaleY(-1)'}} width="25px" />
           <img src="assets/images/sort.svg" width="25px" />
@@ -203,7 +213,7 @@ export default function FacebookAds() {
     </div>
     <hr />
     <div>
-      <button className='btn' onClick={fetchAds}>Apply</button>
+      <button className='btn'>Apply</button>
     </div>
   </div>
   <div className="ad-container">

@@ -3,15 +3,15 @@
 
 @import "layout";
 
+@import "alert";
+
 @import "topbar";
 @import "nav";
 @import "input";
 @import "menu";
 @import "section";
-
-@import "footer";
-
 @import "ad";
+@import "footer";
 
 body {
   padding: 0;
