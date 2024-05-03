@@ -42,14 +42,18 @@ export default function TiktokAds() {
         method:"post",
         mode:"no-cors",
         headers:{
-          "authorization":`bearer ${access_token}`,
+          "Authorization":`Bearer ${access_token}`,
           "Content-Type":"application/json"
         },
         body: {
-          filters: {
-            country:"ZM"
+          "filters": {
+            "ad_published_date_range": {
+              "min": "20240101",
+              "max": "20240401"
+            },
+            "country": "ZM"
           },
-          search_term: "coffee"
+          "search_term": "coffee"
         }
       }).then(value => value.json()).then((data)=>{
         console.log(data)
