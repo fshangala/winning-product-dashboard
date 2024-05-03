@@ -12,7 +12,7 @@ export default defineConfig({
       cert: fs.readFileSync(path.resolve(__dirname,'C:\\Users\\fshan\\localhost.pem')),
     },
     host: '0.0.0.0'
-  }*/
+  }
   server:{
     proxy: {
       '/tiktok-ads-api': {
@@ -21,5 +21,5 @@ export default defineConfig({
         rewrite: (path)=>path.replace(/^\/tiktok-ads-api/,"")
       }
     }
-  },
+  },*/
 })

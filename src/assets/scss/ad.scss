@@ -6,7 +6,7 @@
   justify-content: center;
 
   .ad {
-    flex: 30.33%;
+    flex: 30%;
     margin: 1%;
     border-radius: $border-radius;
     box-shadow: $shadow;
@@ -19,6 +19,10 @@
         border-radius: 0 0 8px 8px;
         margin-left: 16px;
       }
+    }
+
+    .ad-video {
+      width: 100%;
     }
 
     .ad-image {
