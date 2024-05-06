@@ -3,7 +3,6 @@ import brandImage from "../assets/images/detailed-brand.png";
 import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import { useContext, useEffect, useState } from "react";
 import { SetUserContext } from "../context/UserContext";
-import { supabase } from "../supabase-client";
 import {AlertsContainer, Alert} from '../components/alert';
 import CopiwinSDK from "../copiwinsdk/copiwinsdk";
 
@@ -35,6 +34,12 @@ export default function Login() {
       }).then((response)=>{
         response.json().then((data)=>{
           sdk.userByEmail({email:data.email}).then((value)=>{
+            if(value.token) {
+              setUser(value)
+              navigate("/")
+            } else if (value.email) {
+              setAlerts(value.email)
+            }
             console.log(value)
           }).catch((reason)=>{
             console.log(reason)

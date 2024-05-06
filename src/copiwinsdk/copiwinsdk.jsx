@@ -24,7 +24,7 @@ export default class CopiwinSDK{
   }
 
   async createAccount({email,password}) {
-    const response = await fetch(`${this.baseUrl}/create-account/`,{
+    const response = await fetch(`${this.baseUrl}/accounts/create-account/`,{
       method:'post',
       headers: {
         "Content-Type": "application/json",
