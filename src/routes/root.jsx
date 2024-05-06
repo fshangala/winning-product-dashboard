@@ -12,32 +12,8 @@ export default function Root() {
   useEffect(()=>{
     if(user == null) {
       navigate("/login")
-    } else {
-      if(profile == null) {
-        onGoogleLogin(user)
-      }
     }
-  },[user,profile])
-
-  const onGoogleLogin = function(credentials) {
-    fetch(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${credentials.access_token}`, {
-      headers: {
-        "Authorization": `Bearer ${credentials.access_token}`,
-        "Accept": 'application/json'
-      }
-    }).then((response)=>{
-      response.json().then((data)=>{
-        if(data.error) {
-          navigate("/login")
-        } else {
-          setProfile(data)
-        }
-      })
-    }).catch((error)=>{
-      console.log(error)
-      navigate("/login")
-    })
-  }
+  },[user])
 
   return (
     <>

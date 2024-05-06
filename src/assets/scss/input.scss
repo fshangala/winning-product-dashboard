@@ -14,4 +14,24 @@
   .active {
     border: $active-input-border;
   }
+
+  .btn {
+    border: none;
+    background-color: $primary-color;
+    color: $on-primary-color;
+    cursor: pointer;
+    padding: $padding;
+    border-radius: $border-radius;
+    &:hover {
+      background-color: $on-primary-color;
+      color: $primary-color;
+      box-shadow: $shadow;
+    }
+  }
+}
+
+.login-form {
+  .input-group {
+    margin-bottom: 16px;
+  }
 }

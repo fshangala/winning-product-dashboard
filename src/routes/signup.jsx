@@ -4,69 +4,33 @@ import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import { useContext, useEffect, useState } from "react";
 import { SetUserContext } from "../context/UserContext";
 import { supabase } from "../supabase-client";
-import {AlertsContainer, Alert} from '../components/alert';
 import CopiwinSDK from "../copiwinsdk/copiwinsdk";
 
-export default function Login() {
+export default function Signup(){
   const sdk = new CopiwinSDK()
   const [credentials,setCredentials] = useState({
     email:"",
     password:""
   })
+  const [loading,setLoading] = useState(false)
+
   const setUser = useContext(SetUserContext)
   const navigate = useNavigate()
-  const [loading,setLoading] = useState(false)
-  const [alerts,setAlerts] = useState([]);
 
-  const dismissAlert = function(index) {
-    var a = alerts.filter(function(value,i,array){
-      return index != i
-    })
-    setAlerts(a)
-  }
-  
-  const login = useGoogleLogin({
-    onSuccess: (credentials) => {
-      fetch(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${credentials.access_token}`, {
-        headers: {
-          "Authorization": `Bearer ${credentials.access_token}`,
-          "Accept": 'application/json'
-        }
-      }).then((response)=>{
-        response.json().then((data)=>{
-          sdk.userByEmail({email:data.email}).then((value)=>{
-            console.log(value)
-          }).catch((reason)=>{
-            console.log(reason)
-          })
-        })
-      }).catch((error)=>{
-        console.log(error)
-      })
-    },
-    onError: (errorResponse) => {
-      console.log(errorResponse)
-    }
-  })
-
-  const emailLogin = function() {
+  const emailSignUp = function(){
     setLoading(true)
-    sdk.login({username:credentials.email,password:credentials.password}).then((response)=>{
-      if(response.token) {
-        setUser(response)
-        navigate("/")
-      }
-      if(response.non_field_errors) {
-        setAlerts(response.non_field_errors)
-      }
-      console.log(response)
+    sdk.createAccount({
+      email:credentials.email,
+      password:credentials.password
+    }).then((response)=>{
+      setUser(response)
+      navigate("/")
     }).catch((reason)=>{
       console.log(reason)
     }).finally(()=>{
       setLoading(false)
     })
   }
-
   return (
     <>
     <Link to={`/login`} className="topbar">
@@ -79,13 +43,6 @@ export default function Login() {
         </Link>
       </div>
     </div>
-  {(alerts.length > 0) ? (
-  <AlertsContainer>
-  {alerts.map((value,index,array)=>{
-    return <Alert message={value} index={index} dismiss={dismissAlert} />
-  })}
-  </AlertsContainer>
-  ) : null}
     <div className="section">
       <div className="row">
         <div className="login-form">
@@ -109,14 +66,10 @@ export default function Login() {
             }} />
           </div>
           <div className="input-group">
-            <button className="btn" onClick={emailLogin}>Login</button>
+            <button className="btn" onClick={emailSignUp}>Signup</button>
           </div>
           <div className="input-group">
-            <Link to={"/signup"} className="btn">Create an account.</Link>
-          </div>
-          <hr />
-          <div className="social-login">
-            <button className="google-login-btn" onClick={login}>Sign in with Google</button>
+            <Link to={"/login"} className="btn">Already have an account? Login.</Link>
           </div>
         </div>
         <div className="content"></div>
