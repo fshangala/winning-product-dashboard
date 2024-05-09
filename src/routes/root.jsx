@@ -1,5 +1,6 @@
 import { Link, Outlet, useNavigate } from "react-router-dom"
 import brandImage from "../assets/images/detailed-brand.png"
+import userIcon from "../assets/images/user-icon.svg"
 import { useContext, useEffect, useState } from "react"
 import { UserContext } from "../context/UserContext"
 
@@ -37,7 +38,7 @@ export default function Root() {
               <button className="btn btn-primary">Upgrade</button>
               <button className="btn">Tutorials</button>
               <button className="btn-avatar">
-                <img src={profile.picture} alt="user" className="avatar" />
+                <img src={userIcon} alt="user" className="avatar" />
               </button>
             </>
           ):(
