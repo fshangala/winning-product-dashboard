@@ -2,14 +2,15 @@ import { useState, useEffect } from 'react'
 import facebookLogo from '../assets/images/facebook.svg'
 import { supabase } from "../supabase-client"
 import { Alert, AlertsContainer } from '../components/alert'
+import FastAPISDK from '../copiwinsdk/fastapisdk'
 
 export default function FacebookAds() {
   const [loadAds,setLoadAds] = useState({
-    session:"",
     loading:false,
     ads:[]
   })
   const [alerts,setAlerts] = useState([]);
+  const fastAPISDK = new FastAPISDK();
 
   const dismissAlert = function(index) {
     var a = alerts.filter(function(value,i,array){
@@ -19,33 +20,29 @@ export default function FacebookAds() {
   }
 
   useEffect(()=>{
-    if(loadAds.session != "" && loadAds.loading) {
-      var channel = supabase.channel("facebookads").on("postgres_changes",{event:"*",schema:"public",table:"facebookads"},(payload)=>{
-        console.log(payload.new.session);
-        if(payload.new.session == loadAds.session){
-          setLoadAds({
-            session:loadAds.session,
-            loading:false,
-            ads:payload.new.data.ads
-          })
-        }
-      }).subscribe()
+    console.log(loadAds)
+    if(loadAds.ads.length < 1) {
+      fetchAds()
     }
-  })
+  },[])
 
   const fetchAds = function(){
-    fetch("http://localhost:8000/facebook-ads/",{
-      method:"GET",
-    }).then((value)=>{
-      value.json().then((value)=>{
-        setLoadAds({
-          session:value.session,
-          loading:true,
-          ads:loadAds.ads
-        })
+    setLoadAds({
+      loading: true,
+      ads:loadAds.ads,
+    })
+    fastAPISDK.get_test_ads().then((data)=>{
+      console.log(data.data)
+      setLoadAds({
+        loading:false,
+        ads:data.data,
       })
     }).catch((reason)=>{
       console.log(reason)
+      setLoadAds({
+        loading:false,
+        ads:loadAds.ads,
+      })
     })
   }
 
@@ -217,7 +214,9 @@ export default function FacebookAds() {
         <div className="ad-description">{ad[1]}</div>
         <div className="ad-description">{ad[2]}</div>
         <div className="ad-image">
-          <img src="" alt="fb-ad" />
+          <video controls>
+            <source src={ad.video_url} />
+          </video>
         </div>
         <div className="ad-title"></div>
         <div className="ad-details"></div>
@@ -225,7 +224,6 @@ export default function FacebookAds() {
       </div>)}) : null
     }
   </div>
-  <div x-text="$store.user.supabaseUrl"></div>
   </>
   )
 }
