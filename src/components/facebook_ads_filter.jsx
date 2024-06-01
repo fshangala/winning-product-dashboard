@@ -2,11 +2,11 @@ import { useEffect, useState } from "react"
 import sortSVG from '../assets/images/sort.svg'
 import arrowSVG from '../assets/images/arrow.svg'
 
-export default function FaceBookAdsFilter({}) {
+export default function FaceBookAdsFilter({applyFilters=function(filters){}}) {
   const [adsFilters,setAdsFilters] = useState({
-    search:"",
+    search_term:"",
     keywordIn:"all",
-    country:"usa",
+    country:"us",
     website:"shopify",
     language:"english",
     activeAdsets: {
@@ -31,7 +31,7 @@ export default function FaceBookAdsFilter({}) {
         <input type="text" name="search" className="input" placeholder="Search..." onChange={(e)=>{
           setAdsFilters({
             ...adsFilters,
-            search:e.target.value
+            search_term:e.target.value
           })
         }} />
       </div>
@@ -55,8 +55,8 @@ export default function FaceBookAdsFilter({}) {
             country:e.target.value
           })
         }}>
-          <option value="usa">USA</option>
-          <option value="united-kingdom">United Kingdom</option>
+          <option value="us">USA</option>
+          <option value="uk">United Kingdom</option>
         </select>
       </div>
       <div className="input-group filter">
@@ -256,7 +256,7 @@ export default function FaceBookAdsFilter({}) {
       </div>
       <hr />
       <div>
-        <button className='btn'>Apply</button>
+        <button className='btn' onClick={()=>{applyFilters(adsFilters)}}>Apply</button>
       </div>
     </div>
   )

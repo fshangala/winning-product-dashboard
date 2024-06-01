@@ -3,9 +3,9 @@ export default class FastAPISDK {
     this.baseUrl = "http://localhost:8000"
   }
 
-  async get_facebook_ads(search_term="dropshipping",country="us") {
-    const response = await fetch(`${this.baseUrl}/apis/test_facebook_ads/?search_term=dropshipping&country=us`,{
-      method:"get",
+  async get_facebook_ads(filters) {
+    const response = await fetch(`${this.baseUrl}/apis/test_facebook_ads/?search_term=${filters.search}&country=${filters.country}`,{
+      method:"post",
     })
 
     return await response.json()
