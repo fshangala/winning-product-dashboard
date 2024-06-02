@@ -8,8 +8,21 @@ export function Ad({ad}) {
       <div className="ad-top">
         <button className="btn">4</button>
       </div>
-      <div className="ad-header"></div>
-      <div className="ad-description"></div>
+      <div className="ad-header">
+        <span>Creative</span>
+      </div>
+      <div className="ad-revenue">
+        <div className="container">
+          <div className="column">
+            <div className="row spend">Spend: $0.0</div>
+            <div className="row reach">Reach: 0</div>
+          </div>
+          <div className="column">
+            <div className="row revenue">Revenue: $0.0 </div>
+          </div>
+        </div>
+      </div>
+      <div className="ad-title">{ad.title}</div>
       {(ad.display_format == "image") ? (
         <img src={ad.original_image_url} className="ad-image" />
       ) : null}
@@ -26,7 +39,15 @@ export function Ad({ad}) {
           <source src={ad.video_url} />
         </video>
       ) : null}
-      <div className="ad-title"></div>
+      <div className="ad-advertiser">
+        <div className="container">
+          <a href={ad.link_url} className="link">
+            <img src={ad.page_profile_picture_url} alt={ad.page_profile_picture_url} className="avatar" />
+            <span className="description">{ad.page_name}</span>
+          </a>
+        </div>
+        <hr/>
+      </div>
       <div className="ad-details"></div>
       <div className="ad-footer"></div>
     </div>

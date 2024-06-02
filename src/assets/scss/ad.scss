@@ -3,10 +3,10 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
 
   .ad {
     flex: 30%;
+    flex-grow: 0;
     margin: 1%;
     border-radius: $border-radius;
     box-shadow: $shadow;
@@ -27,6 +27,58 @@
 
     .ad-image {
       width: 100%;
+    }
+
+    .ad-revenue {
+      padding: $padding;
+      .container {
+        display: flex;
+        flex-direction: row;
+        padding: $padding;
+
+        color: $secondary-color;
+
+        .column {
+          flex-grow: 1;
+          .revenue {
+            justify-content: end;
+            align-items: start;
+          }
+        }
+      }
+    }
+
+    .ad-title {
+      padding: $padding;
+    }
+
+    .ad-advertiser {
+      padding: $padding;
+
+      .container {
+        .link {
+          display: flex;
+          text-decoration: none;
+          align-items: center;
+
+          &:link, &:visited {
+            color: $primary-color;
+            cursor: pointer;
+          }
+
+          &:hover {
+            text-decoration: underline;
+          }
+
+          .avatar {
+            border-radius: 50%;
+          }
+
+          .description {
+            padding: $padding;
+          }
+        }
+      }
     }
   }
 }

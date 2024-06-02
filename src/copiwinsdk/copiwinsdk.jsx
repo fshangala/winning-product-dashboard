@@ -38,7 +38,6 @@ export default class CopiwinSDK{
   }
 
   async facebookAds({search_term}) {
-    console.log(search_term)
     const response = await fetch(`${this.baseUrl}/facebook-ads/?search_term=${search_term}`)
     return await response.json()
   }
