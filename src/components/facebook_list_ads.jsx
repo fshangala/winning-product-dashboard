@@ -22,11 +22,11 @@ export function Ad({ad}) {
           </div>
         </div>
       </div>
-      <div className="ad-title">{ad.title}</div>
+      <div className="ad-title">{ad.body}</div>
       {(ad.display_format == "image") ? (
         <img src={ad.original_image_url} className="ad-image" />
       ) : null}
-      {(ad.display_format == "video") ? (
+      {(ad.display_format == "video" || ad.display_format == "dco") ? (
         <video className='ad-video' onClick={(event)=>{
           if(playing) {
             playing = false
@@ -49,12 +49,22 @@ export function Ad({ad}) {
         <hr/>
       </div>
       <div className="ad-details"></div>
-      <div className="ad-footer"></div>
+      <div className="ad-footer">
+        <div className="ad-link">
+          <a href={ad.link_url} className="link">{ad.title}</a>
+        </div>
+        <div className="ad-actions">
+          <a className="action-button" href={ad.link_url}>Learn More</a>
+        </div>
+      </div>
     </div>
   )
 }
 
 export default function FacebookListAds({ads}) {
+  useEffect(()=>{
+    console.log(ads)
+  })
   return (
     <div className="ad-container">
       {(ads.length > 0) ? 

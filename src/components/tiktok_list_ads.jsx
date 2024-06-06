@@ -9,6 +9,17 @@ export function Ad({ad}) {
         <button className="btn">4</button>
       </div>
       <div className="ad-header">{ad.ad.id}</div>
+      <div className="ad-revenue">
+        <div className="container">
+          <div className="column">
+            <div className="row spend">Spend: $0.0</div>
+            <div className="row reach">Reach: {ad.ad.reach.unique_users_seen}</div>
+          </div>
+          <div className="column">
+            <div className="row revenue">Revenue: $0.0 </div>
+          </div>
+        </div>
+      </div>
       <div className="ad-description"></div>
       <video id={ad.ad.id} className='ad-video' onClick={(event)=>{
         if(playing) {
@@ -29,6 +40,9 @@ export function Ad({ad}) {
 }
 
 export default function TiktokListAds({ads}) {
+  useEffect(()=>{
+    console.log(ads)
+  })
   return (
     <div className="ad-container">
       {

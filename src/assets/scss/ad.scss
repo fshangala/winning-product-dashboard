@@ -80,5 +80,46 @@
         }
       }
     }
+
+    .ad-footer {
+      display: flex;
+      flex-direction: row;
+      padding: $padding;
+
+      .ad-link {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+
+        .link {
+          text-decoration: none;
+          &:link, &:visited {
+            color: $primary-color;
+          }
+        }
+      }
+
+      .ad-actions {
+        flex-grow: 1;
+        justify-content: end;
+        display: flex;
+
+        .action-button {
+          border: none;
+          border-radius: $border-radius;
+          padding: $padding;
+          cursor: pointer;
+
+          &:link, &:visited {
+            text-decoration: none;
+            color: black;
+          }
+          
+          &:hover {
+            background-color: $secondary-color;
+          }
+        }
+      }
+    }
   }
 }
