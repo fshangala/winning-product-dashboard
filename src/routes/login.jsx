@@ -33,6 +33,7 @@ export default function Login() {
         }
       }).then((response)=>{
         response.json().then((data)=>{
+          console.log(data)
           sdk.userByEmail({email:data.email}).then((value)=>{
             if(value.token) {
               setUser(value)
