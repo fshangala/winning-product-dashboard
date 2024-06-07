@@ -1,7 +1,7 @@
 export default class CopiwinSDK{
   constructor(){
     //this.baseUrl = "http://copiwin.com:8001"
-    this.baseUrl = "https://copiwin.com/api"
+    this.baseUrl = "https://api.copiwin.com"
   }
 
   async login({username,password}){

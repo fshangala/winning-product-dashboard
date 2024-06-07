@@ -47,7 +47,7 @@ startApp()
 function startApp(){
   ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-    <GoogleOAuthProvider clientId="1053050806046-t1ne3ogj3jf5qupfk9heaahia06mih75.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId="211046741429-jk2tmkimn7b1q6gq0vf49n7vvhair2ck.apps.googleusercontent.com">
       <UserProvider>
         <RouterProvider router={router} />
       </UserProvider>
