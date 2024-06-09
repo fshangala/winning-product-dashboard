@@ -4,7 +4,7 @@ import arrowSVG from '../assets/images/arrow.svg'
 
 export default function TiktokAdsFilter({applyFilters=function(filters){}}) {
   const [adsFilters,setAdsFilters] = useState({
-    search:"dog food",
+    search_term:"dog food",
     keywordIn:"all",
     country:"usa",
     language:"english",
@@ -47,7 +47,7 @@ export default function TiktokAdsFilter({applyFilters=function(filters){}}) {
         <input type="text" name="search" className="input" placeholder="Search..." onChange={(e)=>{
           setAdsFilters({
             ...adsFilters,
-            search:e.target.value
+            search_term:e.target.value
           })
         }} />
       </div>

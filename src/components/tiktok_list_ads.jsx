@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { RotatingLines } from "react-loader-spinner";
 
 export function Ad({ad}) {
   let playing = false;
@@ -21,6 +22,7 @@ export function Ad({ad}) {
         </div>
       </div>
       <div className="ad-description"></div>
+      {(ad.ad.videos.length > 0)?(
       <video id={ad.ad.id} className='ad-video' onClick={(event)=>{
         if(playing) {
           playing = false
@@ -32,6 +34,7 @@ export function Ad({ad}) {
       }} poster={ad.ad.videos[0].cover_image_url}>
         <source src={ad.ad.videos[0].url} />
       </video>
+      ):null}
       <div className="ad-title"></div>
       <div className="ad-details"></div>
       <div className="ad-footer"></div>
@@ -39,16 +42,21 @@ export function Ad({ad}) {
   )
 }
 
-export default function TiktokListAds({ads}) {
+export default function TiktokListAds({ads,loading}) {
   useEffect(()=>{
     console.log(ads)
   })
   return (
+    <>
+    <center className="loading-container">
+      <RotatingLines visible={loading} />
+    </center>
     <div className="ad-container">
       {
         ads.map((ad) => {
           return (<Ad ad={ad} />)})
       }
     </div>
+    </>
   )
 }

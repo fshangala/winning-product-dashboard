@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react'
 import tiktokLogo from '../assets/images/tiktok.svg'
-import { supabase } from "../supabase-client"
 import TiktokAdsFilter from '../components/tiktok_ads_filter'
 import TiktokListAds from '../components/tiktok_list_ads'
-import {AlertsContainer} from '../components/alert'
+import {AlertsContainer, Alert} from '../components/alert'
+import CopiwinSDK from '../copiwinsdk/copiwinsdk'
 
 export default function TiktokAds() {
   const [loadAds,setLoadAds] = useState({
-    session:"",
     loading:false,
     ads:[]
   })
   const [alerts,setAlerts] = useState([]);
+  const copiwinSDK = new CopiwinSDK()
 
   const dismissAlert = function(index) {
     var a = alerts.filter(function(value,i,array){
@@ -22,24 +22,27 @@ export default function TiktokAds() {
 
   const applyFilters = (filters)=>{
     setLoadAds({
-      ...loadAds,
       loading:true,
+      ads:loadAds.ads
     })
-    fetch(`http://copiwin.com:8001/tiktok-ads/?search_term=${filters.search}`,{
-      method:"get",
-    }).then(value => value.json()).then((data)=>{
+    copiwinSDK.tiktokAds(filters).then((data)=>{
       if(data.error.code == 'ok') {
         setLoadAds({
-          ...loadAds,
           ads:data.data.ads,
-          loading:false
+          loading:false,
+        })
+      } else {
+        console.log(data)
+        setLoadAds({
+          loading:false,
+          ads:loadAds.ads
         })
       }
     }).catch((reason)=>{
       console.log(reason)
       setLoadAds({
-        ...loadAds,
         loading:false,
+        ads:loadAds.ads
       })
     })
   }
@@ -58,9 +61,8 @@ export default function TiktokAds() {
     return <Alert message={value} index={index} dismiss={dismissAlert} />
   })}
   </AlertsContainer>
-  <div>{loadAds.loading ? "Loading ads" : ""}</div>
   <TiktokAdsFilter applyFilters={applyFilters} />
-  <TiktokListAds ads={loadAds.ads} />
+  <TiktokListAds ads={loadAds.ads} loading={loadAds.loading} />
   </>
   )
 }

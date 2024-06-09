@@ -55,8 +55,13 @@ export default class CopiwinSDK{
     return await response.json()
   }
 
-  async facebookAds({search_term}) {
-    const response = await fetch(`${this.baseUrl}/facebook-ads/?search_term=${search_term}`)
+  async facebookAds({search_term,country}) {
+    const response = await fetch(`${this.baseUrl}/facebook-ads/?search_term=${search_term}&country=${country}`)
+    return await response.json()
+  }
+
+  async tiktokAds({search_term,country}) {
+    const response = await fetch(`${this.baseUrl}/tiktok-ads/?search_term=${search_term}&country=${country}`)
     return await response.json()
   }
 }

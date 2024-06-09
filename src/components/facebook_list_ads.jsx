@@ -12,6 +12,7 @@ export function Ad({ad}) {
       <div className="ad-header">
         <span>Creative</span>
       </div>
+      {(ad.ad_spend)?(
       <div className="ad-revenue">
         <div className="container">
           <div className="column">
@@ -23,6 +24,7 @@ export function Ad({ad}) {
           </div>
         </div>
       </div>
+      ):null}
       <div className="ad-title">{ad.link_title}</div>
       {(ad.display_format == "image") ? (
         <img src={ad.original_image_url} className="ad-image" />
