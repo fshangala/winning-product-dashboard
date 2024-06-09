@@ -4,7 +4,7 @@ import arrowSVG from '../assets/images/arrow.svg'
 
 export default function FaceBookAdsFilter({applyFilters=function(filters){}}) {
   const [adsFilters,setAdsFilters] = useState({
-    search_term:"",
+    search_term:"dog food",
     keywordIn:"all",
     country:"us",
     website:"shopify",
@@ -24,6 +24,10 @@ export default function FaceBookAdsFilter({applyFilters=function(filters){}}) {
     scaling:"no-downscaling",
     mediaType:"videos"
   })
+
+  useEffect(()=>{
+    applyFilters(adsFilters)
+  },[])
 
   return (
     <div className="filter-container">

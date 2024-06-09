@@ -4,7 +4,7 @@ import arrowSVG from '../assets/images/arrow.svg'
 
 export default function TiktokAdsFilter({applyFilters=function(filters){}}) {
   const [adsFilters,setAdsFilters] = useState({
-    search:"",
+    search:"dog food",
     keywordIn:"all",
     country:"usa",
     language:"english",
@@ -36,6 +36,10 @@ export default function TiktokAdsFilter({applyFilters=function(filters){}}) {
     },
     productCreationDate:Date.now(),
   })
+
+  useEffect(()=>{
+    applyFilters(adsFilters)
+  },[])
 
   return (
     <div className="filter-container">

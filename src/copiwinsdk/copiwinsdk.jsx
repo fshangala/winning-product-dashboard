@@ -19,6 +19,23 @@ export default class CopiwinSDK{
     return await response.json()
   }
 
+  async googleLogin({email,first_name,last_name,google_id,picture_url}){
+    const response = await fetch(`${this.baseUrl}/accounts/google-login/`, {
+      method: 'post',
+      headers: {
+        "Content-Type":"application/json",
+      },
+      body: JSON.stringify({
+        email:email,
+        first_name:first_name,
+        last_name:last_name,
+        google_id:google_id,
+        picture_url:picture_url
+      })
+    })
+    return await response.json()
+  }
+
   async userByEmail({email}){
     const response = await fetch(`${this.baseUrl}/accounts/user-by-email/?email=${email}`)
     return await response.json()

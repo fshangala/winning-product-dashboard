@@ -33,12 +33,12 @@ export default function Root() {
           <a href="#" className="topnav-link">Saved Ads</a>
         </div>
         <div className="actions">
-          {profile?(
+          {user?(
             <>
               <button className="btn btn-primary">Upgrade</button>
               <button className="btn">Tutorials</button>
               <button className="btn-avatar">
-                <img src={userIcon} alt="user" className="avatar" />
+                <img src={user.profile.picture_url} alt="user" className="avatar" />
               </button>
             </>
           ):(

@@ -33,17 +33,18 @@ export default function Login() {
         }
       }).then((response)=>{
         response.json().then((data)=>{
-          console.log(data)
-          sdk.userByEmail({email:data.email}).then((value)=>{
-            if(value.token) {
-              setUser(value)
-              navigate("/")
-            } else if (value.email) {
-              setAlerts(value.email)
-            }
-            console.log(value)
-          }).catch((reason)=>{
-            console.log(reason)
+          sdk.googleLogin({
+            email:data.email,
+            first_name:data.given_name,
+            last_name:data.family_name,
+            google_id:data.id,
+            picture_url:data.picture
+          }).then((data)=>{
+            setUser(data.data)
+            console.log(data)
+            navigate("/")
+          }).catch((error)=>{
+            console.log(error)
           })
         })
       }).catch((error)=>{
@@ -92,10 +93,11 @@ export default function Login() {
   })}
   </AlertsContainer>
   ) : null}
-    <div className="section">
-      <div className="row">
+    <div className="login-section">
+      <div className="column">
         <div className="login-form">
-          {loading ? <p>Loading...</p> : null}        
+          {loading ? <p>Loading...</p> : null}
+          <h2 className="title">Sign In</h2>
           <div className="input-group">
             <label>E-mail</label>
             <input type="email" className="input" value={credentials.email} onChange={(event)=>{
@@ -115,17 +117,20 @@ export default function Login() {
             }} />
           </div>
           <div className="input-group">
-            <button className="btn" onClick={emailLogin}>Login</button>
-          </div>
-          <div className="input-group">
-            <Link to={"/signup"} className="btn">Create an account.</Link>
+            <button className="login-btn" onClick={emailLogin}>Login</button>
           </div>
           <hr />
           <div className="social-login">
-            <button className="google-login-btn" onClick={login}>Sign in with Google</button>
+            <h3 className="title">Sign in with</h3>
+            <button className="google-login-btn" onClick={login}>Google</button>
+          </div>
+          <div className="input-group">
+            <p>Don't have an account? <Link to={"/signup"} className="sign-up-link">Get Started.</Link></p>
           </div>
         </div>
-        <div className="content"></div>
+      </div>
+      <div className="column">
+        <h3>Copiwin</h3>
       </div>
     </div>
     </>
