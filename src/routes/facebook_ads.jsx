@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react'
 import facebookLogo from '../assets/images/facebook.svg'
-import { supabase } from "../supabase-client"
 import { Alert, AlertsContainer } from '../components/alert'
-import FastAPISDK from '../copiwinsdk/fastapisdk'
 import FaceBookAdsFilter from '../components/facebook_ads_filter'
 import FacebookListAds from '../components/facebook_list_ads'
 import CopiwinSDK from '../copiwinsdk/copiwinsdk'
@@ -58,9 +56,8 @@ export default function FacebookAds() {
   })}
   </AlertsContainer>
   ) : null}
-  <div>{loadAds.loading ? "Loading ads" : ""}</div>
   <FaceBookAdsFilter applyFilters={applyFilters} />
-  <FacebookListAds ads={loadAds.ads} />
+  <FacebookListAds ads={loadAds.ads} loading={loadAds.loading} />
   </>
   )
 }

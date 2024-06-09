@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { RotatingLines } from "react-loader-spinner";
 
 export function Ad({ad}) {
   let playing = false;
@@ -14,15 +15,15 @@ export function Ad({ad}) {
       <div className="ad-revenue">
         <div className="container">
           <div className="column">
-            <div className="row spend">Spend: $0.0</div>
-            <div className="row reach">Reach: 0</div>
+            <div className="row spend">Spend: ${ad.ad_spend}</div>
+            <div className="row reach">Reach: {ad.eu_total_reach}</div>
           </div>
           <div className="column">
             <div className="row revenue">Revenue: $0.0 </div>
           </div>
         </div>
       </div>
-      <div className="ad-title">{ad.body}</div>
+      <div className="ad-title">{ad.link_title}</div>
       {(ad.display_format == "image") ? (
         <img src={ad.original_image_url} className="ad-image" />
       ) : null}
@@ -51,7 +52,7 @@ export function Ad({ad}) {
       <div className="ad-details"></div>
       <div className="ad-footer">
         <div className="ad-link">
-          <a href={ad.link_url} className="link">{ad.title}</a>
+          <a href={ad.link_url} className="link">{ad.link_title}</a>
         </div>
         <div className="ad-actions">
           <a className="action-button" href={ad.link_url}>Learn More</a>
@@ -61,16 +62,21 @@ export function Ad({ad}) {
   )
 }
 
-export default function FacebookListAds({ads}) {
+export default function FacebookListAds({ads,loading}) {
   useEffect(()=>{
     console.log(ads)
   })
   return (
+    <>
+    <center className="loading-container">
+      <RotatingLines visible={loading} />
+    </center>
     <div className="ad-container">
       {(ads.length > 0) ? 
         ads.map((ad) => {
           return (<Ad key={ad.id} ad={ad} />)}) : null
       }
     </div>
+    </>
   )
 }
