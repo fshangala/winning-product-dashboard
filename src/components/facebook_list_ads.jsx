@@ -20,7 +20,7 @@ export function Ad({ad}) {
             <div className="row reach">Reach: {ad.eu_total_reach}</div>
           </div>
           <div className="column">
-            <div className="row revenue">Revenue: $0.0 </div>
+            <div className="row revenue">Revenue: ${ad.ad_revenue} </div>
           </div>
         </div>
       </div>
@@ -51,7 +51,6 @@ export function Ad({ad}) {
         </div>
         <hr/>
       </div>
-      <div className="ad-details"></div>
       <div className="ad-footer">
         <div className="ad-link">
           <a href={ad.link_url} className="link">{ad.link_title}</a>
@@ -59,6 +58,13 @@ export function Ad({ad}) {
         <div className="ad-actions">
           <a className="action-button" href={ad.link_url}>Learn More</a>
         </div>
+      </div>
+      <div className="ad-details">
+        {ad.target_locations?(
+          <p>Countries: {ad.target_locations.map((loc)=>{return loc.name+" "})}</p>
+        ):null}
+        <p>Platforms: {ad.publisher_platforms.join(", ")}</p>
+        <p>Started: {ad.ad_delivery_start_time}</p>
       </div>
     </div>
   )
