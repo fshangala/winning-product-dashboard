@@ -38,6 +38,14 @@ const router = createHashRouter([
   {
     path:'/signup',
     element:<Signup />
+  },
+  {
+    path:'/facebook-ads',
+    element:<FacebookAds />
+  },
+  {
+    path:'/test-tiktok-ads',
+    element:<TiktokAds />
   }
 ])
 

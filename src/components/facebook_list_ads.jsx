@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react"
 import { RotatingLines } from "react-loader-spinner";
+import bitmap1Image from "../assets/images/bitmap1.png";
+import getPlatformIcons from "./platform_icons";
+import getFlagOf from "./country_iso_flag";
 
 export function Ad({ad}) {
   let playing = false;
@@ -7,10 +10,14 @@ export function Ad({ad}) {
   return (
     <div className='ad'>
       <div className="ad-top">
-        <button className="btn">4</button>
+        <button className="btn">1</button>
       </div>
       <div className="ad-header">
-        <span>Creative</span>
+        <div className="ad-adsets">
+          <span className="ad-adsetCount">1 Adsets</span>
+          <span> use this creative</span>
+        </div>
+        <img className="ad-status" src={bitmap1Image} width={15} height={30} />
       </div>
       {(ad.ad_spend)?(
       <div className="ad-revenue">
@@ -23,25 +30,29 @@ export function Ad({ad}) {
             <div className="row revenue">Revenue: ${ad.ad_revenue} </div>
           </div>
         </div>
+        <div className="revenue-btn">Product Revenue: ${ad.ad_revenue}</div>
       </div>
       ):null}
       <div className="ad-title">{ad.link_title}</div>
-      {(ad.display_format == "image") ? (
-        <img src={ad.original_image_url} className="ad-image" />
-      ) : null}
-      {(ad.display_format == "video" || ad.display_format == "dco") ? (
-        <video className='ad-video' onClick={(event)=>{
-          if(playing) {
-            playing = false
-            event.target.pause()
-          } else {
-            playing = true
-            event.target.play()
-          }
-        }}>
-          <source src={ad.video_url} />
-        </video>
-      ) : null}
+      <div className="ad-content">
+        <span className="date">{ad.ad_creation_time}</span>
+        {(ad.display_format == "image") ? (
+          <img src={ad.original_image_url} className="ad-image" />
+        ) : null}
+        {(ad.display_format == "video" || ad.display_format == "dco") ? (
+          <video className='ad-video' onClick={(event)=>{
+            if(playing) {
+              playing = false
+              event.target.pause()
+            } else {
+              playing = true
+              event.target.play()
+            }
+          }}>
+            <source src={ad.video_url} />
+          </video>
+        ) : null}
+      </div>
       <div className="ad-advertiser">
         <div className="container">
           <a href={ad.link_url} className="link">
@@ -51,6 +62,15 @@ export function Ad({ad}) {
         </div>
         <hr/>
       </div>
+      <div className="ad-details">
+        {ad.target_locations?(
+          <p>Countries: {ad.target_locations.map((loc)=>{
+            return (<img width={32} src={getFlagOf(loc.name)} alt={loc.name} />);
+          })}</p>
+        ):null}
+        <p>Platforms: {getPlatformIcons(ad.publisher_platforms)}</p>
+        <p>Started: {ad.ad_delivery_start_time}</p>
+      </div>
       <div className="ad-footer">
         <div className="ad-link">
           <a href={ad.link_url} className="link">{ad.link_title}</a>
@@ -58,13 +78,6 @@ export function Ad({ad}) {
         <div className="ad-actions">
           <a className="action-button" href={ad.link_url}>Learn More</a>
         </div>
-      </div>
-      <div className="ad-details">
-        {ad.target_locations?(
-          <p>Countries: {ad.target_locations.map((loc)=>{return loc.name+" "})}</p>
-        ):null}
-        <p>Platforms: {ad.publisher_platforms.join(", ")}</p>
-        <p>Started: {ad.ad_delivery_start_time}</p>
       </div>
     </div>
   )
