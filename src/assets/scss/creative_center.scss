@@ -1,0 +1,11 @@
+.creative-container {
+  display: flex;
+
+  .search-section {
+    flex-grow: 1;
+  }
+
+  .download-section {
+    flex-grow: 2;
+  }
+}

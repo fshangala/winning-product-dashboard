@@ -27,7 +27,7 @@ export default function Root() {
           <Link to="/" className="topnav-link">Facebook Ads</Link>
           <a href="#" className="topnav-link">Meta Advertisers</a>
           <Link to="/tiktok-ads" className="topnav-link">Tiktok Ads</Link>
-          <a href="#" className="topnav-link">Tiktok Creative Center</a>
+          <Link to="/tiktok-creative-center" className="topnav-link">Tiktok Creative Center</Link>
           <a href="#" className="topnav-link">Sales Tracker</a>
           <a href="#" className="topnav-link">Magic AI</a>
           <a href="#" className="topnav-link">Saved Ads</a>
