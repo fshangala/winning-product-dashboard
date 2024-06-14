@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react"
 import { RotatingLines } from "react-loader-spinner";
-import worldwideImage from "../assets/images/worldwide.jpg";
-import facebookImage from "../assets/images/facebook.png";
-import instagramImage from "../assets/images/instagram.png";
-import messengerImage from "../assets/images/messenger.png";
-import shareImage from "../assets/images/share.png";
+import bitmap1Image from "../assets/images/bitmap1.png";
+import getPlatformIcons from "./platform_icons";
+import getFlagOf from "./country_iso_flag";
 
 export function Ad({ad}) {
   let playing = false;
@@ -12,10 +10,14 @@ export function Ad({ad}) {
   return (
     <div className='ad'>
       <div className="ad-top">
-        <button className="btn">4</button>
+        <button className="btn">1</button>
       </div>
       <div className="ad-header">
-        <span>creative</span>
+        <div className="ad-adsets">
+          <span className="ad-adsetCount">1 Adsets</span>
+          <span> use this creative</span>
+        </div>
+        <img className="ad-status" src={bitmap1Image} width={15} height={30} />
       </div>
       {(ad.ad_spend)?(
       <div className="ad-revenue">
@@ -98,85 +100,4 @@ export default function FacebookListAds({ads,loading}) {
     </div>
     </>
   )
-}
-
-function getPlatformIcons(platforms) {
-  var platform = {
-    "facebook":facebookImage,
-    "instagram":instagramImage,
-    "messenger":messengerImage,
-    "audience_network":shareImage
-  }
-  return (<span>
-  {platforms.map((ptf)=>{
-    return <img width={32} src={platform[ptf]} alt={ptf} />;
-  })}
-  </span>)
-}
-
-function getFlagOf(country) {
-  var countryISO = {
-    "Andorra":"AD",
-    "United Arab Emirates":"AE",
-    "Afghanistan":"AF",
-    "Antigua and Barbuda":"AG",
-    "Anguilla":"AG",
-    "Albania":"AL",
-    "Armenia":"AM",
-    "Netherlands Antilles":"AN",
-    "Angola":"AO",
-    "Antarctica":"AQ",
-    "Argentina":"AR",
-    "American Samoa":"AS",
-    "Austria":"AT",
-    "Australia":"AU",
-    "Aruba":"AW",
-    "Åland Islands":"AX",
-    "Azerbaijan":"AZ",
-    "Bosnia and Herzegovina":"BA",
-    "Barbados":"BB",
-    "Bangladesh":"BB",
-    "Belgium":"BE",
-    "Burkina Faso":"BF",
-    "Bulgaria":"BG",
-    "Bahrain":"BH",
-    "Burundi":"BI",
-    "Benin":"BJ",
-    "Croatia":"HR",
-    "Czech Republic":"CZ",
-    "Cyprus":"CY",
-    "Denmark":"DK",
-    "Estonia":"EE",
-    "Bermuda":"BM",
-    "France":"FR",
-    "French Guiana":"GF",
-    "Finland":"FI",
-    "Guadeloupe":"GE",
-    "Germany":"DE",
-    "Greece":"GR",
-    "Hungary":"HU",
-    "Ireland":"IE",
-    "Luxembourg":"LU",
-    "Lithuania":"LT",
-    "Latvia":"LV",
-    "Martinique":"MQ",
-    "Mayotte":"YT",
-    "Malta":"MT",
-    "Netherlands":"NL",
-    "Portugal":"PT",
-    "Poland":"PL",
-    "Réunion":"RE",
-    "Romania":"RO",
-    "Saint Barthélemy":"BL",
-    "Sweden":"SE",
-    "Spain":"ES",
-    "Saint Martin":"MF",
-    "Slovenia":"SL",
-    "Slovakia":"SK",
-    "Italy":"IT",
-  }
-  if(country === "Worldwide") {
-    return worldwideImage;
-  }
-  return `https://flagsapi.com/${countryISO[country]}/shiny/64.png`;
 }

@@ -42,6 +42,10 @@ const router = createHashRouter([
   {
     path:'/facebook-ads',
     element:<FacebookAds />
+  },
+  {
+    path:'/test-tiktok-ads',
+    element:<TiktokAds />
   }
 ])
 

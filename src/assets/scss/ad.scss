@@ -28,6 +28,18 @@
 
     .ad-header {
       padding: $padding;
+      display: flex;
+      flex-direction: row;
+      justify-content: end;
+
+      .ad-adsets {
+        flex-grow: 1;
+        .ad-adsetCount {
+          font-weight: 600;
+          font-size: 20px;
+          color: $primary-color;
+        }
+      }
     }
 
     .ad-content {
