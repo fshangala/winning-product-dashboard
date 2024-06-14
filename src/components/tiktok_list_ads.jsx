@@ -89,15 +89,15 @@ export function Ad({ad}) {
           </video>
         ):null}
       </div>
-      {/* <div className="ad-advertiser">
+      <div className="ad-advertiser">
         <div className="container">
-          <a href={ad.link_url} className="link">
-            <img src={ad.page_profile_picture_url} alt={ad.page_profile_picture_url} className="avatar" />
-            <span className="description">{ad.page_name}</span>
+          <a href="" className="link">
+            {/* <img src={ad.page_profile_picture_url} alt={ad.page_profile_picture_url} className="avatar" /> */}
+            <span className="description">{ad.advertiser.business_name}</span>
           </a>
         </div>
         <hr/>
-      </div> */}
+      </div>
       {/* <div className="ad-details">
         {ad.target_locations?(
           <p>Countries: {ad.target_locations.map((loc)=>{
