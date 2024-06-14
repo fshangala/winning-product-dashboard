@@ -38,6 +38,10 @@ const router = createHashRouter([
   {
     path:'/signup',
     element:<Signup />
+  },
+  {
+    path:'/facebook-ads',
+    element:<FacebookAds />
   }
 ])
 
