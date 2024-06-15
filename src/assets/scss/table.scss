@@ -1,4 +1,9 @@
 .table-container {
+  .top-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+  }
   .table {
     width: 100%;
     border-radius: $border-radius;
@@ -14,6 +19,29 @@
           font-weight: 400;
         }
       }
+    }
+  }
+  .paginator {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    padding: $padding;
+
+    .btn {
+      border: none;
+      padding: 12px;
+      background: none;
+      border-radius: $border-radius;
+
+      &:hover {
+        border: 1px solid $primary-color;
+        cursor: pointer;
+      }
+    }
+
+    .placeholder {
+      border: none;
+      background: none;
     }
   }
 }

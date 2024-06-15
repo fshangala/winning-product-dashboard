@@ -20,6 +20,11 @@ export default function MetaAdvertisers() {
     <MetaAdvertisersFilter applyFilters={applyFilters} />
     <br />
     <div className="table-container">
+      <div className="top-bar">
+        <div className="input-group">
+          Search <input type="search" className="input" />
+        </div>
+      </div>
       <table className="table">
         <thead>
           <tr>
@@ -48,6 +53,15 @@ export default function MetaAdvertisers() {
           </tr>
         </tbody>
       </table>
+      <div className="paginator">
+        <button className="btn">Previous</button>
+        <button className="btn">1</button>
+        <button className="btn">2</button>
+        <button className="btn">3</button>
+        <button className="placeholder">...</button>
+        <button className="btn">10</button>
+        <button className="btn">Next</button>
+      </div>
     </div>
     </>
   )
