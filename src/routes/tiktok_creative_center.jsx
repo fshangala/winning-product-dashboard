@@ -1,6 +1,51 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import CopiwinSDK from "../copiwinsdk/copiwinsdk";
+
+function SearchCard({loading,search}) {
+  const [adId,setAdId] = useState("")
+
+  return (
+    <div className="search-card">
+      <h3>Enter video URL</h3>
+      <div className="input-group">
+        <label>Share URL</label>
+        <input type="text" onChange={(event)=>{setAdId(event.target.value)}} className="input" />
+      </div>
+      <div className="input-group">
+        <button onClick={()=>{search(adId)}} className="input">{loading?"Searching...":"Search"}</button>
+      </div>
+    </div>
+  )
+}
 
 export default function TiktokCreativeCenter() {
+  const copiwinSDK = new CopiwinSDK()
+  const [adData,setAdData] = useState({
+    loading:false,
+    data:null
+  })
+
+  const fetchAd = function(ad_id) {
+    setAdData({
+      loading:true,
+      data:adData.data
+    })
+    copiwinSDK.tiktokAd({ad_id:ad_id}).then((data)=>{
+      setAdData({
+        loading:false,
+        data:data.data
+      })
+      console.log(data)
+    }).catch((reason)=>{
+      setAdData({
+        loading:false,
+        data:adData.data
+      })
+      console.log(reason)
+    })
+  }
+
   return (
     <>
     <div className="header-container">
@@ -11,16 +56,7 @@ export default function TiktokCreativeCenter() {
     </div>
     <div className="creative-container">
       <div className="search-section">
-        <div className="search-card">
-          <h3>Enter video URL</h3>
-          <div className="input-group">
-            <label>Share URL</label>
-            <input type="text" className="input" />
-          </div>
-          <div className="input-group">
-            <button className="input">Search</button>
-          </div>
-        </div>
+        <SearchCard loading={adData.loading} search={fetchAd} />
       </div>
       <div className="download-section">
         <div className="download-card">
@@ -82,8 +118,12 @@ export default function TiktokCreativeCenter() {
             <div className="video-output">
               <p>Video without watermark</p>
               <div className="ad-content">
-                <video className="video"></video>
-                <Link className="download-btn" to="" target="_blank" download>Download</Link>
+                <video className="video" controls>
+                  {(adData.data === null)?null:(
+                    <source src={adData.data.ad.videos[0].url} />
+                  )}
+                </video>
+                <Link className="download-btn" to={(adData.data == null)?"":adData.data.ad.videos[0].url} target="_blank" download>Download</Link>
               </div>
             </div>
           </div>

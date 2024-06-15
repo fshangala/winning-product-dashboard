@@ -104,7 +104,11 @@
           padding: $padding;
   
           .ad-content {
+            display: flex;
+            flex-direction: column;
+            
             .video {
+              display: block;
               background-color: $secondary-background;
               border-radius: $border-radius;
               padding: $padding;
