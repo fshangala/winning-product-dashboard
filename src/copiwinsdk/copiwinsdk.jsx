@@ -64,4 +64,9 @@ export default class CopiwinSDK{
     const response = await fetch(`${this.baseUrl}/tiktok-ads/?search_term=${search_term}&country=${country}`)
     return await response.json()
   }
+
+  async tiktokAd({ad_id}) {
+    const response = await fetch(`${this.baseUrl}/tiktok-ads/${ad_id}/`)
+    return await response.json()
+  }
 }

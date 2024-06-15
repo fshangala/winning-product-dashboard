@@ -14,6 +14,7 @@ import FacebookAds from './routes/facebook_ads.jsx'
 //import { initFacebookSdk } from './vendor/facebook.jsx'
 import TiktokAds from './routes/tiktok_ads.jsx'
 import Signup from './routes/signup.jsx'
+import TiktokCreativeCenter from './routes/tiktok_creative_center.jsx'
 
 const router = createHashRouter([
   {
@@ -28,6 +29,10 @@ const router = createHashRouter([
       {
         path:'/tiktok-ads',
         element:<TiktokAds />
+      },
+      {
+        path:'/tiktok-creative-center',
+        element:<TiktokCreativeCenter />
       }
     ]
   },
@@ -46,6 +51,10 @@ const router = createHashRouter([
   {
     path:'/test-tiktok-ads',
     element:<TiktokAds />
+  },
+  {
+    path:'/test-tiktok-creative-center',
+    element:<TiktokCreativeCenter />
   }
 ])
 
