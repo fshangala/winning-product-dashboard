@@ -1,0 +1,19 @@
+.table-container {
+  .table {
+    width: 100%;
+    border-radius: $border-radius;
+    border: 1px solid $secondary-color;
+    box-shadow: $shadow;
+    border-collapse: collapse;
+    
+    thead {
+      tr {
+        th {
+          border-bottom: 1px solid $secondary-color;
+          padding: $padding;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+}
