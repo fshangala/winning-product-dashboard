@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import sortSVG from '../assets/images/sort.svg'
 import arrowSVG from '../assets/images/arrow.svg'
+import countries from "./countries"
+
 
 export default function FaceBookAdsFilter({applyFilters=function(filters){}}) {
   const [adsFilters,setAdsFilters] = useState({
@@ -59,8 +61,10 @@ export default function FaceBookAdsFilter({applyFilters=function(filters){}}) {
             country:e.target.value
           })
         }}>
-          <option value="us">USA</option>
-          <option value="uk">United Kingdom</option>
+          <option value="ALL">ALL</option>
+          {countries.map((value)=>{
+            return <option value={value.code}>{value.name}</option>
+          })}
         </select>
       </div>
       <div className="input-group filter">
