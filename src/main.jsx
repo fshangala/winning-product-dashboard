@@ -50,7 +50,7 @@ const router = createHashRouter([
     element:<Signup />
   },
   {
-    path:'/facebook-ads',
+    path:'/test-facebook-ads',
     element:<FacebookAds />
   },
   {
