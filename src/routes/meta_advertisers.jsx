@@ -73,7 +73,7 @@ export default function MetaAdvertisers() {
                 <a href={advertiser.page.url}>{advertiser.page.name}</a>
               </td>
               <td>{advertiser.countries.map((value)=>{return (<img width={25} height={25} src={"https://winninghunter.com"+value} />)})}</td>
-              <td>{advertiser["Website"]}</td>
+              <td>{advertiser.website.map((value)=><img width={25} height={25} src={"https://winninghunter.com"+value} />)}</td>
               <td>{advertiser.ads}</td>
               <td>{advertiser.adsets}</td>
               <td>{advertiser.avgAdsets}</td>
