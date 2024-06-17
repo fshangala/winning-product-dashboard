@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function MetaAdvertisersFilter({applyFilters}) {
   const [adsFilters,setAdsFilters] = useState({
@@ -31,6 +31,10 @@ export default function MetaAdvertisersFilter({applyFilters}) {
       max:100
     }
   })
+
+  useEffect(()=>{
+    applyFilters(adsFilters)
+  },[])
 
   return (
     <div className="filter-container">

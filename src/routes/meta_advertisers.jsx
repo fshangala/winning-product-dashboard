@@ -70,7 +70,7 @@ export default function MetaAdvertisers() {
           return (
             <tr>
               <td>
-                <a href={advertiser.page.url}>{advertiser.page.name}</a>
+                <a href={advertiser.page.url}><img width={25} height={25} src={advertiser.page.picture_url} /> {advertiser.page.name}</a>
               </td>
               <td>{advertiser.countries.map((value)=>{return (<img width={25} height={25} src={"https://winninghunter.com"+value} />)})}</td>
               <td>{advertiser.website.map((value)=><img width={25} height={25} src={"https://winninghunter.com"+value} />)}</td>
