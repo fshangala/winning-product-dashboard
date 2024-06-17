@@ -1,11 +1,34 @@
 import { useState } from "react";
 import metaLogo from "../assets/images/meta.png";
 import MetaAdvertisersFilter from "../components/meta_advertisers_filter";
+import CopiwinSDK from "../copiwinsdk/copiwinsdk";
+import { RotatingLines } from "react-loader-spinner";
 
 export default function MetaAdvertisers() {
+  const [advertisers,setAdvertisers] = useState({
+    loading:false,
+    data:[]
+  })
+  const copiwinSDK = new CopiwinSDK()
 
   const applyFilters = function(filters) {
-    
+    setAdvertisers({
+      loading:true,
+      data:advertisers.data,
+    })
+    copiwinSDK.metaAdvertisers().then((data)=>{
+      console.log(data)
+      setAdvertisers({
+        loading:false,
+        data:data
+      })
+    }).catch((reason)=>{
+      setAdvertisers({
+        loading:false,
+        data:advertisers.data,
+      })
+      console.log(reason)
+    })
   }
 
   return (
@@ -19,6 +42,9 @@ export default function MetaAdvertisers() {
     </div>
     <MetaAdvertisersFilter applyFilters={applyFilters} />
     <br />
+    <center className="loading-container">
+      <RotatingLines visible={advertisers.loading} />
+    </center>
     <div className="table-container">
       <div className="top-bar">
         <div className="input-group">
@@ -28,29 +54,33 @@ export default function MetaAdvertisers() {
       <table className="table">
         <thead>
           <tr>
-            <th>Page name</th>
-            <th>Countries</th>
-            <th>Website</th>
-            <th>Ads</th>
-            <th>Adsets</th>
-            <th>Avg. Adsets</th>
-            <th>Likes</th>
-            <th>Followers</th>
-            <th>Created</th>
+            <th className="page-name">Page name</th>
+            <th className="page-data">Countries</th>
+            <th className="page-data">Website</th>
+            <th className="page-data">Ads</th>
+            <th className="page-data">Adsets</th>
+            <th className="page-data">Avg. Adsets</th>
+            <th className="page-data">Likes</th>
+            <th className="page-data">Followers</th>
+            <th className="page-data">Created</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-          </tr>
+        {advertisers.data.map((advertiser)=>{
+          return (
+            <tr>
+              <td>{advertiser["Page Name"]}</td>
+              <td>{advertiser["Countries"]}</td>
+              <td>{advertiser["Website"]}</td>
+              <td>{advertiser["Ads"]}</td>
+              <td>{advertiser["Adsets"]}</td>
+              <td>{advertiser["Avg. Adsets"]}</td>
+              <td>{advertiser[" Likes"]}</td>
+              <td>{advertiser[" Followers"]}</td>
+              <td>{advertiser["Created"]}</td>
+            </tr>
+          )
+        })}
         </tbody>
       </table>
       <div className="paginator">

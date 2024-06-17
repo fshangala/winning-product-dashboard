@@ -1,0 +1,19 @@
+.table-container {
+  .table {
+    tbody {
+      tr {
+        td {
+          padding: $padding;
+        }
+
+        td.page-data {
+          text-align: center;
+        }
+
+        td.page-name {
+          text-align: start;
+        }
+      }
+    }
+  }
+}
