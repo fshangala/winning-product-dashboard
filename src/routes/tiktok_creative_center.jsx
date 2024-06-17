@@ -7,9 +7,9 @@ function SearchCard({loading,search}) {
 
   return (
     <div className="search-card">
-      <h3>Enter video URL</h3>
+      <h3>Enter video ID</h3>
       <div className="input-group">
-        <label>Share URL</label>
+        <label>Ad ID</label>
         <input type="text" onChange={(event)=>{setAdId(event.target.value)}} className="input" />
       </div>
       <div className="input-group">
