@@ -69,15 +69,17 @@ export default function MetaAdvertisers() {
         {advertisers.data.map((advertiser)=>{
           return (
             <tr>
-              <td>{advertiser["Page Name"]}</td>
-              <td>{advertiser["Countries"]}</td>
-              <td>{advertiser["Website"]}</td>
-              <td>{advertiser["Ads"]}</td>
-              <td>{advertiser["Adsets"]}</td>
-              <td>{advertiser["Avg. Adsets"]}</td>
-              <td>{advertiser[" Likes"]}</td>
-              <td>{advertiser[" Followers"]}</td>
-              <td>{advertiser["Created"]}</td>
+              <td>
+                <a href={advertiser.page.url}><img width={25} height={25} src={advertiser.page.picture_url} /> {advertiser.page.name}</a>
+              </td>
+              <td>{advertiser.countries.map((value)=>{return (<img width={25} height={25} src={"https://winninghunter.com"+value} />)})}</td>
+              <td>{advertiser.website.map((value)=><img width={25} height={25} src={"https://winninghunter.com"+value} />)}</td>
+              <td>{advertiser.ads}</td>
+              <td>{advertiser.adsets}</td>
+              <td>{advertiser.avgAdsets}</td>
+              <td>{advertiser.likes}</td>
+              <td>{advertiser.followers}</td>
+              <td>{advertiser.created}</td>
             </tr>
           )
         })}

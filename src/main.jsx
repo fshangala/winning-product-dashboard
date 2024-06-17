@@ -16,6 +16,7 @@ import TiktokAds from './routes/tiktok_ads.jsx'
 import Signup from './routes/signup.jsx'
 import TiktokCreativeCenter from './routes/tiktok_creative_center.jsx'
 import MetaAdvertisers from './routes/meta_advertisers.jsx'
+import SavedAds from './routes/saved_ads.jsx'
 
 const router = createHashRouter([
   {
@@ -38,6 +39,10 @@ const router = createHashRouter([
       {
         path:'/meta-advertisers',
         element:<MetaAdvertisers />
+      },
+      {
+        path:'/saved-ads',
+        element:<SavedAds />
       }
     ]
   },
@@ -64,6 +69,10 @@ const router = createHashRouter([
   {
     path:'/test-meta-advertisers',
     element:<MetaAdvertisers />
+  },
+  {
+    path:'/test-saved-ads',
+    element:<SavedAds />
   }
 ])
 
