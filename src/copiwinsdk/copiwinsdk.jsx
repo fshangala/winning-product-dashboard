@@ -69,4 +69,9 @@ export default class CopiwinSDK{
     const response = await fetch(`${this.baseUrl}/tiktok-ads/${ad_id}/`)
     return await response.json()
   }
+
+  async metaAdvertisers() {
+    const response = await fetch(`${this.baseUrl}/meta-advertisers/`)
+    return await response.json()
+  }
 }
