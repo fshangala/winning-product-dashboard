@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import countries from "./countries"
 
 export default function MetaAdvertisersFilter({applyFilters}) {
   const [adsFilters,setAdsFilters] = useState({
@@ -46,8 +47,9 @@ export default function MetaAdvertisersFilter({applyFilters}) {
             country:e.target.value
           })
         }}>
-          <option value="us">USA</option>
-          <option value="uk">United Kingdom</option>
+        {countries.map((value)=>{
+          return <option value={value.code}>{value.name}</option>
+        })}
         </select>
       </div>
       <div className="input-group filter">
