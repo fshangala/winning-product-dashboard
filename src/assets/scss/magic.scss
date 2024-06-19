@@ -1,0 +1,54 @@
+.magic-header {
+  .top-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+
+    .btn {
+      padding: $padding;
+      border: none;
+      box-shadow: $shadow;
+      font-weight: 700;
+      border-radius: $border-radius;
+    }
+  }
+  .title {
+    text-align: center;
+  }
+  .search-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    .search-input {
+      margin: $padding;
+      padding: $padding;
+      border-color: $secondary-color;
+      border-radius: $border-radius;
+    }
+
+    .search-btn {
+      margin: $padding;
+      padding: $padding;
+      border: none;
+      border-radius: $border-radius;
+      background-color: $primary-color;
+      color: $on-primary-color;
+      cursor: pointer;
+    }
+
+    .file-input-btn {
+      border: none;
+      border-radius: $border-radius;
+      box-shadow: $shadow;
+      margin: $padding;
+      cursor: pointer;
+
+      img {
+        width: 25px;
+        height: 25px;
+        background-color: $secondary-background;
+      }
+    }
+  }
+}

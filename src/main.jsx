@@ -17,6 +17,7 @@ import Signup from './routes/signup.jsx'
 import TiktokCreativeCenter from './routes/tiktok_creative_center.jsx'
 import MetaAdvertisers from './routes/meta_advertisers.jsx'
 import SavedAds from './routes/saved_ads.jsx'
+import MagicAI from './routes/magic_ai.jsx'
 
 const router = createHashRouter([
   {
@@ -39,6 +40,10 @@ const router = createHashRouter([
       {
         path:'/meta-advertisers',
         element:<MetaAdvertisers />
+      },
+      {
+        path:'/magic-ai',
+        element:<MagicAI />
       },
       {
         path:'/saved-ads',
@@ -73,6 +78,10 @@ const router = createHashRouter([
   {
     path:'/test-saved-ads',
     element:<SavedAds />
+  },
+  {
+    path:'/test-magic-ai',
+    element:<MagicAI />
   }
 ])
 
