@@ -28,8 +28,8 @@ export default function Root() {
           <Link to="/meta-advertisers" className="topnav-link">Meta Advertisers</Link>
           <Link to="/tiktok-ads" className="topnav-link">Tiktok Ads</Link>
           <Link to="/tiktok-creative-center" className="topnav-link">Tiktok Creative Center</Link>
-          {/* <a href="#" className="topnav-link">Sales Tracker</a>
-          <a href="#" className="topnav-link">Magic AI</a> */}
+          {/* <a href="#" className="topnav-link">Sales Tracker</a> */}
+          <Link to="/magic-ai" className="topnav-link">Magic AI</Link>
           <a href="#" className="topnav-link">Saved Ads</a>
         </div>
         <div className="actions">
