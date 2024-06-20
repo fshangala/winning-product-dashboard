@@ -74,4 +74,9 @@ export default class CopiwinSDK{
     const response = await fetch(`${this.baseUrl}/meta-advertisers/`)
     return await response.json()
   }
+
+  async magicAI({search_term}) {
+    const response = await fetch(`${this.baseUrl}/magic-ai/?search_term=${search_term}`)
+    return await response.json()
+  }
 }

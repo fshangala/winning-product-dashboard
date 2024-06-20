@@ -8,6 +8,10 @@ export default function MagicAIFilter({applyFilters=function(filters){}}) {
     lastSeen:Date.now(),
   })
 
+  useEffect(()=>{
+    applyFilters(adsFilters)
+  })
+
   return (
     <div className="filter-container">
       <div className="input-group filter">
