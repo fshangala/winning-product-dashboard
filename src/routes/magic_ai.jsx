@@ -3,7 +3,8 @@ import cameraImage from "../assets/images/camera.png"
 import MagicAIFilter from "../components/magic_ai_filter"
 import CopiwinSDK from "../copiwinsdk/copiwinsdk"
 import { RotatingLines } from "react-loader-spinner"
-
+import TiktokListAds from "../components/tiktok_list_ads"
+import FacebookListAds from '../components/facebook_list_ads'
 
 export default function MagicAI({}) {
   const [search,setSearch] = useState("")
@@ -17,7 +18,7 @@ export default function MagicAI({}) {
 
   useEffect(()=>{
     console.log(ads)
-  })
+  },[ads])
 
   const startSearch = function({search_term}) {
     setAds({
@@ -25,9 +26,10 @@ export default function MagicAI({}) {
       loading:true
     })
     copiwinSDK.magicAI({search_term:search_term}).then((data)=>{
+      console.log(data)
       setAds({
         loading:false,
-        facebook:data.facebook.data,
+        facebook:data.facebok.data,
         tiktok:data.tiktok.data.ads
       })
     }).catch((reason)=>{
@@ -55,7 +57,8 @@ export default function MagicAI({}) {
       </div>
     </div>
     <MagicAIFilter />
-    <RotatingLines visible={ads.loading} />
+    <TiktokListAds ads={ads.tiktok} loading={ads.loading} />
+    <FacebookListAds ads={ads.facebook} loading={false} />
     </>
   )
 }
