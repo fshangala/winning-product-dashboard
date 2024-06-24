@@ -20,7 +20,7 @@ export default function MetaAdvertisers() {
       console.log(data)
       setAdvertisers({
         loading:false,
-        data:data
+        data:data.results
       })
     }).catch((reason)=>{
       setAdvertisers({
@@ -70,16 +70,16 @@ export default function MetaAdvertisers() {
           return (
             <tr>
               <td>
-                <a href={advertiser.page.url}><img width={25} height={25} src={advertiser.page.picture_url} /> {advertiser.page.name}</a>
+                <a href={"https://facebook.com/"+advertiser.id}><img width={25} height={25} src={advertiser.imageURI} /> {advertiser.name}</a>
               </td>
-              <td>{advertiser.countries.map((value)=>{return (<img width={25} height={25} src={"https://winninghunter.com"+value} />)})}</td>
-              <td>{advertiser.website.map((value)=><img width={25} height={25} src={"https://winninghunter.com"+value} />)}</td>
-              <td>{advertiser.ads}</td>
-              <td>{advertiser.adsets}</td>
-              <td>{advertiser.avgAdsets}</td>
+              <td>{advertiser.country}</td>
+              <td>{advertiser.category}</td>
+              <td>{advertiser.ads.number_of_ads}</td>
+              <td>{advertiser.ads.results.length}</td>
+              <td>{(advertiser.ads.number_of_ads/advertiser.ads.results.length).toFixed(1)}</td>
               <td>{advertiser.likes}</td>
-              <td>{advertiser.followers}</td>
-              <td>{advertiser.created}</td>
+              <td>{advertiser.igFollowers}</td>
+              <td>{}</td>
             </tr>
           )
         })}
