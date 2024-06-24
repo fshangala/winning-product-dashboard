@@ -13,6 +13,8 @@ export default function Root() {
   useEffect(()=>{
     if(user == null) {
       navigate("/login")
+    } else {
+      console.log(user)
     }
   },[user])
 
@@ -30,7 +32,7 @@ export default function Root() {
           <Link to="/tiktok-creative-center" className="topnav-link">Tiktok Creative Center</Link>
           {/* <a href="#" className="topnav-link">Sales Tracker</a> */}
           <Link to="/magic-ai" className="topnav-link">Magic AI</Link>
-          <a href="#" className="topnav-link">Saved Ads</a>
+          <Link to="/saved-ads" className="topnav-link">Saved Ads</Link>
         </div>
         <div className="actions">
           {user?(
@@ -38,7 +40,7 @@ export default function Root() {
               <button className="btn btn-primary">Upgrade</button>
               <button className="btn">Tutorials</button>
               <button className="btn-avatar">
-                <img src={user.profile.picture_url} alt="user" className="avatar" />
+                {/* <img src={user.profile.picture_url} alt="user" className="avatar" /> */}
               </button>
             </>
           ):(

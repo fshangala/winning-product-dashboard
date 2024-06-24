@@ -1,0 +1,11 @@
+.list {
+  button.list-item {
+    border: none;
+    background-color: $on-primary-color;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $secondary-background;
+    }
+  }
+}

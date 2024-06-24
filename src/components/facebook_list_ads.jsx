@@ -1,11 +1,24 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { RotatingLines } from "react-loader-spinner";
 import bitmap1Image from "../assets/images/bitmap1.png";
 import getPlatformIcons from "./platform_icons";
 import getFlagOf from "./country_iso_flag";
+import Dropdown from "./dropdown";
+import CopiwinSDK from "../copiwinsdk/copiwinsdk";
+import { UserContext } from "../context/UserContext";
 
 export function Ad({ad}) {
   let playing = false;
+  const copiwinSDK = new CopiwinSDK()
+  const user = useContext(UserContext)
+
+  const saveAd = function() {
+    copiwinSDK.saveAd({user_id:user.user_id,source:'facebook',ad:ad}).then((data)=>{
+      console.log(data)
+    }).catch((reason)=>{
+      console.log(reason)
+    })
+  }
 
   return (
     <div className='ad'>
@@ -18,6 +31,13 @@ export function Ad({ad}) {
           <span> use this creative</span>
         </div>
         <img className="ad-status" src={bitmap1Image} width={15} height={30} />
+        <Dropdown>
+          <div className="list">
+            <button onClick={()=>{
+              saveAd()
+            }} className="list-item">Save Ad</button>
+          </div>
+        </Dropdown>
       </div>
       {(ad.ad_spend)?(
       <div className="ad-revenue">
