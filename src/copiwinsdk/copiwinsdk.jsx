@@ -79,4 +79,24 @@ export default class CopiwinSDK{
     const response = await fetch(`${this.baseUrl}/magic-ai/?search_term=${search_term}`)
     return await response.json()
   }
+
+  async savedAds() {
+    const response = await fetch(`${this.baseUrl}/save-ad/`)
+    return await response.json()
+  }
+
+  async saveAd({user_id,source,ad}) {
+    const response = await fetch(`${this.baseUrl}/save-ad/`,{
+      method:'post',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user:user_id,
+        source:source,
+        content:ad
+      })
+    })
+    return await response.json()
+  }
 }
