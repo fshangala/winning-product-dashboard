@@ -1,0 +1,54 @@
+.store-table-filters {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .show-input {
+    border: solid 1px $secondary-color;
+    padding: $padding;
+    border-radius: $border-radius;
+    margin: 0 8px;
+  }
+
+  .search-label {
+    flex-grow: 1;
+    text-align: end;
+  }
+
+  .search-input {
+    border: solid 1px $secondary-color;
+    padding: $padding;
+    border-radius: $border-radius;
+  }
+}
+
+.sales-table {
+  width: 100%;
+  margin: 8px 0;
+  border-collapse: collapse;
+  box-shadow: $shadow;
+
+  thead {
+    tr {
+      th {
+        border-bottom: solid 1px $secondary-color;
+        font-weight: 500;
+        padding: $padding;
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      
+      &:first-child {
+        text-align: start;
+      }
+      
+      td {
+        padding: $padding;
+        text-align: center;
+      }
+    }
+  }
+}
