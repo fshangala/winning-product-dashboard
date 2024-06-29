@@ -60,6 +60,7 @@ export default function Login() {
     setLoading(true)
     sdk.login({username:credentials.email,password:credentials.password}).then((response)=>{
       if(response.token) {
+        localStorage.setItem("user",JSON.stringify(response))
         setUser(response)
         navigate("/")
       }
