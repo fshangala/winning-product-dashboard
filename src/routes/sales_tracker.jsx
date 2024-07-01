@@ -1,6 +1,37 @@
+import { useEffect, useState } from "react";
 import StoreInput from "../components/store_input";
+import CopiwinSDK from "../copiwinsdk/copiwinsdk";
 
 export default function SalesTracker() {
+  let copiwinSDK = new CopiwinSDK()
+  const [stores,setStores] = useState([])
+
+  let addStore = function(storeUrl){
+    copiwinSDK.addStore({storeUrl:storeUrl}).then((data)=>{
+      if ("name" in data && "url" in data) {
+        var currentStores = stores
+        currentStores.push(data)
+        setStores(currentStores)
+        console.log("Store added!")
+      }
+      console.log(data)
+    }).catch((reason)=>{
+      console.log(reason)
+    })
+  }
+
+  let loadStores = function() {
+    copiwinSDK.stores().then((data)=>{
+      setStores(data)
+    }).catch((reason)=>{
+      console.log(reason)
+    })
+  }
+
+  useEffect(()=>{
+    loadStores()
+  },[])
+
   return (
     <>
     <div className="header-container">
@@ -13,7 +44,7 @@ export default function SalesTracker() {
       </div>
       <hr className="divider" />
     </div>
-    <StoreInput />
+    <StoreInput addStore={addStore} />
     <br />
     
     <div className="store-table-filters">
@@ -40,15 +71,40 @@ export default function SalesTracker() {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Ohsnap</td>
-          <td>$10000</td>
-          <td>$20000</td>
-          <td>$30000</td>
-          <td>$40000</td>
-        </tr>
+        {stores.map((store)=>{
+          return (
+            <tr>
+            <td className="first">
+              <div className="top">{store.name}</div>
+              <div className="bottom">{store.url}</div>
+            </td>
+            <td>
+              <div className="top">$0</div>
+              <div className="bottom">0 sales</div>
+            </td>
+            <td>
+              <div className="top">$0</div>
+              <div className="bottom">0 sales</div>
+            </td>
+            <td>
+              <div className="top">$0</div>
+              <div className="bottom">0 sales</div>
+            </td>
+            <td>
+              <div className="top">$0</div>
+              <div className="bottom">0 sales</div>
+            </td>
+            </tr>
+          )
+        })}
       </tbody>
     </table>
+
+    <div className="sales-pagination">
+      <button className="btn">Previous</button>
+      <button className="btn">1</button>
+      <button className="btn">Next</button>
+    </div>
     </>
   )
 }

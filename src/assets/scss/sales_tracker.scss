@@ -41,14 +41,48 @@
   tbody {
     tr {
       
-      &:first-child {
-        text-align: start;
+      &:hover {
+        background-color: $secondary-background;
+        cursor: pointer;
+
+        td.first {
+          border-left: 8px solid $primary-color;
+        }
       }
       
       td {
         padding: $padding;
         text-align: center;
+
+        .bottom {
+          font-size: small;
+        }
       }
+
+      td.first {
+        text-align: start;
+        border-left: 8px solid $on-primary-color;
+      }
+    }
+  }
+}
+
+.sales-pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+
+  .btn {
+    padding: 12px;
+    border-radius: $border-radius;
+    cursor: pointer;
+    margin: 0 8px;
+    background-color: $on-primary-color;
+    border-color: $on-primary-color;
+    border-style: none;
+
+    &:hover {
+      border: 1px solid $primary-color;
     }
   }
 }
