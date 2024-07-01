@@ -23,11 +23,11 @@ export function Ad({ad}) {
   return (
     <div className='ad'>
       <div className="ad-top">
-        <button className="btn">1</button>
+        <button className="btn">{ad.page_ads}</button>
       </div>
       <div className="ad-header">
         <div className="ad-adsets">
-          <span className="ad-adsetCount">1 Adsets</span>
+          <span className="ad-adsetCount">{ad.adsets} Adsets</span>
           <span> use this creative</span>
         </div>
         <img className="ad-status" src={bitmap1Image} width={15} height={30} />

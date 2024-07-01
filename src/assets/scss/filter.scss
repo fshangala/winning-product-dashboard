@@ -1,8 +1,57 @@
-.filter-container {
-  button.apply-btn {
-    background-color: $primary-color;
-    color: $on-primary-color;
+.ad-filters {
+  background-color: $on-primary-color;
+  border-radius: $border-radius;
+  box-shadow: $shadow;
+  padding: $padding;
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-bottom: 1px solid $secondary-background;
+    align-items:end;
+
+    .filter {
+      padding: 8px;
+    }
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
     padding: $padding;
-    border: none;
+
+    .dropshipping {
+      margin: 0 4px;
+      border-radius: $border-radius;
+      background-color: $on-primary-color;
+      border: 1px solid $secondary-color;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $secondary-background;
+      }
+    }
+
+    .state-actions {
+      flex-grow: 1;
+      text-align: end;
+
+      .cancel-btn {
+        background-color: $on-primary-color;
+        padding: $padding;
+        cursor: pointer;
+        margin: 0 8px;
+      }
+  
+      .apply-btn {
+        background-color: $primary-color;
+        color: $on-primary-color;
+        padding: $padding;
+        border: none;
+        cursor: pointer;
+      }
+    }
   }
 }
