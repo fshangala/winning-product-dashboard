@@ -1,0 +1,36 @@
+.store-input-group {
+  display: flex;
+  flex-direction: row;
+  padding: $padding;
+  box-shadow: $shadow;
+
+  .store-input {
+    border-radius: $border-radius;
+    border: solid 1px $secondary-color;
+    padding: $padding;
+    flex-grow: 1;
+  }
+
+  .store-submit {
+    border-radius: $border-radius;
+    border: none;
+    padding: $padding;
+    margin: 0 8px;
+    background-color: $primary-color;
+    color: $on-primary-color;
+    cursor: pointer;
+
+    &:disabled {
+      background-color: $secondary-background;
+      color: $secondary-color;
+      cursor: not-allowed;
+    }
+  }
+
+  .store-count {
+    border-radius: $border-radius;
+    border: solid 1px $secondary-color;
+    padding: $padding;
+    margin: 0 8px;
+  }
+}

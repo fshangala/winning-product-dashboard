@@ -99,4 +99,20 @@ export default class CopiwinSDK{
     })
     return await response.json()
   }
+
+  async addStore({storeUrl}) {
+    const response = await fetch(`${this.baseUrl}/sales-tracker/`,{
+      method:"post",
+      headers: {
+        "Content-Type":"application/json",
+      },
+      body: JSON.stringify({url:storeUrl})
+    })
+    return await response.json()
+  }
+
+  async stores() {
+    const response = await fetch(`${this.baseUrl}/sales-tracker/`)
+    return await response.json()
+  }
 }
