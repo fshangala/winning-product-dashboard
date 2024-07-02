@@ -1,32 +1,68 @@
 import { useEffect, useState } from "react";
 import StoreInput from "../components/store_input";
 import CopiwinSDK from "../copiwinsdk/copiwinsdk";
+import { RotatingLines } from "react-loader-spinner";
+import { Alert, AlertsContainer } from '../components/alert'
 
 export default function SalesTracker() {
   let copiwinSDK = new CopiwinSDK()
   const [stores,setStores] = useState([])
+  const [loading,setLoading] = useState(false)
+  const [alerts,setAlerts] = useState([])
+
+  const dismissAlert = function(index) {
+    var a = alerts.filter(function(value,i,array){
+      return index != i
+    })
+    setAlerts(a)
+  }
 
   let addStore = function(storeUrl){
+    setLoading(true)
     copiwinSDK.addStore({storeUrl:storeUrl}).then((data)=>{
-      if ("name" in data && "url" in data) {
-        var currentStores = stores
-        currentStores.push(data)
-        setStores(currentStores)
-        console.log("Store added!")
+      if ("url" in data) {
+        if("name" in data) {
+          var currentStores = stores
+          currentStores.push(data)
+          setStores(currentStores)
+          console.log("Store added!")
+        } else {
+          var currentAlerts = alerts
+          data.url.forEach((item)=>{
+            currentAlerts.push(item)
+          })
+          setAlerts(currentAlerts)
+        }
+      }
+      if ("non_field_errors" in data) {
+        var currentAlerts = alerts
+        data.non_field_errors.forEach((item)=>{
+          currentAlerts.push(item)
+        })
+        setAlerts(currentAlerts)
       }
       console.log(data)
+      setLoading(false)
     }).catch((reason)=>{
       console.log(reason)
+      setLoading(false)
     })
   }
 
   let loadStores = function() {
+    setLoading(true)
     copiwinSDK.stores().then((data)=>{
       setStores(data)
+      setLoading(false)
     }).catch((reason)=>{
       console.log(reason)
+      setLoading(false)
     })
   }
+
+  useEffect(()=>{
+    console.log(alerts)
+  })
 
   useEffect(()=>{
     loadStores()
@@ -46,6 +82,18 @@ export default function SalesTracker() {
     </div>
     <StoreInput addStore={addStore} />
     <br />
+
+    <center>
+    <RotatingLines visible={loading} />
+    </center>
+
+    {(alerts.length > 0) ? (
+    <AlertsContainer>
+    {alerts.map((value,index,array)=>{
+      return <Alert message={value} key={index} index={index} dismiss={dismissAlert} />
+    })}
+    </AlertsContainer>
+    ) : null}
     
     <div className="store-table-filters">
       <span className="show-prefix">Show</span>
