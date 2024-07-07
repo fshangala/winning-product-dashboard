@@ -9,6 +9,7 @@ export default function SalesTracker() {
   const [stores,setStores] = useState([])
   const [loading,setLoading] = useState(false)
   const [alerts,setAlerts] = useState([])
+  const [addedStore,setAddedStore] = useState(null)
 
   const dismissAlert = function(index) {
     var a = alerts.filter(function(value,i,array){
@@ -20,11 +21,10 @@ export default function SalesTracker() {
   let addStore = function(storeUrl){
     setLoading(true)
     copiwinSDK.addStore({storeUrl:storeUrl}).then((data)=>{
+      console.log(data)
       if ("url" in data) {
-        if("name" in data) {
-          var currentStores = stores
-          currentStores.push(data)
-          setStores(currentStores)
+        if("title" in data) {
+          setAddedStore(data)
           console.log("Store added!")
         } else {
           var currentAlerts = alerts
@@ -52,6 +52,7 @@ export default function SalesTracker() {
   let loadStores = function() {
     setLoading(true)
     copiwinSDK.stores().then((data)=>{
+      console.log(data)
       setStores(data)
       setLoading(false)
     }).catch((reason)=>{
@@ -59,10 +60,6 @@ export default function SalesTracker() {
       setLoading(false)
     })
   }
-
-  useEffect(()=>{
-    console.log(alerts)
-  })
 
   useEffect(()=>{
     loadStores()
@@ -86,6 +83,8 @@ export default function SalesTracker() {
     <center>
     <RotatingLines visible={loading} />
     </center>
+
+    {addedStore ? <h4>{"The store "+addedStore.title+" Has been added and is currently being tracked. If data does not appear instantly check back after 24hrs."}</h4>:null}
 
     {(alerts.length > 0) ? (
     <AlertsContainer>
@@ -123,26 +122,43 @@ export default function SalesTracker() {
           return (
             <tr>
             <td className="first">
-              <div className="top">{store.name}</div>
-              <div className="bottom">{store.url}</div>
+              {store.store}
             </td>
             <td>
-              <div className="top">$0</div>
-              <div className="bottom">0 sales</div>
+              {store.today}
             </td>
             <td>
-              <div className="top">$0</div>
-              <div className="bottom">0 sales</div>
+            {store.yesterday}
             </td>
             <td>
-              <div className="top">$0</div>
-              <div className="bottom">0 sales</div>
+            {store["7days"]}
             </td>
             <td>
-              <div className="top">$0</div>
-              <div className="bottom">0 sales</div>
+            {store["30days"]}
             </td>
             </tr>
+            // <tr>
+            // <td className="first">
+            //   <div className="top">{store.name}</div>
+            //   <div className="bottom">{store.url}</div>
+            // </td>
+            // <td>
+            //   <div className="top">$0</div>
+            //   <div className="bottom">0 sales</div>
+            // </td>
+            // <td>
+            //   <div className="top">$0</div>
+            //   <div className="bottom">0 sales</div>
+            // </td>
+            // <td>
+            //   <div className="top">$0</div>
+            //   <div className="bottom">0 sales</div>
+            // </td>
+            // <td>
+            //   <div className="top">$0</div>
+            //   <div className="bottom">0 sales</div>
+            // </td>
+            // </tr>
           )
         })}
       </tbody>
