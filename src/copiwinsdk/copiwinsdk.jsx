@@ -1,3 +1,5 @@
+import Cookie from 'js-cookie'
+
 export default class CopiwinSDK{
   constructor(){
     //this.baseUrl = "http://copiwin.com:8001"
@@ -5,13 +7,15 @@ export default class CopiwinSDK{
   }
 
   async login({username,password}){
-    console.log(username)
-    const response = await fetch(`${this.baseUrl}/accounts/api-token-auth/`, {
+    const response = await fetch(`${this.baseUrl}/accounts/oauth-token/`, {
       method: 'post',
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        "client_id":process.env.COPIWIN_CLIENT_ID,
+        "client_secret":process.env.COPIWIN_CLIENT_SECRET,
+        "grant_type":"password",
         "username": username,
         "password": password
       })
@@ -36,6 +40,36 @@ export default class CopiwinSDK{
     return await response.json()
   }
 
+  async loginWithGoogle({google_access_token}) {
+    const response = await fetch(`${this.baseUrl}/accounts/login-with-google/`, {
+      method: 'post',
+      headers: {
+        "Content-Type":"application/json",
+      },
+      body: JSON.stringify({
+        "client_id":process.env.COPIWIN_CLIENT_ID,
+        "google_access_token":google_access_token
+      })
+    })
+    return await response.json()
+  }
+
+  async me({access_token}) {
+    const response = await fetch(`${this.baseUrl}/accounts/me/`, {
+      method: 'get',
+      headers: {
+        "Content-Type":"application/json",
+        "Authorization":`Bearer ${access_token}`,
+      }
+    })
+    var data = await response.json()
+    if(response.status == 200) {
+      return data
+    }
+
+    throw {status:response.status,statusText:response.statusText,data:data}
+  }
+
   async userByEmail({email}){
     const response = await fetch(`${this.baseUrl}/accounts/user-by-email/?email=${email}`)
     return await response.json()
@@ -55,41 +89,66 @@ export default class CopiwinSDK{
     return await response.json()
   }
 
-  async facebookAds({search_term,country}) {
-    const response = await fetch(`${this.baseUrl}/facebook-ads/?search_term=${search_term}&country=${country}`)
+  async facebookAds({access_token,search_term,country}) {
+    const response = await fetch(`${this.baseUrl}/facebook-ads/?search_term=${search_term}&country=${country}`,{
+      headers:{
+        "Authorization":`Bearer ${access_token}`,
+      }
+    })
     return await response.json()
   }
 
-  async tiktokAds({search_term,country}) {
-    const response = await fetch(`${this.baseUrl}/tiktok-ads/?search_term=${search_term}&country=${country}`)
+  async tiktokAds({access_token,search_term,country}) {
+    const response = await fetch(`${this.baseUrl}/tiktok-ads/?search_term=${search_term}&country=${country}`,{
+      headers:{
+        "Authorization":`Bearer ${access_token}`,
+      }
+    })
     return await response.json()
   }
 
-  async tiktokAd({ad_id}) {
-    const response = await fetch(`${this.baseUrl}/tiktok-ads/${ad_id}/`)
+  async tiktokAd({access_token,ad_id}) {
+    const response = await fetch(`${this.baseUrl}/tiktok-ads/${ad_id}/`,{
+      headers:{
+        "Authorization":`Bearer ${access_token}`,
+      }
+    })
     return await response.json()
   }
 
-  async metaAdvertisers() {
-    const response = await fetch(`${this.baseUrl}/meta-advertisers/`)
+  async metaAdvertisers({access_token}) {
+    const response = await fetch(`${this.baseUrl}/meta-advertisers/`,{
+      headers:{
+        "Authorization":`Bearer ${access_token}`,
+      }
+    })
     return await response.json()
   }
 
-  async magicAI({search_term}) {
-    const response = await fetch(`${this.baseUrl}/magic-ai/?search_term=${search_term}`)
+  async magicAI({access_token,search_term}) {
+    const response = await fetch(`${this.baseUrl}/magic-ai/?search_term=${search_term}`,{
+      headers:{
+        "Authorization":`Bearer ${access_token}`,
+      }
+    })
     return await response.json()
   }
 
-  async savedAds() {
-    const response = await fetch(`${this.baseUrl}/save-ad/`)
+  async savedAds({access_token}) {
+    const response = await fetch(`${this.baseUrl}/save-ad/`,{
+      headers:{
+        "Authorization":`Bearer ${access_token}`,
+      }
+    })
     return await response.json()
   }
 
-  async saveAd({user_id,source,ad}) {
+  async saveAd({access_token,user_id,source,ad}) {
     const response = await fetch(`${this.baseUrl}/save-ad/`,{
       method:'post',
       headers: {
         "Content-Type": "application/json",
+        "Authorization":`Bearer ${access_token}`,
       },
       body: JSON.stringify({
         user:user_id,
@@ -100,19 +159,35 @@ export default class CopiwinSDK{
     return await response.json()
   }
 
-  async addStore({storeUrl}) {
+  async addStore({access_token,storeUrl}) {
     const response = await fetch(`${this.baseUrl}/sales-tracker/`,{
       method:"post",
       headers: {
         "Content-Type":"application/json",
+        "Authorization":`Bearer ${access_token}`,
       },
       body: JSON.stringify({url:storeUrl})
     })
+
+    if(response.status == 500) {
+      throw {status:response.status,statusText:response.statusText,data:null}
+    }
+    
     return await response.json()
   }
 
-  async stores() {
-    const response = await fetch(`${this.baseUrl}/sales-tracker/`)
-    return await response.json()
+  async stores({access_token}) {
+    const response = await fetch(`${this.baseUrl}/sales-tracker/`,{
+      headers:{
+        "Authorization":`Bearer ${access_token}`,
+      }
+    })
+
+    var data = await response.json()
+    if (response.status == 200) {
+      return data
+    }
+    
+    throw {status:response.status,statusText:response.statusText,data:data}
   }
 }

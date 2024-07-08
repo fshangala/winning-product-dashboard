@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import sortSVG from '../assets/images/sort.svg'
 import arrowSVG from '../assets/images/arrow.svg'
 
-export default function TiktokAdsFilter({applyFilters=function(filters){}}) {
+export default function TiktokAdsFilter({applyFilters=function(filters){},initialized}) {
   const [adsFilters,setAdsFilters] = useState({
     search_term:"dog food",
     keywordIn:"all",
@@ -38,8 +38,10 @@ export default function TiktokAdsFilter({applyFilters=function(filters){}}) {
   })
 
   useEffect(()=>{
-    applyFilters(adsFilters)
-  },[])
+    if(!initialized){
+      applyFilters(adsFilters)
+    }
+  })
 
   return (
     <div className="filter-container">

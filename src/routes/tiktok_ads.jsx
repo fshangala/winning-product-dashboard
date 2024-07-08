@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import tiktokLogo from '../assets/images/tiktok.svg'
 import TiktokAdsFilter from '../components/tiktok_ads_filter'
 import TiktokListAds from '../components/tiktok_list_ads'
 import {AlertsContainer, Alert} from '../components/alert'
 import CopiwinSDK from '../copiwinsdk/copiwinsdk'
+import { UserContext } from '../context/UserContext'
 
 export default function TiktokAds() {
   const [loadAds,setLoadAds] = useState({
@@ -12,6 +13,8 @@ export default function TiktokAds() {
   })
   const [alerts,setAlerts] = useState([]);
   const copiwinSDK = new CopiwinSDK()
+  const user = useContext(UserContext)
+  const [initialized,setInitialized] = useState(false)
 
   const dismissAlert = function(index) {
     var a = alerts.filter(function(value,i,array){
@@ -21,30 +24,33 @@ export default function TiktokAds() {
   }
 
   const applyFilters = (filters)=>{
-    setLoadAds({
-      loading:true,
-      ads:loadAds.ads
-    })
-    copiwinSDK.tiktokAds(filters).then((data)=>{
-      if(data.error.code == 'ok') {
-        setLoadAds({
-          ads:data.data.ads,
-          loading:false,
-        })
-      } else {
-        console.log(data)
+    if(user) {
+      setLoadAds({
+        loading:true,
+        ads:loadAds.ads
+      })
+      setInitialized(true)
+      copiwinSDK.tiktokAds({...filters,access_token:user.access_token}).then((data)=>{
+        if(data.error.code == 'ok') {
+          setLoadAds({
+            ads:data.data.ads,
+            loading:false,
+          })
+        } else {
+          console.log(data)
+          setLoadAds({
+            loading:false,
+            ads:loadAds.ads
+          })
+        }
+      }).catch((reason)=>{
+        console.log(reason)
         setLoadAds({
           loading:false,
           ads:loadAds.ads
         })
-      }
-    }).catch((reason)=>{
-      console.log(reason)
-      setLoadAds({
-        loading:false,
-        ads:loadAds.ads
       })
-    })
+    }
   }
 
   return (
@@ -61,7 +67,7 @@ export default function TiktokAds() {
     return <Alert message={value} index={index} dismiss={dismissAlert} />
   })}
   </AlertsContainer>
-  <TiktokAdsFilter applyFilters={applyFilters} />
+  <TiktokAdsFilter applyFilters={applyFilters} initialized={initialized} />
   <TiktokListAds ads={loadAds.ads} loading={loadAds.loading} />
   </>
   )

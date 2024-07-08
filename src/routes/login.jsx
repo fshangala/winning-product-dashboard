@@ -26,29 +26,15 @@ export default function Login() {
   
   const login = useGoogleLogin({
     onSuccess: (credentials) => {
-      fetch(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${credentials.access_token}`, {
-        headers: {
-          "Authorization": `Bearer ${credentials.access_token}`,
-          "Accept": 'application/json'
+      sdk.loginWithGoogle({google_access_token:credentials.access_token}).then((response)=>{
+        if(response.access_token) {
+          localStorage.setItem("auth",JSON.stringify(response))
+          setUser(response)
+          navigate("/")
         }
-      }).then((response)=>{
-        response.json().then((data)=>{
-          sdk.googleLogin({
-            email:data.email,
-            first_name:data.given_name,
-            last_name:data.family_name,
-            google_id:data.id,
-            picture_url:data.picture
-          }).then((data)=>{
-            setUser(data.data)
-            console.log(data)
-            navigate("/")
-          }).catch((error)=>{
-            console.log(error)
-          })
-        })
-      }).catch((error)=>{
-        console.log(error)
+        console.log(response)
+      }).catch((reason)=>{
+        console.log(reason)
       })
     },
     onError: (errorResponse) => {
@@ -59,6 +45,11 @@ export default function Login() {
   const emailLogin = function() {
     setLoading(true)
     sdk.login({username:credentials.email,password:credentials.password}).then((response)=>{
+      if(response.access_token) {
+        localStorage.setItem("auth",JSON.stringify(response))
+        setUser(response)
+        navigate("/")
+      }
       if(response.token) {
         localStorage.setItem("user",JSON.stringify(response))
         setUser(response)
@@ -66,6 +57,11 @@ export default function Login() {
       }
       if(response.non_field_errors) {
         setAlerts(response.non_field_errors)
+      }
+      if(response.error) {
+        var currentAlerts=alerts
+        currentAlerts.push(response.error)
+        setAlerts(currentAlerts)
       }
       console.log(response)
     }).catch((reason)=>{

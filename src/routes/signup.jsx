@@ -23,8 +23,8 @@ export default function Signup(){
       email:credentials.email,
       password:credentials.password
     }).then((response)=>{
-      setUser(response)
-      navigate("/")
+      alert("User successfully created, please login.")
+      navigate("/login")
     }).catch((reason)=>{
       console.log(reason)
     }).finally(()=>{

@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import CopiwinSDK from "../copiwinsdk/copiwinsdk"
 import { Ad as TiktokAd } from "../components/tiktok_list_ads";
 import { Ad as FacebookAd } from "../components/facebook_list_ads";
+import { UserContext } from "../context/UserContext";
 
 export default function SavedAds() {
   const copiwinSDK = new CopiwinSDK()
@@ -9,29 +10,36 @@ export default function SavedAds() {
     loading:false,
     ads:[]
   })
+  const user = useContext(UserContext)
+  const [initialized,setInitialized] = useState(false)
   
   useEffect(()=>{
-    loadSavedAds()
-  },[])
+    if(!initialized) {
+      loadSavedAds()
+    }
+  })
 
   const loadSavedAds = function() {
-    setSavedAds({
-      loading:true,
-      ads:savedAds.ads
-    })
-    copiwinSDK.savedAds().then((data)=>{
+    if(user) {
       setSavedAds({
-        loading:false,
-        ads:data
-      })
-      console.log(data)
-    }).catch((reason)=>{
-      setSavedAds({
-        loading:false,
+        loading:true,
         ads:savedAds.ads
       })
-      console.log(reason)
-    })
+      setInitialized(true)
+      copiwinSDK.savedAds({access_token:user.access_token}).then((data)=>{
+        setSavedAds({
+          loading:false,
+          ads:data
+        })
+        console.log(data)
+      }).catch((reason)=>{
+        setSavedAds({
+          loading:false,
+          ads:savedAds.ads
+        })
+        console.log(reason)
+      })
+    }
   }
 
   return (

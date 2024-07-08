@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import countries from "./countries"
 
-export default function MetaAdvertisersFilter({applyFilters}) {
+export default function MetaAdvertisersFilter({applyFilters,initialized}) {
   const [adsFilters,setAdsFilters] = useState({
     country:"us",
     website:"shopify",
@@ -34,8 +34,10 @@ export default function MetaAdvertisersFilter({applyFilters}) {
   })
 
   useEffect(()=>{
-    applyFilters(adsFilters)
-  },[])
+    if(!initialized) {
+      applyFilters(adsFilters)
+    }
+  })
 
   return (
     <div className="filter-container">

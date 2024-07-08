@@ -3,24 +3,44 @@ import brandImage from "../assets/images/detailed-brand.png"
 import userIcon from "../assets/images/user-icon.svg"
 import { useContext, useEffect, useState } from "react"
 import { SetUserContext, UserContext } from "../context/UserContext"
+import CopiwinSDK from "../copiwinsdk/copiwinsdk"
 
 export default function Root() {
   const user = useContext(UserContext)
   const setUser = useContext(SetUserContext)
   const navigate = useNavigate()
+  let sdk = new CopiwinSDK()
 
   const [profile,setProfile] = useState(null)
 
   useEffect(()=>{
     if(user == null) {
-      var userinfo = localStorage.getItem("user")
-      if (userinfo === null) {
+      var userauth = localStorage.getItem("auth")
+      if (userauth === null) {
         navigate("/login")
       } else {
-        setUser(JSON.parse(userinfo))
+        setUser(JSON.parse(userauth))
       }
     }
   },[user])
+
+  useEffect(()=>{
+    if(user && profile === null) {
+      sdk.me({access_token:user.access_token}).then((response)=>{
+        if("profile" in response) {
+          setProfile(response)
+        }
+      }).catch((reason)=>{
+        if("statusText" in reason) {
+          alert(reason.statusText)
+          if(reason.status === 401) {
+            navigate("/login")
+          }
+        }
+        console.log(reason)
+      })
+    }
+  })
 
   return (
     <>
@@ -44,7 +64,7 @@ export default function Root() {
               <button className="btn btn-primary">Upgrade</button>
               <button className="btn">Tutorials</button>
               <button className="btn-avatar">
-                {/* <img src={user.profile.picture_url} alt="user" className="avatar" /> */}
+                {profile ? <img src={profile.profile.picture_url ? profile.profile.picture_url : "https://avatar.iran.liara.run/public"} alt="user" className="avatar" /> : null}
               </button>
             </>
           ):(

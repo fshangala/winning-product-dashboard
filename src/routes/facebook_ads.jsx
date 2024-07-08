@@ -1,16 +1,19 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import facebookLogo from '../assets/images/facebook.svg'
 import { Alert, AlertsContainer } from '../components/alert'
 import FaceBookAdsFilter from '../components/facebook_ads_filter'
 import FacebookListAds from '../components/facebook_list_ads'
 import CopiwinSDK from '../copiwinsdk/copiwinsdk'
+import { UserContext } from '../context/UserContext'
 
 export default function FacebookAds() {
+  const user = useContext(UserContext)
   const [loadAds,setLoadAds] = useState({
     loading:false,
     ads:[]
   })
   const [alerts,setAlerts] = useState([])
+  const [initialized,setInitialized] = useState(false)
   const copiwinSDK = new CopiwinSDK()
 
   const dismissAlert = function(index) {
@@ -21,23 +24,26 @@ export default function FacebookAds() {
   }
 
   const applyFilters = function(filters) {
-    setLoadAds({
-      loading: true,
-      ads:loadAds.ads,
-    })
-    copiwinSDK.facebookAds(filters).then((data)=>{
+    if(user) {
       setLoadAds({
-        loading:false,
-        ads:data.data,
-      })
-    }).catch((reason)=>{
-      alerts.push(reason.toString())
-      setAlerts(alerts)
-      setLoadAds({
-        loading:false,
+        loading: true,
         ads:loadAds.ads,
       })
-    })
+      setInitialized(true)
+      copiwinSDK.facebookAds({...filters,access_token:user.access_token}).then((data)=>{
+        setLoadAds({
+          loading:false,
+          ads:data.data,
+        })
+      }).catch((reason)=>{
+        alerts.push(reason.toString())
+        setAlerts(alerts)
+        setLoadAds({
+          loading:false,
+          ads:loadAds.ads,
+        })
+      })
+    }
   }
 
   return (
@@ -56,7 +62,7 @@ export default function FacebookAds() {
   })}
   </AlertsContainer>
   ) : null}
-  <FaceBookAdsFilter applyFilters={applyFilters} />
+  <FaceBookAdsFilter applyFilters={applyFilters} initialized={initialized} />
   <FacebookListAds ads={loadAds.ads} loading={loadAds.loading} />
   </>
   )
