@@ -1,47 +1,6 @@
 import { useEffect, useState } from "react";
 import { RotatingLines } from "react-loader-spinner";
-import bitmap1Image from "../assets/images/bitmap1.png";
-
-/*export function Ad({ad}) {
-  let playing = false;
-
-  return (
-    <div className='ad'>
-      <div className="ad-top">
-        <button className="btn">4</button>
-      </div>
-      <div className="ad-header">{ad.ad.id}</div>
-      <div className="ad-revenue">
-        <div className="container">
-          <div className="column">
-            <div className="row spend">Spend: $0.0</div>
-            <div className="row reach">Reach: {ad.ad.reach.unique_users_seen}</div>
-          </div>
-          <div className="column">
-            <div className="row revenue">Revenue: $0.0 </div>
-          </div>
-        </div>
-      </div>
-      <div className="ad-description"></div>
-      {(ad.ad.videos.length > 0)?(
-      <video id={ad.ad.id} className='ad-video' onClick={(event)=>{
-        if(playing) {
-          playing = false
-          event.target.pause()
-        } else {
-          playing = true
-          event.target.play()
-        }
-      }} poster={ad.ad.videos[0].cover_image_url}>
-        <source src={ad.ad.videos[0].url} />
-      </video>
-      ):null}
-      <div className="ad-title"></div>
-      <div className="ad-details"></div>
-      <div className="ad-footer"></div>
-    </div>
-  )
-} */
+import bitmap3Image from "../assets/images/bitmap3.png";
 
 export function Ad({ad}) {
   let playing = false;
@@ -56,7 +15,7 @@ export function Ad({ad}) {
           <span className="ad-adsetCount">1 Adsets</span>
           <span> use this creative</span>
         </div>
-        <img className="ad-status" src={bitmap1Image} width={15} height={30} />
+        <img className="ad-status" src={bitmap3Image} width={15} height={30} />
       </div>
       {(ad.ad_spend)?(
       <div className="ad-revenue">
@@ -130,8 +89,8 @@ export default function TiktokListAds({ads,loading}) {
     </center>
     <div className="ad-container">
       {
-        ads.map((ad) => {
-          return (<Ad ad={ad} />)})
+        ads.map((ad,index) => {
+          return (<Ad ad={ad} key={index} />)})
       }
     </div>
     </>

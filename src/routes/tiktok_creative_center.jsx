@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CopiwinSDK from "../copiwinsdk/copiwinsdk";
+import { UserContext } from "../context/UserContext";
 
 function SearchCard({loading,search}) {
   const [adId,setAdId] = useState("")
@@ -25,25 +26,28 @@ export default function TiktokCreativeCenter() {
     loading:false,
     data:null
   })
+  const user = useContext(UserContext)
 
   const fetchAd = function(ad_id) {
-    setAdData({
-      loading:true,
-      data:adData.data
-    })
-    copiwinSDK.tiktokAd({ad_id:ad_id}).then((data)=>{
+    if(user){
       setAdData({
-        loading:false,
-        data:data.data
-      })
-      console.log(data)
-    }).catch((reason)=>{
-      setAdData({
-        loading:false,
+        loading:true,
         data:adData.data
       })
-      console.log(reason)
-    })
+      copiwinSDK.tiktokAd({ad_id:ad_id,access_token:user.access_token}).then((data)=>{
+        setAdData({
+          loading:false,
+          data:data.data
+        })
+        console.log(data)
+      }).catch((reason)=>{
+        setAdData({
+          loading:false,
+          data:adData.data
+        })
+        console.log(reason)
+      })
+    }
   }
 
   return (

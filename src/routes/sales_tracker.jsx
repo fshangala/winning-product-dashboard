@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import StoreInput from "../components/store_input";
 import CopiwinSDK from "../copiwinsdk/copiwinsdk";
 import { RotatingLines } from "react-loader-spinner";
 import { Alert, AlertsContainer } from '../components/alert'
+import { UserContext } from "../context/UserContext";
 
 export default function SalesTracker() {
   let copiwinSDK = new CopiwinSDK()
+  const user = useContext(UserContext)
+  const [initialized,setInitialized] = useState(false)
   const [stores,setStores] = useState([])
   const [loading,setLoading] = useState(false)
   const [alerts,setAlerts] = useState([])
@@ -19,51 +22,83 @@ export default function SalesTracker() {
   }
 
   let addStore = function(storeUrl){
-    setLoading(true)
-    copiwinSDK.addStore({storeUrl:storeUrl}).then((data)=>{
-      console.log(data)
-      if ("url" in data) {
-        if("title" in data) {
-          setAddedStore(data)
-          console.log("Store added!")
-        } else {
+    if(user){
+      setLoading(true)
+      copiwinSDK.addStore({storeUrl:storeUrl,access_token:user.access_token}).then((data)=>{
+        console.log(data)
+        if ("url" in data) {
+          if("title" in data) {
+            setAddedStore(data)
+            console.log("Store added!")
+          } else {
+            var currentAlerts = alerts
+            data.url.forEach((item)=>{
+              currentAlerts.push(item)
+            })
+            setAlerts(currentAlerts)
+          }
+        }
+        if ("non_field_errors" in data) {
           var currentAlerts = alerts
-          data.url.forEach((item)=>{
+          data.non_field_errors.forEach((item)=>{
             currentAlerts.push(item)
           })
           setAlerts(currentAlerts)
         }
-      }
-      if ("non_field_errors" in data) {
-        var currentAlerts = alerts
-        data.non_field_errors.forEach((item)=>{
-          currentAlerts.push(item)
-        })
-        setAlerts(currentAlerts)
-      }
-      console.log(data)
-      setLoading(false)
-    }).catch((reason)=>{
-      console.log(reason)
-      setLoading(false)
-    })
+        if ("data" in data && "store" in data) {
+          setAddedStore(data["store"])
+          setStores(data["data"])
+          if (data["filtered"].length > 0) {
+            var currentAlerts = alerts
+            currentAlerts.push(`Store ${data["filtered"][0]["store"]}, has been added!`)
+            setAlerts(currentAlerts)
+          } else {
+            loadStores()
+          }
+        }
+        if ("detail" in data) {
+          var currentAlerts = alerts
+          currentAlerts.push(data.detail)
+          setAlerts(currentAlerts)
+        }
+        console.log(data)
+        setLoading(false)
+      }).catch((reason)=>{
+        console.log(reason)
+        if ("statusText" in reason) {
+          var currentAlerts=alerts
+          currentAlerts.push(reason.statusText)
+          setAlerts(currentAlerts)
+        }
+        setLoading(false)
+      })
+    }
   }
 
   let loadStores = function() {
-    setLoading(true)
-    copiwinSDK.stores().then((data)=>{
-      console.log(data)
-      setStores(data)
-      setLoading(false)
-    }).catch((reason)=>{
-      console.log(reason)
-      setLoading(false)
-    })
+    if(user) {
+      setLoading(true)
+      setInitialized(true)
+      copiwinSDK.stores({access_token:user.access_token}).then((data)=>{
+        console.log(data)
+        setStores(data)
+        setLoading(false)
+      }).catch((reason)=>{
+        if("statusText" in reason) {
+          var currentAlerts = alerts
+          currentAlerts.push(reason.statusText)
+        }
+        console.log(reason)
+        setLoading(false)
+      })
+    }
   }
 
   useEffect(()=>{
-    loadStores()
-  },[])
+    if(!initialized) {
+      loadStores()
+    }
+  })
 
   return (
     <>
@@ -118,9 +153,9 @@ export default function SalesTracker() {
         </tr>
       </thead>
       <tbody>
-        {stores.map((store)=>{
+        {stores.map((store,index,array)=>{
           return (
-            <tr>
+            <tr key={index}>
             <td className="first">
               {store.store}
             </td>

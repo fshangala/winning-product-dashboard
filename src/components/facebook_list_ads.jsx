@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from "react"
 import { RotatingLines } from "react-loader-spinner";
 import bitmap1Image from "../assets/images/bitmap1.png";
+import bitmap2Image from "../assets/images/bitmap2.png";
+import bitmap3Image from "../assets/images/bitmap3.png";
 import getPlatformIcons from "./platform_icons";
 import getFlagOf from "./country_iso_flag";
 import Dropdown from "./dropdown";
@@ -30,7 +32,7 @@ export function Ad({ad}) {
           <span className="ad-adsetCount">{ad.adsets} Adsets</span>
           <span> use this creative</span>
         </div>
-        <img className="ad-status" src={bitmap1Image} width={15} height={30} />
+        <img className="ad-status" src={bitmap3Image} width={15} height={30} />
         <Dropdown>
           <div className="list">
             <button onClick={()=>{
@@ -114,7 +116,7 @@ export default function FacebookListAds({ads,loading}) {
     </center>
     <div className="ad-container">
       {(ads.length > 0) ? 
-        ads.map((ad) => {
+        ads.map((ad,index) => {
           return (<Ad key={ad.id} ad={ad} />)}) : null
       }
     </div>

@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import cameraImage from "../assets/images/camera.png"
 import MagicAIFilter from "../components/magic_ai_filter"
 import CopiwinSDK from "../copiwinsdk/copiwinsdk"
 import { RotatingLines } from "react-loader-spinner"
 import TiktokListAds from "../components/tiktok_list_ads"
 import FacebookListAds from '../components/facebook_list_ads'
+import { UserContext } from "../context/UserContext"
 
 export default function MagicAI({}) {
   const [search,setSearch] = useState("")
@@ -15,30 +16,30 @@ export default function MagicAI({}) {
     tiktok:[]
   })
   const copiwinSDK = new CopiwinSDK()
-
-  useEffect(()=>{
-    console.log(ads)
-  },[ads])
+  const user = useContext(UserContext)
+  const [initialized,setInitialized] = useState(false)
 
   const startSearch = function({search_term}) {
-    setAds({
-      ...ads,
-      loading:true
-    })
-    copiwinSDK.magicAI({search_term:search_term}).then((data)=>{
-      console.log(data)
-      setAds({
-        loading:false,
-        facebook:data.facebok.data,
-        tiktok:data.tiktok.data.ads
-      })
-    }).catch((reason)=>{
+    if(user) {
       setAds({
         ...ads,
-        loading:false
+        loading:true
       })
-      console.log(reason)
-    })
+      copiwinSDK.magicAI({search_term:search_term,access_token:user.access_token}).then((data)=>{
+        console.log(data)
+        setAds({
+          loading:false,
+          facebook:data.facebok.data,
+          tiktok:data.tiktok.data.ads
+        })
+      }).catch((reason)=>{
+        setAds({
+          ...ads,
+          loading:false
+        })
+        console.log(reason)
+      })
+    }
   }
 
   return (
@@ -50,10 +51,10 @@ export default function MagicAI({}) {
       <h1 className="title">Magic AI Search</h1>
       <div className="search-section">
         <input type="search" className="search-input" onChange={(e)=>{setSearch(e.target.value)}} placeholder="Enter AI search prompt here" />
-        <button className="search-btn" onClick={(e)=>{
+        <button disabled={user==null} className="search-btn" onClick={(e)=>{
           startSearch({search_term:search})
         }} >Search</button>
-        <button className="file-input-btn"><img src={cameraImage} /></button>
+        <button disabled={user==null} className="file-input-btn"><img src={cameraImage} /></button>
       </div>
     </div>
     <MagicAIFilter />

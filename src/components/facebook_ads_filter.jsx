@@ -4,7 +4,7 @@ import arrowSVG from '../assets/images/arrow.svg'
 import countries from "./countries"
 
 
-export default function FaceBookAdsFilter({applyFilters=function(filters){}}) {
+export default function FaceBookAdsFilter({applyFilters=function(filters){},initialized}) {
   const [adsFilters,setAdsFilters] = useState({
     search_term:"dog food",
     keywordIn:"all",
@@ -28,8 +28,10 @@ export default function FaceBookAdsFilter({applyFilters=function(filters){}}) {
   })
 
   useEffect(()=>{
-    applyFilters(adsFilters)
-  },[])
+    if(!initialized) {
+      applyFilters(adsFilters)
+    }
+  })
 
   return (
     <div className="ad-filters">

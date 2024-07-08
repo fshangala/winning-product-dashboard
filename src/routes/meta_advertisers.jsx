@@ -1,34 +1,40 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import metaLogo from "../assets/images/meta.png";
 import MetaAdvertisersFilter from "../components/meta_advertisers_filter";
 import CopiwinSDK from "../copiwinsdk/copiwinsdk";
 import { RotatingLines } from "react-loader-spinner";
+import { UserContext } from "../context/UserContext";
 
 export default function MetaAdvertisers() {
+  const user = useContext(UserContext)
   const [advertisers,setAdvertisers] = useState({
     loading:false,
     data:[]
   })
   const copiwinSDK = new CopiwinSDK()
+  const [initialized,setInitialized] = useState(false)
 
   const applyFilters = function(filters) {
-    setAdvertisers({
-      loading:true,
-      data:advertisers.data,
-    })
-    copiwinSDK.metaAdvertisers().then((data)=>{
-      console.log(data)
+    if(user) {
       setAdvertisers({
-        loading:false,
-        data:data.results
-      })
-    }).catch((reason)=>{
-      setAdvertisers({
-        loading:false,
+        loading:true,
         data:advertisers.data,
       })
-      console.log(reason)
-    })
+      setInitialized(true)
+      copiwinSDK.metaAdvertisers({access_token:user.access_token}).then((data)=>{
+        console.log(data)
+        setAdvertisers({
+          loading:false,
+          data:data.results
+        })
+      }).catch((reason)=>{
+        setAdvertisers({
+          loading:false,
+          data:advertisers.data,
+        })
+        console.log(reason)
+      })
+    }
   }
 
   return (
@@ -40,7 +46,7 @@ export default function MetaAdvertisers() {
       </div>
       <hr className="divider" />
     </div>
-    <MetaAdvertisersFilter applyFilters={applyFilters} />
+    <MetaAdvertisersFilter applyFilters={applyFilters} initialized={initialized} />
     <br />
     <center className="loading-container">
       <RotatingLines visible={advertisers.loading} />
