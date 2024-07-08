@@ -75,7 +75,7 @@ export default class CopiwinSDK{
     return await response.json()
   }
 
-  async createAccount({email,password}) {
+  async createAccount({email,password,first_name,last_name}) {
     const response = await fetch(`${this.baseUrl}/accounts/create-account/`,{
       method:'post',
       headers: {
@@ -83,6 +83,9 @@ export default class CopiwinSDK{
       },
       body: JSON.stringify({
         "email": email,
+        "username": email,
+        "first_name": first_name,
+        "last_name": last_name,
         "password": password
       })
     })
