@@ -29,6 +29,9 @@ export default function SalesTracker() {
         if ("url" in data) {
           if("title" in data) {
             setAddedStore(data)
+            var currentStores = stores
+            currentStores.push(data)
+            setStores(currentStores)
             console.log("Store added!")
           } else {
             var currentAlerts = alerts
@@ -155,23 +158,43 @@ export default function SalesTracker() {
       <tbody>
         {stores.map((store,index,array)=>{
           return (
-            <tr key={index}>
-            <td className="first">
-              {store.store}
-            </td>
-            <td>
-              {store.today}
-            </td>
-            <td>
-            {store.yesterday}
-            </td>
-            <td>
-            {store["7days"]}
-            </td>
-            <td>
-            {store["30days"]}
-            </td>
-            </tr>
+            store.track_data ? (
+              <tr key={index}>
+                <td className="first">
+                  {store.track_data.store}
+                </td>
+                <td>
+                  {store.track_data.today}
+                </td>
+                <td>
+                {store.track_data.yesterday}
+                </td>
+                <td>
+                {store.track_data["7days"]}
+                </td>
+                <td>
+                {store.track_data["30days"]}
+                </td>
+              </tr>
+            ) : (
+              <tr key={index}>
+                <td className="first">
+                  {store.hostname}
+                </td>
+                <td>
+                  {"$0 \n0 sales"}
+                </td>
+                <td>
+                {"$0 \n0 sales"}
+                </td>
+                <td>
+                {"$0 \n0 sales"}
+                </td>
+                <td>
+                {"$0 \n0 sales"}
+                </td>
+              </tr>
+            )
             // <tr>
             // <td className="first">
             //   <div className="top">{store.name}</div>

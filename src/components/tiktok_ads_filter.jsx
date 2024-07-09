@@ -358,11 +358,11 @@ export default function TiktokAdsFilter({applyFilters=function(filters){},initia
         </div>
       </div>
       <div className="actions">
-        <button className="dropshipping">European Winners</button>
-        <button className="dropshipping">USA (Big 5) Winners</button>
-        <button className="dropshipping">Dropship Ads</button>
-        <button className="dropshipping">Fashion Dropship</button>
-        <button className="dropshipping">Top Branded</button>
+        <button className="dropshipping"><img src="https://app.winninghunter.com/images/european-union-flag-on-trophee-circle.png" height={25}/> European Winners</button>
+        <button className="dropshipping"><img src="https://app.winninghunter.com/images/usa-flag-with-uk-flag.png" height={25}/> USA (Big 5) Winners</button>
+        <button className="dropshipping"><img src="https://app.winninghunter.com/images/drop-shipping.png" height={25}/> Dropship Ads</button>
+        <button className="dropshipping"><img src="https://app.winninghunter.com/images/clothes-cool-brand.png" height={25}/> Fashion Dropship</button>
+        <button className="dropshipping"><img src="https://app.winninghunter.com/images/award.png" height={25}/> Top Branded</button>
         <div className="state-actions">
           <button className="cancel-btn">Cancel</button>
           <button className='apply-btn' onClick={()=>{applyFilters(adsFilters)}}>Apply</button>
