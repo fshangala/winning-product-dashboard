@@ -10,6 +10,8 @@ export default function Signup(){
   const sdk = new CopiwinSDK()
   const [credentials,setCredentials] = useState({
     email:"",
+    first_name:"",
+    last_name:"",
     password:""
   })
   const [loading,setLoading] = useState(false)
@@ -21,10 +23,15 @@ export default function Signup(){
     setLoading(true)
     sdk.createAccount({
       email:credentials.email,
-      password:credentials.password
+      first_name:credentials.first_name,
+      last_name:credentials.last_name,
+      password:credentials.password,
     }).then((response)=>{
       alert("User successfully created, please login.")
-      navigate("/login")
+      if("id" in response) {
+        navigate("/login")
+      }
+      console.log(response)
     }).catch((reason)=>{
       console.log(reason)
     }).finally(()=>{
@@ -47,6 +54,24 @@ export default function Signup(){
       <div className="row">
         <div className="login-form">
           {loading ? <p>Loading...</p> : null}        
+          <div className="input-group">
+            <label>First Name</label>
+            <input type="name" className="input" value={credentials.first_name} onChange={(event)=>{
+                setCredentials({
+                ...credentials,
+                first_name:event.target.value
+                })
+            }} />
+          </div>
+          <div className="input-group">
+            <label>Last Name</label>
+            <input type="name" className="input" value={credentials.last_name} onChange={(event)=>{
+                setCredentials({
+                ...credentials,
+                last_name:event.target.value
+                })
+            }} />
+          </div>
           <div className="input-group">
             <label>E-mail</label>
             <input type="email" className="input" value={credentials.email} onChange={(event)=>{
