@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { SetUserContext } from "../context/UserContext";
 import {AlertsContainer, Alert} from '../components/alert';
 import CopiwinSDK from "../copiwinsdk/copiwinsdk";
+import facebookAdsImage from "../assets/images/facebook-ads.svg"
 
 export default function Login() {
   const sdk = new CopiwinSDK()
@@ -79,7 +80,7 @@ export default function Login() {
     <div className="navbar">
       <div className="container">
         <Link to={`/`}>
-          <img src={brandImage} alt="brand" />
+          <img src={brandImage} height={50} alt="brand" />
         </Link>
       </div>
     </div>
@@ -94,7 +95,7 @@ export default function Login() {
       <div className="column">
         <div className="login-form">
           {loading ? <p>Loading...</p> : null}
-          <h2 className="title">Sign In</h2>
+          <h1 className="title">Sign In</h1>
           <div className="input-group">
             <label>E-mail</label>
             <input type="email" className="input" value={credentials.email} onChange={(event)=>{
@@ -126,8 +127,12 @@ export default function Login() {
           </div>
         </div>
       </div>
-      <div className="column">
-        <h3>Copiwin</h3>
+      <div className="column right">
+        <h1 className="title">Find Winning Products</h1>
+        <h2 className="sub-title">Find Winning Products And add stores to the live Sales Tracker to be ahead of your competitors.</h2>
+        <div className="image-container">
+          <img className="image" src={facebookAdsImage} alt="facebook-ads" />
+        </div>
       </div>
     </div>
     </>
