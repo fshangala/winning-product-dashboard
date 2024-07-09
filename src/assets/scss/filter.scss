@@ -13,6 +13,12 @@
 
     .filter {
       padding: 8px;
+
+      .save-search-btn {
+        border: 1px solid $secondary-color;
+        border-radius: 100%;
+        cursor: pointer;
+      }
     }
   }
 
