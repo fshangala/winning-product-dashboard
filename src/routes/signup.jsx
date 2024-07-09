@@ -46,13 +46,19 @@ export default function Signup(){
     <div className="navbar">
       <div className="container">
         <Link to={`/`}>
-          <img src={brandImage} alt="brand" />
+          <img src={brandImage} height={64} alt="brand" />
         </Link>
       </div>
     </div>
-    <div className="section">
-      <div className="row">
-        <div className="login-form">
+    <div className="signup-section">
+      <div className="container">
+        <h1 className="title">Create an Account</h1>
+        <div className="divider-container">
+          <div className="divider"></div>
+          <div className="text">or Sign Up with</div>
+          <div className="divider"></div>
+        </div>
+        <div className="signup-form">
           {loading ? <p>Loading...</p> : null}        
           <div className="input-group">
             <label>First Name</label>
@@ -93,11 +99,7 @@ export default function Signup(){
           <div className="input-group">
             <button className="btn" onClick={emailSignUp}>Signup</button>
           </div>
-          <div className="input-group">
-            <Link to={"/login"} className="btn">Already have an account? Login.</Link>
-          </div>
         </div>
-        <div className="content"></div>
       </div>
     </div>
     </>
