@@ -90,6 +90,7 @@ export default function SalesTracker() {
         if("statusText" in reason) {
           var currentAlerts = alerts
           currentAlerts.push(reason.statusText)
+          setAlerts(currentAlerts)
         }
         console.log(reason)
         setLoading(false)
@@ -97,9 +98,27 @@ export default function SalesTracker() {
     }
   }
 
+  let loadStoresSilently = function() {
+    if(user) {
+      copiwinSDK.stores({access_token:user.access_token}).then((data)=>{
+        setStores(data)
+      }).catch((reason)=>{
+        if("statusText" in reason) {
+          var currentAlerts = alerts
+          currentAlerts.push(reason.statusText)
+          setAlerts(currentAlerts)
+        }
+        console.log(reason)
+      })
+    }
+  }
+
   useEffect(()=>{
     if(!initialized) {
       loadStores()
+      setInterval(()=>{
+        loadStoresSilently()
+      }, 3000)
     }
   })
 
@@ -161,19 +180,19 @@ export default function SalesTracker() {
             store.track_data ? (
               <tr key={index}>
                 <td className="first">
-                  {store.track_data.store}
+                  {store.track_data.data.store}
                 </td>
                 <td>
-                  {store.track_data.today}
+                  {store.track_data.data.today}
                 </td>
                 <td>
-                {store.track_data.yesterday}
+                {store.track_data.data.yesterday}
                 </td>
                 <td>
-                {store.track_data["7days"]}
+                {store.track_data.data["7days"]}
                 </td>
                 <td>
-                {store.track_data["30days"]}
+                {store.track_data.data["30days"]}
                 </td>
               </tr>
             ) : (
