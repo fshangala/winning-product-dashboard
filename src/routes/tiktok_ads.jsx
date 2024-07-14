@@ -5,6 +5,9 @@ import TiktokListAds from '../components/tiktok_list_ads'
 import {AlertsContainer, Alert} from '../components/alert'
 import CopiwinSDK from '../copiwinsdk/copiwinsdk'
 import { UserContext } from '../context/UserContext'
+import TiktokHeader from '../templates/tiktok_header'
+import FacebookFilters from '../templates/facebook_filters'
+import FacebookAd from '../templates/facebook_ad'
 
 export default function TiktokAds() {
   const [loadAds,setLoadAds] = useState({
@@ -55,20 +58,39 @@ export default function TiktokAds() {
 
   return (
     <>
-    <div className="header-container">
-    <div className="header">
-      <img src={tiktokLogo} alt="tiktok" />
-      <h1>Search Tiktok Ads</h1>
+    <div>
+      <div className="margin-bottom margin-xlarge">
+        <div>
+          <TiktokHeader />
+          <hr />
+          <FacebookFilters />
+        </div>
+      </div>
+      <div className="add_list relative" data-wg-notranslate="">
+        {[1,2,3,4,5].map((ad)=>{
+          return <FacebookAd key={ad} />
+        })}
+      </div>
     </div>
-    <hr className="divider" />
-  </div>
-  <AlertsContainer>
-  {alerts.map((value,index,array)=>{
-    return <Alert message={value} index={index} dismiss={dismissAlert} />
-  })}
-  </AlertsContainer>
-  <TiktokAdsFilter applyFilters={applyFilters} initialized={initialized} />
-  <TiktokListAds ads={loadAds.ads} loading={loadAds.loading} />
-  </>
+    </>
   )
+
+  // return (
+  //   <>
+  //   <div className="header-container">
+  //   <div className="header">
+  //     <img src={tiktokLogo} alt="tiktok" />
+  //     <h1>Search Tiktok Ads</h1>
+  //   </div>
+  //   <hr className="divider" />
+  // </div>
+  // <AlertsContainer>
+  // {alerts.map((value,index,array)=>{
+  //   return <Alert message={value} index={index} dismiss={dismissAlert} />
+  // })}
+  // </AlertsContainer>
+  // <TiktokAdsFilter applyFilters={applyFilters} initialized={initialized} />
+  // <TiktokListAds ads={loadAds.ads} loading={loadAds.loading} />
+  // </>
+  // )
 }
