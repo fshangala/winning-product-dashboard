@@ -5,6 +5,9 @@ import FaceBookAdsFilter from '../components/facebook_ads_filter'
 import FacebookListAds from '../components/facebook_list_ads'
 import CopiwinSDK from '../copiwinsdk/copiwinsdk'
 import { UserContext } from '../context/UserContext'
+import PageHeader from "../components/page_header"
+import FacebookFilters from "../components/facebook_filters"
+import FacebookAd from "../templates/facebook_ad"
 
 export default function FacebookAds() {
   const user = useContext(UserContext)
@@ -45,6 +48,25 @@ export default function FacebookAds() {
       })
     }
   }
+
+  return (
+    <>
+    <div>
+      <div className="margin-bottom margin-xlarge">
+        <div>
+          <PageHeader />
+          <hr />
+          <FacebookFilters />
+        </div>
+      </div>
+      <div className="add_list relative" data-wg-notranslate="">
+        {[1,2,3,4,5].map((ad)=>{
+          return <FacebookAd key={ad} />
+        })}
+      </div>
+    </div>
+    </>
+  )
 
   return (
     <>

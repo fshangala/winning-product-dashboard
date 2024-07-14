@@ -19,6 +19,8 @@ import MetaAdvertisers from './routes/meta_advertisers.jsx'
 import SavedAds from './routes/saved_ads.jsx'
 import MagicAI from './routes/magic_ai.jsx'
 import SalesTracker from './routes/sales_tracker.jsx'
+import TestFacebookAds from './routes/test/facebook_ads.jsx'
+import Dashboard from './routes/test/dashboard.jsx'
 
 const router = createHashRouter([
   {
@@ -53,7 +55,7 @@ const router = createHashRouter([
       {
         path:'/sales-tracker',
         element:<SalesTracker />
-      }
+      },
     ]
   },
   {
@@ -87,6 +89,14 @@ const router = createHashRouter([
   {
     path:'/test-magic-ai',
     element:<MagicAI />
+  },
+  {
+    path:'/test-dashboard',
+    element:<TestFacebookAds />
+  },
+  {
+    path:'/test',
+    element:<Dashboard />
   }
 ])
 

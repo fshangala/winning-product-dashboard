@@ -4,6 +4,7 @@ import userIcon from "../assets/images/user-icon.svg"
 import { useContext, useEffect, useState } from "react"
 import { SetUserContext, UserContext } from "../context/UserContext"
 import CopiwinSDK from "../copiwinsdk/copiwinsdk"
+import Navbar from "../components/navbar"
 
 export default function Root() {
   const user = useContext(UserContext)
@@ -44,7 +45,28 @@ export default function Root() {
 
   return (
     <>
-    <nav className="navbar">
+    <div className="page-wrapper">
+      <div className="global-styles w-embed"></div>
+      <main className="main-wrapper">
+        <Navbar />
+        <header className="section_dashboard">
+          <div className="padding-global">
+            <div>
+              <div className="padding-section-medium">
+                <Outlet />
+              </div>
+            </div>
+          </div>
+        </header>
+      </main>
+    </div>
+    </>
+  )
+
+  return (
+    <>
+    <Navbar />
+    {/* <nav className="navbar">
       <div className="container">
         <a href="home.html" className="brand">
           <img src={brandImage} alt="logo" />
@@ -73,7 +95,7 @@ export default function Root() {
           </>)}
         </div>
       </div>
-    </nav>
+    </nav> */}
     <div className="main">
       <Outlet />
     </div>
