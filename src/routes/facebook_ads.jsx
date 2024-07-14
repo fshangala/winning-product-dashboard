@@ -19,35 +19,35 @@ export default function FacebookAds() {
   const [initialized,setInitialized] = useState(false)
   const copiwinSDK = new CopiwinSDK()
 
-  const dismissAlert = function(index) {
-    var a = alerts.filter(function(value,i,array){
-      return index != i
-    })
-    setAlerts(a)
-  }
+  // const dismissAlert = function(index) {
+  //   var a = alerts.filter(function(value,i,array){
+  //     return index != i
+  //   })
+  //   setAlerts(a)
+  // }
 
-  const applyFilters = function(filters) {
-    if(user) {
-      setLoadAds({
-        loading: true,
-        ads:loadAds.ads,
-      })
-      setInitialized(true)
-      copiwinSDK.facebookAds({...filters,access_token:user.access_token}).then((data)=>{
-        setLoadAds({
-          loading:false,
-          ads:data.data,
-        })
-      }).catch((reason)=>{
-        alerts.push(reason.toString())
-        setAlerts(alerts)
-        setLoadAds({
-          loading:false,
-          ads:loadAds.ads,
-        })
-      })
-    }
-  }
+  // const applyFilters = function(filters) {
+  //   if(user) {
+  //     setLoadAds({
+  //       loading: true,
+  //       ads:loadAds.ads,
+  //     })
+  //     setInitialized(true)
+  //     copiwinSDK.facebookAds({...filters,access_token:user.access_token}).then((data)=>{
+  //       setLoadAds({
+  //         loading:false,
+  //         ads:data.data,
+  //       })
+  //     }).catch((reason)=>{
+  //       alerts.push(reason.toString())
+  //       setAlerts(alerts)
+  //       setLoadAds({
+  //         loading:false,
+  //         ads:loadAds.ads,
+  //       })
+  //     })
+  //   }
+  // }
 
   return (
     <>
@@ -68,24 +68,24 @@ export default function FacebookAds() {
     </>
   )
 
-  return (
-    <>
-    <div className="header-container">
-    <div className="header">
-      <img src={facebookLogo} alt="facebook" />
-      <h1>Search Facebook Ads</h1>
-    </div>
-    <hr className="divider" />
-  </div>
-  {(alerts.length > 0) ? (
-  <AlertsContainer>
-  {alerts.map((value,index,array)=>{
-    return <Alert message={value} key={index} index={index} dismiss={dismissAlert} />
-  })}
-  </AlertsContainer>
-  ) : null}
-  <FaceBookAdsFilter applyFilters={applyFilters} initialized={initialized} />
-  <FacebookListAds ads={loadAds.ads} loading={loadAds.loading} />
-  </>
-  )
+  // return (
+  //   <>
+  //   <div className="header-container">
+  //   <div className="header">
+  //     <img src={facebookLogo} alt="facebook" />
+  //     <h1>Search Facebook Ads</h1>
+  //   </div>
+  //   <hr className="divider" />
+  // </div>
+  // {(alerts.length > 0) ? (
+  // <AlertsContainer>
+  // {alerts.map((value,index,array)=>{
+  //   return <Alert message={value} key={index} index={index} dismiss={dismissAlert} />
+  // })}
+  // </AlertsContainer>
+  // ) : null}
+  // <FaceBookAdsFilter applyFilters={applyFilters} initialized={initialized} />
+  // <FacebookListAds ads={loadAds.ads} loading={loadAds.loading} />
+  // </>
+  // )
 }

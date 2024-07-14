@@ -1,30 +1,31 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import brandImage from "../assets/images/detailed-brand.png";
 import userAvatarImage from "../assets/images/user-icon.svg";
 
 export default function Navbar() {
+  const location = useLocation()
   return (
     <div data-animation="default" class="navbar_component p-bottom-top-0" data-easing2="ease" fs-scrolldisable-element="smart-nav" data-easing="ease" data-collapse="medium" data-w-id="fbbd3357-a308-4244-f630-6ac7f084078e" role="banner" data-duration="400">
       <div class="navbar_container">
         <Link to="/" aria-current="page" class="navbar1_logo-link w-nav-brand" aria-label="home"><img src={brandImage} loading="lazy" alt="" class="navbar1_logo"/></Link>
         <nav role="navigation" class="navbar_menu is-page-height-tablet w-nav-menu">
-          <Link to="/" class="menu_links dark-hover w-inline-block w--current">
+          <Link to="/" class={"menu_links dark-hover w-inline-block "+(location.pathname == "/" ? "w--current" : "")}>
             {/*             <div class="svg-embeds w-embed"><img src="/images/facebook-2.svg" style="height:24px;width:24px;"></div> */}
-            <div class="dashboard-label">Facebook Ads</div>
+            <div class="dashboard-label">Facebook</div>
           </Link>
-          <Link to="/meta-advertisers" class="menu_links dark-hover w-inline-block">
+          <Link to="/meta-advertisers" class={"menu_links dark-hover w-inline-block "+(location.pathname == "/meta-advertisers" ? "w--current" : "")}>
             {/*             <div class="svg-embeds w-embed"><img src="/images/facebook.svg" style="height:24px;width:24px;"></div> */}
             <div class="dashboard-label">Meta Advertisers</div>
           </Link>
-          <Link to="/tiktok-ads" class="menu_links dark-hover w-inline-block">
+          <Link to="/tiktok-ads" class={"menu_links dark-hover w-inline-block "+(location.pathname == "/tiktok-ads" ? "w--current" : "")}>
             {/*             <div class="svg-embeds w-embed"><img src="/images/tiktok-menu.svg" style="height:24px;width:24px;"></div> */}
             <div class="dashboard-label">Tiktok Ads</div>
           </Link>
-          <Link to="/tiktok-creative-center" class="menu_links dark-hover w-inline-block">
+          <Link to="/tiktok-creative-center" class={"menu_links dark-hover w-inline-block "+(location.pathname == "/tiktok-creative-center" ? "w--current" : "")}>
             {/*             <div class="svg-embeds w-embed"><img src="/images/tools.svg" style="height:24px;width:24px;"></div> */}
             <div class="dashboard-label">Tiktok Creative Center</div>
           </Link>
-          <Link to="/sales-tracker" class="menu_links dark-hover w-inline-block">
+          <Link to="/sales-tracker" class={"menu_links dark-hover w-inline-block "+(location.pathname == "/sales-tracker" ? "w--current" : "")}>
             {/*             <div class="svg-embeds w-embed">
                   <svg width="100%" height="100%" viewbox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect width="48" height="48" fill="none"></rect>
@@ -36,10 +37,10 @@ export default function Navbar() {
                 </div> */}
             <div class="dashboard-label">Sales Tracker</div>
           </Link>
-          <Link to="/magic-ai" class="menu_links dark-hover w-inline-block">
+          <Link to="/magic-ai" className={"menu_links dark-hover w-inline-block "+(location.pathname == "/magic-ai" ? "w--current" : "")}>
             <div class="dashboard-label">Magic AI</div>
           </Link>
-          <Link to="/saved-ads" class="menu_links dark-hover w-inline-block">
+          <Link to="/saved-ads" className={"menu_links dark-hover w-inline-block "+(location.pathname == "/saved-ads" ? "w--current" : "")}>
             {/*             <div class="svg-embeds w-embed"><svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> 
                     <path d="M12.89 5.87988H5.10999C3.39999 5.87988 2 7.27987 2 8.98987V20.3499C2 21.7999 3.04 22.4199 4.31 21.7099L8.23999 19.5199C8.65999 19.2899 9.34 19.2899 9.75 19.5199L13.68 21.7099C14.95 22.4199 15.99 21.7999 15.99 20.3499V8.98987C16 7.27987 14.6 5.87988 12.89 5.87988Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> 
                     <path d="M16 8.98987V20.3499C16 21.7999 14.96 22.4099 13.69 21.7099L9.76001 19.5199C9.34001 19.2899 8.65999 19.2899 8.23999 19.5199L4.31 21.7099C3.04 22.4099 2 21.7999 2 20.3499V8.98987C2 7.27987 3.39999 5.87988 5.10999 5.87988H12.89C14.6 5.87988 16 7.27987 16 8.98987Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> 
