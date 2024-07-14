@@ -8,6 +8,8 @@ import { UserContext } from '../context/UserContext'
 import TiktokHeader from '../templates/tiktok_header'
 import FacebookFilters from '../templates/facebook_filters'
 import FacebookAd from '../templates/facebook_ad'
+import TiktokFilters from '../templates/tiktok_filters'
+import TiktokAd from '../templates/tiktok_ad'
 
 export default function TiktokAds() {
   const [loadAds,setLoadAds] = useState({
@@ -63,12 +65,12 @@ export default function TiktokAds() {
         <div>
           <TiktokHeader />
           <hr />
-          <FacebookFilters />
+          <TiktokFilters />
         </div>
       </div>
       <div className="add_list relative" data-wg-notranslate="">
         {[1,2,3,4,5].map((ad)=>{
-          return <FacebookAd key={ad} />
+          return <TiktokAd key={ad} />
         })}
       </div>
     </div>
