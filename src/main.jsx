@@ -1,11 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+
 import './assets/scss/style.scss'
+import './assets/vendor/jquery-3.5.1.min.js'
+import './assets/vendor/ion.rangeSlider.min.js'
+import './assets/vendor/select2.min.js'
+
 import {
   createHashRouter,
   RouterProvider
 } from 'react-router-dom'
 import { GoogleOAuthProvider } from '@react-oauth/google'
+
 import Root from './routes/root.jsx'
 import ErrorPage from './error-page.jsx'
 import Login from './routes/login.jsx'
