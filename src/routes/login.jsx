@@ -19,6 +19,12 @@ export default function Login() {
   const [loading,setLoading] = useState(false)
   const [alerts,setAlerts] = useState([]);
 
+  useEffect(()=>{
+    sessionStorage.setItem("loading",loading)
+    sessionStorage.setItem("logo",brandImage)
+    sessionStorage.setItem("product_demo",facebookAdsImage)
+  })
+
   const dismissAlert = function(index) {
     var a = alerts.filter(function(value,i,array){
       return index != i
@@ -28,6 +34,7 @@ export default function Login() {
   
   const login = useGoogleLogin({
     onSuccess: (credentials) => {
+      console.log(credentials)
       sdk.loginWithGoogle({google_access_token:credentials.access_token}).then((response)=>{
         if(response.access_token) {
           localStorage.setItem("auth",JSON.stringify(response))
@@ -43,6 +50,34 @@ export default function Login() {
       console.log(errorResponse)
     }
   })
+
+  const customEmailLogin = function(credentials={username:'',password:''}) {
+    setLoading(true)
+    console.log(credentials)
+    sdk.login({username:credentials.username,password:credentials.password}).then((response)=>{
+      if(response.access_token) {
+        localStorage.setItem("auth",JSON.stringify(response))
+        setUser(response)
+        navigate("/")
+      }
+      if(response.token) {
+        localStorage.setItem("user",JSON.stringify(response))
+        setUser(response)
+        navigate("/")
+      }
+      if(response.non_field_errors) {
+        setAlerts(response.non_field_errors)
+      }
+      if(response.error_description) { 
+        var currentAlerts=alerts
+        currentAlerts.push(response.error_description)
+        setAlerts(currentAlerts)
+      }
+      console.log(response)
+    }).catch((reason)=>{
+      console.log(reason)
+    })
+  }
 
   const emailLogin = function() {
     setLoading(true)
@@ -61,9 +96,9 @@ export default function Login() {
       if(response.non_field_errors) {
         setAlerts(response.non_field_errors)
       }
-      if(response.error) {
+      if(response.error_description) {
         var currentAlerts=alerts
-        currentAlerts.push(response.error)
+        currentAlerts.push(response.error_description)
         setAlerts(currentAlerts)
       }
       console.log(response)
@@ -76,7 +111,9 @@ export default function Login() {
 
   return (
     <>
-    <LoginTemplate googleLogin={login} emailLogin={emailLogin} credentials={credentials} setCredentials={setCredentials} />
+    <LoginTemplate googleLogin={login} emailLogin={({username,password})=>{
+      customEmailLogin({username:username,password:password})
+    }} alerts={alerts} setAlerts={setAlerts}/>
     </>
   )
 
