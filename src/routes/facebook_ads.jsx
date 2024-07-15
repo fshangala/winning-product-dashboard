@@ -6,8 +6,8 @@ import FacebookListAds from '../components/facebook_list_ads'
 import CopiwinSDK from '../copiwinsdk/copiwinsdk'
 import { UserContext } from '../context/UserContext'
 import PageHeader from "../components/page_header"
-import FacebookFilters from "../components/facebook_filters"
 import FacebookAd from "../templates/facebook_ad"
+import FacebookFilters from '../templates/facebook_filters'
 
 export default function FacebookAds() {
   const user = useContext(UserContext)
