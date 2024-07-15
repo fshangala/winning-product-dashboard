@@ -24593,7 +24593,7 @@ hr {
 /* select2 styling */
 .select2-container {
   min-width: 186px;
-  width: 100% !important;
+  width: 100%;
 }
 
 .select2-results__option {
