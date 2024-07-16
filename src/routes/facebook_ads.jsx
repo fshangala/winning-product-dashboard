@@ -26,28 +26,31 @@ export default function FacebookAds() {
   //   setAlerts(a)
   // }
 
-  // const applyFilters = function(filters) {
-  //   if(user) {
-  //     setLoadAds({
-  //       loading: true,
-  //       ads:loadAds.ads,
-  //     })
-  //     setInitialized(true)
-  //     copiwinSDK.facebookAds({...filters,access_token:user.access_token}).then((data)=>{
-  //       setLoadAds({
-  //         loading:false,
-  //         ads:data.data,
-  //       })
-  //     }).catch((reason)=>{
-  //       alerts.push(reason.toString())
-  //       setAlerts(alerts)
-  //       setLoadAds({
-  //         loading:false,
-  //         ads:loadAds.ads,
-  //       })
-  //     })
-  //   }
-  // }
+  const applyFilters = function(filters) {
+    console.log(filters,user)
+    if(user) {
+      console.log("Clicked")
+      setLoadAds({
+        loading: true,
+        ads:loadAds.ads,
+      })
+      setInitialized(true)
+      copiwinSDK.facebookAds({...filters,access_token:user.access_token}).then((data)=>{
+        setLoadAds({
+          loading:false,
+          ads:data.data,
+        })
+        console.log(data)
+      }).catch((reason)=>{
+        alerts.push(reason.toString())
+        setAlerts(alerts)
+        setLoadAds({
+          loading:false,
+          ads:loadAds.ads,
+        })
+      })
+    }
+  }
 
   return (
     <>
@@ -56,12 +59,12 @@ export default function FacebookAds() {
         <div>
           <PageHeader />
           <hr />
-          <FacebookFilters />
+          <FacebookFilters applyFilters={applyFilters} />
         </div>
       </div>
       <div className="add_list relative" data-wg-notranslate="">
-        {[1,2,3,4,5].map((ad)=>{
-          return <FacebookAd key={ad} />
+        {loadAds.ads.map((ad)=>{
+          return <FacebookAd key={ad.id} ad={ad} />
         })}
       </div>
     </div>

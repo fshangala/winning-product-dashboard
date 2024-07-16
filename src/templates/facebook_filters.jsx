@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function FacebookFilters() {
+export default function FacebookFilters({applyFilters=({keyword=''})=>{}}) {
   const [template,setTemplate] = useState('')
   const [initialized,setInitialized] = useState(false)
 
@@ -13,16 +13,37 @@ export default function FacebookFilters() {
     })
   },[])
 
-  useEffect(()=>{
+  useEffect(()=>{ 
     if(template.initialized) {
       //
     }
   })
 
+  let getFilters = function() {
+    var filters = {}
+
+    //keyword
+    var keyword = document.querySelector("#keyword").value
+    filters["keyword"] = keyword
+    return filters
+  }
+
   let initialize = function() {
     if(document.querySelector("#facebook-filters-template")) {
       // select2
       $(".select2-hidden-accessible").select2()
+
+      // load ads
+      applyFilters(()=>{
+        var filters = getFilters()
+        filters.keyword = "dress"
+        return filters
+      })
+
+      // Event listeners
+      document.querySelector("#applyfilters").addEventListener("click",()=>{
+        applyFilters(getFilters())
+      })
       setInitialized(true)
     } else {
       setTimeout(initialize, 1000);
