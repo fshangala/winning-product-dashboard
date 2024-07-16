@@ -2,3 +2,7 @@
   background-color: rgb(94, 148, 52);
   color: white;
 }
+
+.has-popup:hover .custom-popup {
+  display: block !important;
+}

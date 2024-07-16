@@ -6,7 +6,8 @@ export default function FacebookAd({ad}) {
 
   useEffect(()=>{
     fetch("/templates/facebook_ad.html").then(response => response.text()).then((value)=>{
-      var text = value.replaceAll("{{video_url}}",ad.video_url)
+      var text = value.replaceAll("{{template_id}}",ad.id)
+      text = text.replaceAll("{{video_url}}",ad.video_url)
       text = text.replaceAll("{{adsets}}",ad.adsets)
       text = text.replaceAll("{{ad_delivery_start_time}}",ad.ad_delivery_start_time)
       text = text.replaceAll("{{page_ads}}",ad.page_ads)
@@ -15,7 +16,7 @@ export default function FacebookAd({ad}) {
       text = text.replaceAll("{{ad_spend}}",ad.ad_spend)
       text = text.replaceAll("{{page_name}}",ad.page_name)
       text = text.replaceAll("{{page_profile_picture_url}}",ad.page_profile_picture_url)
-      text = text.replaceAll("{{ad_creative_link_captions}}",ad.ad_creative_link_captions[0])
+      text = text.replaceAll("{{ad_creative_link_captions}}",ad.ad_creative_link_captions ? ad.ad_creative_link_captions[0] : null)
       setTemplate(text)
       initialize()
     }).catch((reason)=>{
@@ -30,8 +31,23 @@ export default function FacebookAd({ad}) {
   })
 
   let initialize = function() {
-    if(document.querySelector("#facebook-ad-template")) {
+    var ad_template = document.querySelector("div[data-template-id='"+ad.id+"'")
+    if(ad_template) {
 
+      // event listeners
+      ad_template.querySelectorAll(".has-popup").forEach((elem)=>{
+        elem.addEventListener("click",(e)=>{
+          var custom_popup = e.target.querySelector(".custom-popup")
+          console.log(custom_popup.style.display)
+          if (custom_popup.style.display == "block") {
+            console.log("close")
+            custom_popup.style.display = "none"
+          } else {
+            console.log("open")
+            custom_popup.style.display = "block"
+          }
+        })
+      })
       setInitialized(true)
     } else {
       setTimeout(initialize,1000)

@@ -29,7 +29,6 @@ export default function FacebookAds() {
   const applyFilters = function(filters) {
     console.log(filters,user)
     if(user) {
-      console.log("Clicked")
       setLoadAds({
         loading: true,
         ads:loadAds.ads,
