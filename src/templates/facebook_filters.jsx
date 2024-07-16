@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function FacebookFilters({applyFilters=({keyword=''})=>{}}) {
+export default function FacebookFilters({applyFilters=(filters)=>{}}) {
   const [template,setTemplate] = useState('')
   const [initialized,setInitialized] = useState(false)
 

@@ -29,6 +29,7 @@ export default function TiktokAds() {
   }
 
   const applyFilters = (filters)=>{
+    console.log(filters,user)
     if(user) {
       setLoadAds({
         loading:true,
@@ -37,6 +38,7 @@ export default function TiktokAds() {
       setInitialized(true)
       copiwinSDK.tiktokAds({...filters,access_token:user.access_token}).then((data)=>{
         if(data.error.code == 'ok') {
+          console.log(data.data.ads)
           setLoadAds({
             ads:data.data.ads,
             loading:false,
@@ -65,12 +67,12 @@ export default function TiktokAds() {
         <div>
           <TiktokHeader />
           <hr />
-          <TiktokFilters />
+          <TiktokFilters applyFilters={applyFilters} />
         </div>
       </div>
       <div className="add_list relative" data-wg-notranslate="">
-        {[1,2,3,4,5].map((ad)=>{
-          return <TiktokAd key={ad} />
+        {loadAds.ads.map((ad)=>{
+          return <TiktokAd key={ad.id} ad={ad} />
         })}
       </div>
     </div>

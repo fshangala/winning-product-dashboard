@@ -27,7 +27,7 @@
                               <div target="__BLANK" href="http://localhost/editor/1aeaf0ad1cc43dfa746629c831c8d071dbd0ac5f53613d07c9e8e3a88cf54161.jpg" class="dropdownnode action-button dropdown-item" style="padding-left:7px"><img width="15px" src="https://app.winninghunter.com/images/picture-edit.svg"> Edit Image</div><hr>
                               <div target="__BLANK" href="https://zelova.nl/collections/all?sort_by=best-selling" class="dropdownnode action-button dropdown-item"><img width="20px" src="https://app.winninghunter.com/images/SH.svg"> Best Selling</div><hr>
                               <div tabindex="0" class="dropdownnode action-button dropdown-item block" href="/sales-tracker?store=https://zelova.nl/products/zelova-lift-up-bra?tw_source=tiktok&amp;tw_adid=__CID__" target="__BLANK"><img width="20px" src="https://app.winninghunter.com/images/track.png"> Track Store</div>
-                              <div tabindex="0" class="dropdownnode action-button dropdown-item block" href="/magic-ai?imgurl=https://adslibrary.eu-central-1.linodeobjects.com/1aeaf0ad1cc43dfa746629c831c8d071dbd0ac5f53613d07c9e8e3a88cf54161.jpg" target="__BLANK"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" loading="lazy" class="w-4 h-4 inline-block">
+                              <div tabindex="0" class="dropdownnode action-button dropdown-item block" href="/magic-ai?imgurl={{cover_image_url}}" target="__BLANK"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" loading="lazy" class="w-4 h-4 inline-block">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"></path>
                               </svg> Find Competitors</div>
                               <div target="__BLANK" href="https://www.similarweb.com/website/zelova.nl" class="dropdownnode action-button dropdown-item block"><img width="20px" src="https://app.winninghunter.com/images/similiarweb.png"> Website Traffic</div>  
@@ -54,9 +54,9 @@
       <p>Vandaag 50% korting! | Betaal later met Klarna</p>
     </div>
     <hr style="width: 92%;margin: 0 auto;">
-    <div style="position: absolute;z-index: 1;display: flex;gap: 10px;justify-content: end;" class="w-full text-sm p-1"><div class="has-popup relative"> <div class="custom-popup left-[-50px] hidden" style="display: none;">Product Creation Date</div><span class="p-1 font-bold bg-white rounded pointer-events-none" style="opacity: 0.79;"> <img src="https://app.winninghunter.com/images/box.svg" class="h-4 v-4"> 2024-03-20</span></div></div>
-    <div class="video-2 w-video w-embed"><img src="https://adslibrary.eu-central-1.linodeobjects.com/1aeaf0ad1cc43dfa746629c831c8d071dbd0ac5f53613d07c9e8e3a88cf54161.jpg" style="display: block;margin:0 auto;filter: blur(5px);min-height: 319px;">
-<video poster="https://adslibrary.eu-central-1.linodeobjects.com/1aeaf0ad1cc43dfa746629c831c8d071dbd0ac5f53613d07c9e8e3a88cf54161.jpg" controls="" style="flex: 1 1 0;max-width: 100%;object-fit: cover;margin: 0 auto;display: block;" preload="none"></video></div>
+    <div style="position: absolute;z-index: 1;display: flex;gap: 10px;justify-content: end;" class="w-full text-sm p-1"><div class="has-popup relative"> <div class="custom-popup left-[-50px] hidden" style="display: none;">Product Creation Date</div><span class="p-1 font-bold bg-white rounded pointer-events-none" style="opacity: 0.79;"> <img src="https://app.winninghunter.com/images/box.svg" class="h-4 v-4"> {{first_shown_date}}</span></div></div>
+    <div class="video-2 w-video w-embed"><img src="{{cover_image_url}}" style="display: block;margin:0 auto;filter: blur(5px);min-height: 319px;">
+<video poster="{{cover_image_url}}" controls="" style="flex: 1 1 0;max-width: 100%;object-fit: cover;margin: 0 auto;display: block;" preload="none"><source src="{{video_url}}" type="video/mp4"></video></div>
     <div class="frameitem-title-box" style="background-color:white;">
       <div class="frameitem-button-group gap-0">
         
@@ -107,9 +107,7 @@
           <div class="info_body" style="margin: 0 auto;">
             <div id="w-node-_3eb5300b-0206-f91c-5505-e52b666a5390-de161bc0" class="frameitem-video-wrapper">
               <div class="html-embed-5 w-embed">
-                <video poster="https://adslibrary.eu-central-1.linodeobjects.com/1aeaf0ad1cc43dfa746629c831c8d071dbd0ac5f53613d07c9e8e3a88cf54161.jpg" controls="" style="width:350px;object-fit:contain;display:block;" preload="none">
-
-</video>
+                <video poster="{{cover_image_url}}" controls="" style="width:350px;object-fit:contain;display:block;" preload="none"><source src="{{video_url}}" type="video/mp4"></video>
               </div>
               <br> Ads History <canvas id="chart734852414987306598681847"></canvas>
             </div>
@@ -167,7 +165,7 @@
                   <img src="https://app.winninghunter.com/images/download-svgrepo-com.svg" loading="lazy" alt="" class="frameitem-icon">
                   <div>
                     <div class="frameitem-small-text">Photo</div>
-                    <div href="https://adslibrary.eu-central-1.linodeobjects.com/1aeaf0ad1cc43dfa746629c831c8d071dbd0ac5f53613d07c9e8e3a88cf54161.jpg" class="frameitem-link" target="__BLANK" download="">Download <br>thumbnail </div>
+                    <div href="{{cover_image_url}}" class="frameitem-link" target="__BLANK" download="">Download <br>thumbnail </div>
                   </div>
                 </div>
                 <div class="frameitem-link-item">
@@ -181,7 +179,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"></path>
                   </svg>
                   <div>
-                    <div tabindex="0" class="frameitem-link" href="/magic-ai?imgurl=https://adslibrary.eu-central-1.linodeobjects.com/1aeaf0ad1cc43dfa746629c831c8d071dbd0ac5f53613d07c9e8e3a88cf54161.jpg" target="__BLANK">Find Competitors</div>
+                    <div tabindex="0" class="frameitem-link" href="/magic-ai?imgurl={{cover_image_url}}" target="__BLANK">Find Competitors</div>
                   </div>
                 </div>
               </div>
@@ -322,7 +320,7 @@
         </div>
           
         </div>
-        <button type="button" class="dots see-details action-button" comptarget="#competitor-adds-list734852414987306598681847" imageurl="https://adslibrary.eu-central-1.linodeobjects.com/1aeaf0ad1cc43dfa746629c831c8d071dbd0ac5f53613d07c9e8e3a88cf54161.jpg">
+        <button type="button" class="dots see-details action-button" comptarget="#competitor-adds-list734852414987306598681847" imageurl="{{cover_image_url}}">
           View Details
         </button>
       </div>
