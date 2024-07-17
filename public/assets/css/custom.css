@@ -5,4 +5,5 @@
 
 .has-popup:hover .custom-popup {
   display: block !important;
+  transform: scale(1);
 }

@@ -35,18 +35,9 @@ export default function FacebookAd({ad}) {
     if(ad_template) {
 
       // event listeners
-      ad_template.querySelectorAll(".has-popup").forEach((elem)=>{
-        elem.addEventListener("click",(e)=>{
-          var custom_popup = e.target.querySelector(".custom-popup")
-          console.log(custom_popup.style.display)
-          if (custom_popup.style.display == "block") {
-            console.log("close")
-            custom_popup.style.display = "none"
-          } else {
-            console.log("open")
-            custom_popup.style.display = "block"
-          }
-        })
+      ad_template.querySelector(".has-popup .custom-popup a.view-page-ads").addEventListener("click",(e)=>{
+        console.log(e)
+        ad_template.querySelector(".pageads .page-popup").style.display="flex"
       })
       setInitialized(true)
     } else {
