@@ -2008,7 +2008,7 @@ select {
 
 .border-primary {
   --tw-border-opacity: 1;
-  border-color: rgb(34 90 234 / var(--tw-border-opacity));
+  border-color: rgb(94 148 52 / var(--tw-border-opacity));
 }
 
 .border-slate-200 {
@@ -2096,7 +2096,7 @@ select {
 
 .bg-primary {
   --tw-bg-opacity: 1;
-  background-color: rgb(34 90 234 / var(--tw-bg-opacity));
+  background-color: rgb(94 148 52 / var(--tw-bg-opacity));
 }
 
 .bg-rose-500 {
@@ -2575,7 +2575,7 @@ select {
 
 .text-primary {
   --tw-text-opacity: 1;
-  color: rgb(34 90 234 / var(--tw-text-opacity));
+  color: rgb(94 148 52 / var(--tw-text-opacity));
 }
 
 .text-red-400 {
@@ -2949,7 +2949,7 @@ select {
 }
 
 .hover\:bg-primary\/80:hover {
-  background-color: rgb(34 90 234 / 0.8);
+  background-color: rgb(94 148 52 / 0.8);
 }
 
 .hover\:bg-rose-400:hover {
@@ -2979,7 +2979,7 @@ select {
 
 .hover\:text-primary:hover {
   --tw-text-opacity: 1;
-  color: rgb(34 90 234 / var(--tw-text-opacity));
+  color: rgb(94 148 52 / var(--tw-text-opacity));
 }
 
 .hover\:underline:hover {
