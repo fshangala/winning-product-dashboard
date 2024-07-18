@@ -101,8 +101,8 @@ export default class CopiwinSDK{
     return await response.json()
   }
 
-  async tiktokAds({access_token,search_term,country='US'}) {
-    const response = await fetch(`${this.baseUrl}/tiktok-ads/?search_term=${search_term}&country=${country}`,{
+  async tiktokAds({access_token,keyword,country='US'}) {
+    const response = await fetch(`${this.baseUrl}/tiktok-ads/?search_term=${keyword}&country=${country}`,{
       headers:{
         "Authorization":`Bearer ${access_token}`,
       }
