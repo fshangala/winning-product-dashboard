@@ -27,6 +27,16 @@ export default function TiktokFilters({applyFilters=(filters)=>{}}) {
       // select2
       $(".select2-hidden-accessible").select2()
 
+      // lightpick
+      var lastseen = new Lightpick({
+        field:document.querySelector("#datepickerlastseen"),
+        singleDate:false,
+      })
+      var productcreation = new Lightpick({
+        field:document.querySelector("#datepickerproductcreation"),
+        singleDate:false,
+      })
+
       // load ads
       filters = getFilters()
       filters.keyword = "dress"

@@ -7,6 +7,7 @@ import TiktokListAds from "../components/tiktok_list_ads"
 import FacebookListAds from '../components/facebook_list_ads'
 import { UserContext } from "../context/UserContext"
 import magicAITemplate from "../templates/magic_ai_template"
+import initialize from "../utils/initialize"
 
 export default function MagicAI({}) {
   const [search,setSearch] = useState("")
@@ -20,6 +21,7 @@ export default function MagicAI({}) {
   const user = useContext(UserContext)
   const [initialized,setInitialized] = useState(false)
   const template = magicAITemplate
+  template.id="magic-ai-page"
 
   const startSearch = function({search_term}) {
     if(user) {
@@ -43,6 +45,25 @@ export default function MagicAI({}) {
       })
     }
   }
+
+  useEffect(function(){
+    initialize({querySelector:"#magic-ai-page"}).then(function(elem){
+      // select2
+      $(".select2-hidden-accessible").select2()
+
+      // lightpick
+      var picker = new Lightpick({
+        field:document.querySelector("#datepicker"),
+        singleDate:false,
+      })
+      var lastseen = new Lightpick({
+        field:document.querySelector("#datepickerlastseen"),
+        singleDate:false,
+      })
+    }).catch(function(reason){
+      console.log(reason)
+    })
+  })
 
   return <div dangerouslySetInnerHTML={{__html:template.html}} />
 

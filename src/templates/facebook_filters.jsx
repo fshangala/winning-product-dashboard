@@ -33,6 +33,20 @@ export default function FacebookFilters({applyFilters=(filters)=>{}}) {
       // select2
       $(".select2-hidden-accessible").select2()
 
+      //lightpick 
+      var picker = new Lightpick({
+        field:document.querySelector("#datepicker"),
+        singleDate:false,
+      })
+      var lastseen = new Lightpick({
+        field:document.querySelector("#datepickerlastseen"),
+        singleDate:false,
+      })
+      var productcreation = new Lightpick({
+        field:document.querySelector("#datepickerproductcreation"),
+        singleDate:false,
+      })
+
       // load ads
       applyFilters(()=>{
         var filters = getFilters()
