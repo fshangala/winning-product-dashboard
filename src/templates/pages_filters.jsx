@@ -12,11 +12,21 @@ export default function PagesFilters() {
       $(".select2-hidden-accessible").select2()
 
       // rangeSliders
+      function number_prettify(n) {
+        if(n >= 1000) {
+          if(n >= 1000000) {
+            return `${Math.trunc(n/1000000)}M`
+          }
+          return `${Math.trunc(n/1000)}K`
+        }
+        return n
+      }
       $("#page_like_range").ionRangeSlider({
         type:"double",
         skin:"round",
         min:0,
         max:500000000,
+        prettify: number_prettify,
         onStart: function(data) {
           data.input.hide()
         }
@@ -26,6 +36,7 @@ export default function PagesFilters() {
         skin:"round",
         min:0,
         max:50000000,
+        prettify: number_prettify,
         onStart: function(data) {
           data.input.hide()
         }
@@ -35,6 +46,7 @@ export default function PagesFilters() {
         skin:"round",
         min:0,
         max:5000,
+        prettify: number_prettify,
         onStart: function(data) {
           data.input.hide()
         }
@@ -44,6 +56,7 @@ export default function PagesFilters() {
         skin:"round",
         min:0,
         max:500000,
+        prettify: number_prettify,
         onStart: function(data) {
           data.input.hide()
         }
@@ -53,6 +66,7 @@ export default function PagesFilters() {
         skin:"round",
         min:0,
         max:1000,
+        prettify: number_prettify,
         onStart: function(data) {
           data.input.hide()
         }
