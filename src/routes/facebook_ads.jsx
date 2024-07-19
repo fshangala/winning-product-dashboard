@@ -35,10 +35,12 @@ export default function FacebookAds() {
       })
       setInitialized(true)
       copiwinSDK.facebookAds({...filters,access_token:user.access_token}).then((data)=>{
-        setLoadAds({
-          loading:false,
-          ads:data.data,
-        })
+        if ('data' in data) {
+          setLoadAds({
+            loading:false,
+            ads:data.data,
+          })
+        }
         console.log(data)
       }).catch((reason)=>{
         alerts.push(reason.toString())

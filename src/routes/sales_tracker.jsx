@@ -5,6 +5,8 @@ import { RotatingLines } from "react-loader-spinner";
 import { Alert, AlertsContainer } from '../components/alert'
 import { UserContext } from "../context/UserContext";
 import salesTrackerTemplate from "../templates/sales_tracker_template";
+import init from "../utils/initialize";
+import salesTrackerRowTemplate from "../templates/sales_tracker_row_template";
 
 export default function SalesTracker() {
   let copiwinSDK = new CopiwinSDK()
@@ -30,9 +32,12 @@ export default function SalesTracker() {
         console.log(data)
         if ("url" in data) {
           if("title" in data) {
-            setAddedStore(data)
+            // setAddedStore(data)
             var currentStores = stores
             currentStores.push(data)
+            var currentAlerts = alerts
+            currentAlerts.push("The store "+data.title+" Has been added and is currently being tracked. If data does not appear instantly check back after 24hrs.")
+            setAlerts(currentAlerts)
             setStores(currentStores)
             console.log("Store added!")
           } else {
@@ -116,15 +121,53 @@ export default function SalesTracker() {
   }
 
   useEffect(()=>{
-    if(!initialized) {
-      loadStores()
-      setInterval(()=>{
-        loadStoresSilently()
-      }, 3000)
+    var table = new DataTable("#stores-table",{})
+    if (table) {
+      return function clean() {
+        table.destroy(true)
+      }
     }
   })
 
-  return <div dangerouslySetInnerHTML={{__html:template.html}} />
+  useEffect(()=>{
+    loadStores()
+    init({querySelector:"#store-tracker-template"}).then(function(elem){
+      // DataTables
+      // eventListeners
+      elem.querySelector("#start-tracking-btn").addEventListener("click",function(e){
+        var storeURL = elem.querySelector("input[name='Store-URL']").value
+        if(storeURL !== "") {
+          addStore(storeURL)
+        }
+      })
+    }).catch(function(reason){console.log(reason)})
+  },[])
+
+  // useEffect(()=>{
+  //   if(!initialized) {
+  //     loadStores()
+  //     setInterval(()=>{
+  //       loadStoresSilently()
+  //     }, 3000)
+  //   }
+  // })
+
+  return <>
+  {(alerts.length > 0) ? (
+    <AlertsContainer>
+    {alerts.map((value,index,array)=>{
+      return <Alert message={value} key={index} index={index} dismiss={dismissAlert} />
+    })}
+    </AlertsContainer>
+    ) : null}
+  <div dangerouslySetInnerHTML={{__html:function(){
+  template.table_rows = stores.map(function(store){
+    var template = salesTrackerRowTemplate
+    return template.html
+  }).join("")
+  return template.html
+  }()}} />
+  </>
 
   // return (
   //   <>

@@ -21962,8 +21962,8 @@ hr {
 .frameitem-info {
   padding: 0.5rem 0.75rem;
   border-radius: 0.5rem;
-  background-color: #fff;
-  color: #515360;
+  background-color: rgb(94, 148, 52);
+  color: white;
   font-size: 0.75rem;
   text-align: center;
   white-space: nowrap;
@@ -23117,7 +23117,7 @@ hr {
   border: none;
 }
 
-.frameitem-info {
+/* .frameitem-info {
   padding: 0.5rem 0.75rem;
   border-radius: 0.5rem;
   background-color: #fff;
@@ -23126,7 +23126,7 @@ hr {
   text-align: center;
   white-space: nowrap;
   box-shadow: 0px 2px 4px rgba(2, 0, 82, 0.05);
-}
+} */
 
 .frameitem-info.is-link {
   padding: 0.25rem 0rem;

@@ -48,11 +48,9 @@ export default function FacebookFilters({applyFilters=(filters)=>{}}) {
       })
 
       // load ads
-      applyFilters(()=>{
-        var filters = getFilters()
-        filters.keyword = "dress"
-        return filters
-      })
+      var filters = getFilters()
+      filters.keyword = "dress"
+      applyFilters(filters)
 
       // Event listeners
       document.querySelector("#applyfilters").addEventListener("click",()=>{
