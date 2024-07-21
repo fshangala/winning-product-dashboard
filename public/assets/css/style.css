@@ -21486,6 +21486,7 @@ appearance: none !important;
   padding: 0.5rem 1rem;
   border-radius: 9px;
   background-color: rgb(94, 148, 52);
+  color: white;
   font-size: 0.875rem;
   text-align: center;
   -webkit-transition: background-color 0.06s ease-in;
