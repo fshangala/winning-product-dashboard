@@ -41,25 +41,30 @@ export default function Root() {
     }
   })
 
-  return (
-    <>
-    <div className="page-wrapper">
-      <div className="global-styles w-embed"></div>
-      <main className="main-wrapper">
-        <Navbar />
-        <header className="section_dashboard">
-          <div className="padding-global">
-            <div>
-              <div className="padding-section-medium">
-                <Outlet />
+  if (user) {
+
+    return (
+      <>
+      <div className="page-wrapper">
+        <div className="global-styles w-embed"></div>
+        <main className="main-wrapper">
+          <Navbar />
+          <header className="section_dashboard">
+            <div className="padding-global">
+              <div>
+                <div className="padding-section-medium">
+                  <Outlet />
+                </div>
               </div>
             </div>
-          </div>
-        </header>
-      </main>
-    </div>
-    </>
-  )
+          </header>
+        </main>
+      </div>
+      </>
+    )
+  }
+
+  return null
 
   // return (
   //   <>

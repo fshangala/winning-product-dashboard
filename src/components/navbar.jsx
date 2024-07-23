@@ -11,7 +11,7 @@ export default function Navbar() {
         <nav role="navigation" className="navbar_menu is-page-height-tablet w-nav-menu">
           <Link to="/" className={"menu_links dark-hover w-inline-block "+(location.pathname == "/" ? "w--current" : "")}>
             {/*             <div className="svg-embeds w-embed"><img src="/images/facebook-2.svg" style="height:24px;width:24px;"></div> */}
-            <div className="dashboard-label">Facebook</div>
+            <div className="dashboard-label">Facebook Ads</div>
           </Link>
           <Link to="/meta-advertisers" className={"menu_links dark-hover w-inline-block "+(location.pathname == "/meta-advertisers" ? "w--current" : "")}>
             {/*             <div className="svg-embeds w-embed"><img src="/images/facebook.svg" style="height:24px;width:24px;"></div> */}
@@ -114,7 +114,7 @@ export default function Navbar() {
           </form>
         </div> */}
 
-        <div className="navbar1_menu-button w-nav-button" style={{WebkitUserSelect:"text"}} aria-label="menu" role="button" tabindex="0" aria-controls="w-nav-overlay-0" aria-haspopup="menu" aria-expanded="false">
+        <div className="navbar1_menu-button w-nav-button" style={{WebkitUserSelect:"text"}} aria-label="menu" role="button" tabIndex="0" aria-controls="w-nav-overlay-0" aria-haspopup="menu" aria-expanded="false">
           <div className="menu-icon1">
             <div className="menu-icon1_line-top"></div>
             <div className="menu-icon1_line-middle">
