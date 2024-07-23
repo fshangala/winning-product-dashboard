@@ -7350,13 +7350,6 @@ li {
   border-radius: 8px;
 }
 
-.select2-results__option:hover,
-.select2-results__option:focus,
-.select2-results__option:active {
-  background-color: #e7edfe !important;
-  color: #272727;
-}
-
 .select2-results__option:before {
   content: "";
   display: inline-block;
@@ -14256,13 +14249,6 @@ li {
   border-radius: 8px;
 }
 
-.select2-results__option:hover,
-.select2-results__option:focus,
-.select2-results__option:active {
-  background-color: #e7edfe !important;
-  color: #272727;
-}
-
 .select2-results__option:before {
   content: "";
   display: inline-block;
@@ -21035,7 +21021,7 @@ li {
 .select2-results__option:focus,
 .select2-results__option:active {
   background-color: #e7edfe !important;
-  color: #272727;
+  color: black !important;
 }
 
 .select2-results__option:before {
