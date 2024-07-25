@@ -7,6 +7,7 @@ import {AlertsContainer, Alert} from '../components/alert';
 import CopiwinSDK from "../copiwinsdk/copiwinsdk";
 import facebookAdsImage from "../assets/images/facebook-ads.svg"
 import LoginTemplate from "../templates/login";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const sdk = new CopiwinSDK()
@@ -66,12 +67,12 @@ export default function Login() {
         navigate("/")
       }
       if(response.non_field_errors) {
-        setAlerts(response.non_field_errors)
+        response.non_field_errors.forEach(function(error){
+          toast.error(error)
+        })
       }
       if(response.error_description) { 
-        var currentAlerts=alerts
-        currentAlerts.push(response.error_description)
-        setAlerts(currentAlerts)
+        toast.error(response.error_description)
       }
       console.log(response)
     }).catch((reason)=>{

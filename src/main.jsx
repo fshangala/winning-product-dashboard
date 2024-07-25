@@ -27,6 +27,8 @@ import MagicAI from './routes/magic_ai.jsx'
 import SalesTracker from './routes/sales_tracker.jsx'
 import TestFacebookAds from './routes/test/facebook_ads.jsx'
 import Dashboard from './routes/test/dashboard.jsx'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 const router = createHashRouter([
   {
@@ -115,6 +117,7 @@ function startApp(){
     <GoogleOAuthProvider clientId="211046741429-jk2tmkimn7b1q6gq0vf49n7vvhair2ck.apps.googleusercontent.com">
       <UserProvider>
         <RouterProvider router={router} />
+        <ToastContainer />
       </UserProvider>
     </GoogleOAuthProvider>
     </React.StrictMode>,

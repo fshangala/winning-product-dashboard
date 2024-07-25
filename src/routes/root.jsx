@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react"
 import { SetUserContext, UserContext } from "../context/UserContext"
 import CopiwinSDK from "../copiwinsdk/copiwinsdk"
 import Navbar from "../components/navbar"
+import { toast } from "react-toastify"
 
 export default function Root() {
   const user = useContext(UserContext)
@@ -30,7 +31,7 @@ export default function Root() {
           }
         }).catch((reason)=>{
           if("statusText" in reason) {
-            alert(reason.statusText)
+            toast.warn(reason.statusText)
             if(reason.status === 401) {
               navigate("/login")
             }

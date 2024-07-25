@@ -10,6 +10,7 @@ import FacebookAd from "../templates/facebook_ad"
 import FacebookFilters from '../templates/facebook_filters'
 import FacebookAdset from '../templates/facebook_adset'
 import initialize from '../utils/initialize'
+import Loading from '../components/loading'
 
 function facebookAdsReducer(state,action) {
   switch (action.type) {
@@ -119,6 +120,7 @@ export default function FacebookAds() {
           <FacebookFilters applyFilters={applyFilters} />
         </div>
       </div>
+      <Loading visible={loadAds.loading} />
       <div className="add_list relative" data-wg-notranslate="">
         {/* {loadAds.ads.map((ad)=>{
           return <FacebookAd key={ad.id} ad={ad} />
