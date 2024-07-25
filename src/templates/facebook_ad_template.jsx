@@ -7,6 +7,7 @@ var facebookAdTemplate = {
   title:null,
   page_name:null,
   page_profile_picture_url:null,
+  publisherPlatforms:null,
 
   get html() {
     return `<div id="w-node-_8922055b-736f-9646-6ca8-979550297294993-de161bc0" class="one_add_wrapper" style="position:relative;" copiwin-id="${this.id}">
@@ -347,7 +348,7 @@ var facebookAdTemplate = {
       <div class="add-meta-wrapper">     
         <div class="add-sub-info">
           <div>Scaling: <span style="width:1.5em;border:none;border-radius:0.5em;background-color:#EFEFF7;padding:3px;color:#5E6068;">0%</span></div>
-          <div>Platforms: <img src="https://app.winninghunter.com/images/facebook-48.svg" height="20px" width="20px"><img src="https://app.winninghunter.com/images/instagram.svg" height="20px" width="20px"><img src="https://app.winninghunter.com/images/audience_network.png" height="20px" width="20px"><img src="https://app.winninghunter.com/images/messenger.svg" height="20px" width="20px"></div> 
+          <div>Platforms: ${this.publisherPlatforms}</div> 
           <div class="has-popup relative"><div class="custom-popup hidden" style="left: 0px; display: none;">Countries<hr><div class="text-sm p-1"><p class="flex w-full gap-1 mt-1"><img src="https://app.winninghunter.com/images/NZ.png" loading="lazy" alt="" height="20px" width="20px" class="NZ w-5 h-5" style="border:none;border-radius: 50%;">New Zealand</p><p class="flex w-full gap-1 mt-1"><img src="https://app.winninghunter.com/images/AU.png" loading="lazy" alt="" height="20px" width="20px" class="AU w-5 h-5" style="border:none;border-radius: 50%;">Australia</p></div></div>Countries: <img src="https://app.winninghunter.com/images/NZ.png" loading="lazy" alt="" height="20px" width="20px" class="NZ" style="border:none;border-radius: 50%;height:20px;"><img src="https://app.winninghunter.com/images/AU.png" loading="lazy" alt="" height="20px" width="20px" class="AU" style="border:none;border-radius: 50%;height:20px;"></div>
           <div>Website: <img src="https://app.winninghunter.com/images/SH.svg" height="20px" width="20px" class="techicon SHtip" title="Shopify"><img src="https://app.winninghunter.com/images/PP.svg" height="20px" width="20px" class="techicon PPtip" title="PayPal"><img src="https://app.winninghunter.com/images/GM.svg" height="20px" width="20px" class="techicon GMtip" title="Google Tag Manager"><img src="https://app.winninghunter.com/images/KV.svg" height="20px" width="20px" class="techicon KVtip" title="Klaviyo"><img src="https://app.winninghunter.com/images/CO.svg" height="20px" width="20px" class="techicon COtip" title="Checkout"><img src="https://app.winninghunter.com/images/GG.svg" height="20px" width="20px" class="techicon GGtip" title="Gorgias"></div>
           
