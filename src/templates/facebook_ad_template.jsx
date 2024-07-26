@@ -8,6 +8,7 @@ var facebookAdTemplate = {
   page_name:null,
   page_profile_picture_url:null,
   publisherPlatforms:null,
+  link_url:null,
 
   get html() {
     return `<div id="w-node-_8922055b-736f-9646-6ca8-979550297294993-de161bc0" class="one_add_wrapper" style="position:relative;" copiwin-id="${this.id}">

@@ -64,7 +64,6 @@ export default function FacebookAds() {
   }
 
   const applyFilters = function(filters) {
-    console.log(filters,user)
     if(user) {
       handleSetLoading()
       copiwinSDK.facebookAds({...filters,access_token:user.access_token}).then((data)=>{

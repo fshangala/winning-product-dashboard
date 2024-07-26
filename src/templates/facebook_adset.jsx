@@ -1,8 +1,6 @@
 import facebookAdTemplate from "./facebook_ad_template";
 import facebookAdImageTemplate from "./facebook_ad_image_template";
 import facebookAdVideoTemplate from "./facebook_ad_video_template";
-import { toast } from "react-toastify";
-import { useEffect } from "react";
 
 export default function FacebookAdset({adset}) {
   var ad = adset[0]
@@ -55,10 +53,6 @@ export default function FacebookAdset({adset}) {
     content_template.image_url = ad.snapshot.cards[0].original_image_url
     template.content_template = content_template.html
   }
-
-  useEffect(function(){
-    toast.info(template.id)
-  },[])
 
   return (
     <>
