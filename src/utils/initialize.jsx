@@ -1,22 +1,20 @@
-
-
 async function initialize({querySelector=''}) {
   var trial = 0;
-  function fn() {
+  var obj = null;
+
+  for (let index = 0; index < 10; index++) {
     var elem = document.querySelector(querySelector)
-    if(elem) {
-      return elem
-    } else {
-      if (trial < 5) {
-        trial += 1
-        setTimeout(fn,1000)
-      } else {
-        throw Error(querySelector+" => Element not found!")
-      }
+    if(elem != null && elem != undefined) {
+      obj = elem
     }
+    await new Promise(function(resolve){setTimeout(function(){resolve()},1000)})
   }
 
-  return fn()
+  if (obj === null) {
+    throw Error(querySelector+" => Element not found!")
+  } else {
+    return obj;
+  }
 }
 
 export default initialize
