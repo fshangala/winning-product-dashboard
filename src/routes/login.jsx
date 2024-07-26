@@ -21,17 +21,9 @@ export default function Login() {
   const [alerts,setAlerts] = useState([]);
 
   useEffect(()=>{
-    sessionStorage.setItem("loading",loading)
     sessionStorage.setItem("logo",brandImage)
     sessionStorage.setItem("product_demo",facebookAdsImage)
   })
-
-  const dismissAlert = function(index) {
-    var a = alerts.filter(function(value,i,array){
-      return index != i
-    })
-    setAlerts(a)
-  }
   
   const login = useGoogleLogin({
     onSuccess: (credentials) => {
@@ -54,6 +46,7 @@ export default function Login() {
 
   const customEmailLogin = function(credentials={username:'',password:''}) {
     setLoading(true)
+    toast.info("Logging in...")
     console.log(credentials)
     sdk.login({username:credentials.username,password:credentials.password}).then((response)=>{
       if(response.access_token) {
@@ -117,70 +110,4 @@ export default function Login() {
     }} alerts={alerts} setAlerts={setAlerts}/>
     </>
   )
-
-  // return (
-  //   <>
-  //   <Link to={`/login`} className="topbar">
-  //   🎉 Sales Tracker back with 98% accuracy, Try it out
-  //   </Link>
-  //   <div className="navbar">
-  //     <div className="container">
-  //       <Link to={`/`}>
-  //         <img src={brandImage} height={50} alt="brand" />
-  //       </Link>
-  //     </div>
-  //   </div>
-  // {(alerts.length > 0) ? (
-  // <AlertsContainer>
-  // {alerts.map((value,index,array)=>{
-  //   return <Alert message={value} index={index} dismiss={dismissAlert} />
-  // })}
-  // </AlertsContainer>
-  // ) : null}
-  //   <div className="login-section">
-  //     <div className="column">
-  //       <div className="login-form">
-  //         {loading ? <p>Loading...</p> : null}
-  //         <h1 className="title">Sign In</h1>
-  //         <div className="input-group">
-  //           <label>E-mail</label>
-  //           <input type="email" className="input" value={credentials.email} onChange={(event)=>{
-  //               setCredentials({
-  //               ...credentials,
-  //               email:event.target.value
-  //               })
-  //             }} />
-  //         </div>
-  //         <div className="input-group">
-  //           <label>Password</label>
-  //           <input type="password" className="input" value={credentials.password} onChange={(event)=>{
-  //               setCredentials({
-  //               ...credentials,
-  //               password:event.target.value
-  //               })
-  //           }} />
-  //         </div>
-  //         <div className="input-group">
-  //           <button className="login-btn" onClick={emailLogin}>Login</button>
-  //         </div>
-  //         <hr />
-  //         <div className="social-login">
-  //           <h3 className="title">Sign in with</h3>
-  //           <button className="google-login-btn" onClick={login}>Google</button>
-  //         </div>
-  //         <div className="input-group">
-  //           <p>Don't have an account? <Link to={"/signup"} className="sign-up-link">Get Started.</Link></p>
-  //         </div>
-  //       </div>
-  //     </div>
-  //     <div className="column right">
-  //       <h1 className="title">Find Winning Products</h1>
-  //       <h2 className="sub-title">Find Winning Products And add stores to the live Sales Tracker to be ahead of your competitors.</h2>
-  //       <div className="image-container">
-  //         <img className="image" src={facebookAdsImage} alt="facebook-ads" />
-  //       </div>
-  //     </div>
-  //   </div>
-  //   </>
-  // )
 }

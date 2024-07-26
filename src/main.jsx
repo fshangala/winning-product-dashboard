@@ -29,6 +29,7 @@ import TestFacebookAds from './routes/test/facebook_ads.jsx'
 import Dashboard from './routes/test/dashboard.jsx'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import SalesTrackerDetail from './routes/sales_tracker_detail.jsx'
 
 const router = createHashRouter([
   {
@@ -64,6 +65,10 @@ const router = createHashRouter([
         path:'/sales-tracker',
         element:<SalesTracker />
       },
+      {
+        path:'/sales-tracker/detail/:storeId',
+        element:<SalesTrackerDetail />
+      }
     ]
   },
   {

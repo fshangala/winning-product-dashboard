@@ -1,4 +1,5 @@
 var salesTrackerRowTemplate = {
+  id:null,
   site_name:null,
   hostname:null,
   today_sales:0.0,
@@ -14,7 +15,7 @@ var salesTrackerRowTemplate = {
   <td class="dt-center dtr-control" tabindex="0">
     <div style="display:flex;">
       <div class="store-details-llink">
-        <a href="/sales-tracker-details/a1168972d26268587b40b8680033b6e3" class="details-link w-inline-block">
+        <a href="/#/sales-tracker/detail/${this.id}" class="details-link w-inline-block">
           <div class="html-embed-3 w-embed">
             <img src="https://app.winninghunter.com/images/track.png" loading="lazy" alt=""
               style="width:22px;height:22px;">
@@ -28,7 +29,7 @@ var salesTrackerRowTemplate = {
           </div>
         </button>
         <a href="#" class="w-inline-block"></a>
-      </div><a href="/sales-tracker-details/a1168972d26268587b40b8680033b6e3" target="__BLANK"
+      </div><a href="/#/sales-tracker/detail/${this.id}" target="__BLANK"
         id="w-node-aeafd948-b32c-2a14-8806-7142be7f8ebd-0ff95548" class="store-name">
 
         <img src="https://app.winninghunter.com/images/no_photo.png" height="32px" width="32px" class="storeicon"

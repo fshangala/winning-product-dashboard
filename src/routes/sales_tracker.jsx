@@ -47,6 +47,7 @@ export default function SalesTracker() {
   stores_table.table_rows = salesTrackerState.stores.map(function(store){
     const row = salesTrackerRowTemplate
     if(store.track_data === null) {
+      row.id = store.id
       row.hostname = store.hostname
       row.site_name = store.hostname
     }
