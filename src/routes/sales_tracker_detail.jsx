@@ -62,10 +62,6 @@ export default function SalesTrackerDetail() {
   useEffect(function(){
     copiwinSDK.store({access_token:user.access_token,id:params.storeId}).then(function(data){
       handleSetStore(data)
-      getStoreProducts(data).then((products)=>{
-        console.log(products)
-        handleSetProducts(products.products)
-      })
     }).catch(function(reason){
       console.log(reason)
     })
@@ -73,6 +69,11 @@ export default function SalesTrackerDetail() {
 
   useEffect(function(){
     if(salesTrackerDetailState.store) {
+      getStoreProducts(salesTrackerDetailState.store).then((products)=>{
+        console.log(products)
+        handleSetProducts(products.products)
+      })
+
       template.store_hostname=salesTrackerDetailState.store.hostname
       template.store_name=salesTrackerDetailState.store.title
       template.locale=salesTrackerDetailState.store.locale
