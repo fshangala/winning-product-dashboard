@@ -193,4 +193,19 @@ export default class CopiwinSDK{
     
     throw {status:response.status,statusText:response.statusText,data:data}
   }
+
+  async store({access_token,id}) {
+    const response = await fetch(`${this.baseUrl}/sales-tracker/${id}/`,{
+      headers:{
+        "Authorization":`Bearer ${access_token}`
+      }
+    })
+
+    var data = await response.json()
+    if(response.status == 200) {
+      return data
+    }
+    
+    throw {status:response.status,statusText:response.statusText,data:data}
+  }
 }

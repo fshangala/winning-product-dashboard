@@ -67,6 +67,9 @@ export default function Login() {
       if(response.error_description) { 
         toast.error(response.error_description)
       }
+      if(response.error) {
+        toast.error(response.error)
+      }
       console.log(response)
     }).catch((reason)=>{
       console.log(reason)

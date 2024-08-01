@@ -167,7 +167,7 @@ html[data-w-dynpage] [data-w-cloak] {
 *,*::before,*::after{-webkit-box-sizing:border-box;box-sizing:border-box;}
 p{margin-top:0;margin-bottom:1em;}
 svg:not(:root){overflow:hidden;}
-::selection{color:#fff;background:#1890ff;}
+::selection{color:#fff;background:rgb(94, 148, 52);}
 .ali-empty{margin:0 8px;font-size:14px;line-height:22px;text-align:center;}
 .ali-empty-image{height:100px;margin-bottom:8px;}
 .ali-empty-image svg{height:100%;margin:auto;}

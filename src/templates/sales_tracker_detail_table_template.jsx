@@ -1,0 +1,30 @@
+var salesTrackerDetailTableTemplate = {
+  rows:null,
+  get html() {
+    return `
+<div class="table-responsive">
+  <table id="products-table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Bestseller</th>
+        <th>Total Ads</th>
+        <th>
+          <img src="https://app.winninghunter.com/images/facebook-48.svg" height="20px" width="20px">
+          Adspend
+        </th>
+        <th>Ad Channels</th>
+        <th>Trend</th>
+        <th>Last Advertised</th>
+        <th>Creation Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${this.rows}
+    </tbody>
+  </table>
+</div>`
+  }
+}
+
+export default salesTrackerDetailTableTemplate

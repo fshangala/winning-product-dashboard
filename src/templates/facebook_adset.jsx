@@ -1,9 +1,46 @@
 import facebookAdTemplate from "./facebook_ad_template";
 import facebookAdImageTemplate from "./facebook_ad_image_template";
 import facebookAdVideoTemplate from "./facebook_ad_video_template";
+import facebookAdPagePopupTemplate from "./facebook_ad_page_popup_template";
+import { useEffect, useReducer } from "react";
 
-export default function FacebookAdset({adset}) {
+function facebookAdsetReducer(state,action) {
+  switch (action.type) {
+    case 'open-page-ads':
+      return {
+        ...state,
+        open_page_ads:true,
+      }
+  
+    case 'close-page-ads':
+      return {
+        ...state,
+        open_page_ads:false,
+      }
+
+    default:
+      break;
+  }
+}
+
+export default function FacebookAdset({adset,key}) {
   var ad = adset[0]
+  const [componentState,dispatch] = useReducer(facebookAdsetReducer,{
+    open_page_ads:false,
+  })
+
+  function handleOpenPageAds() {
+    dispatch({
+      type:"open-page-ads"
+    })
+  }
+
+  function handleClosePageAds() {
+    dispatch({
+      type:"close-page-ads"
+    })
+  }
+
   const template = facebookAdTemplate
   template.id = ad.adArchiveID
   template.title = ad.snapshot.body.markup.__html
@@ -53,6 +90,33 @@ export default function FacebookAdset({adset}) {
     content_template.image_url = ad.snapshot.cards[0].original_image_url
     template.content_template = content_template.html
   }
+
+  if (componentState.open_page_ads) {
+    var pageAdsPopupTemplate = facebookAdPagePopupTemplate
+    pageAdsPopupTemplate.id = template.id
+    template.page_ads_popup = pageAdsPopupTemplate.html
+  }
+
+  function openPageAdsPopupListener(e) {
+    if (e.target.getAttribute("copiwin-id") == template.id) {
+      handleOpenPageAds()
+    }
+  }
+
+  function closePageAdsPopupListener(e) {
+    if (e.target.getAttribute("copiwin-id") == template.id) {
+      handleClosePageAds()
+    }
+  }
+
+  useEffect(function(){
+    document.addEventListener("open_page_ads_popup",openPageAdsPopupListener)
+    document.addEventListener("close_page_ads_popup",closePageAdsPopupListener)
+    return function(){
+      document.removeEventListener("open_page_ads_popup",openPageAdsPopupListener)
+      document.removeEventListener("close_page_ads_popup",closePageAdsPopupListener)
+    }
+  },[])
 
   return (
     <>

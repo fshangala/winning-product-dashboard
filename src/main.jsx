@@ -30,6 +30,9 @@ import Dashboard from './routes/test/dashboard.jsx'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import SalesTrackerDetail from './routes/sales_tracker_detail.jsx'
+import CopiwinSDK from './copiwinsdk/copiwinsdk.jsx'
+
+const copiwinSDK = new CopiwinSDK()
 
 const router = createHashRouter([
   {
