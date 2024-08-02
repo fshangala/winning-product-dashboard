@@ -1,23 +1,51 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
+
+function facebookFiltersReducer(state,action) {
+  switch (action.type) {
+    case "set-template":
+      return {
+        ...state,
+        template:action.template,
+      }
+    
+    case "set-initialized":
+      return {
+        ...state,
+        initialized:true,
+      }
+  
+    default:
+      break;
+  }
+}
 
 export default function FacebookFilters({applyFilters=(filters)=>{}}) {
-  const [template,setTemplate] = useState('')
-  const [initialized,setInitialized] = useState(false)
+  const [facebookFiltersState, dispatch] = useReducer(facebookFiltersReducer,{
+    template:'',
+    initialized:false,
+  })
+
+  function handleSetTemplate(template) {
+    dispatch({
+      type:"set-template",
+      template:template,
+    })
+  }
+
+  function handleSetInitialized() {
+    dispatch({
+      type:"set-initialized",
+    })
+  }
 
   useEffect(()=>{
     fetch("/templates/facebook_filters.html").then(response => response.text()).then((value)=>{
-      setTemplate(value)
+      handleSetTemplate(value)
       initialize()
     }).catch((reason)=>{
       console.log(reason)
     })
   },[])
-
-  useEffect(()=>{ 
-    if(template.initialized) {
-      //
-    }
-  })
 
   let getFilters = function() {
     var filters = {}
@@ -56,7 +84,7 @@ export default function FacebookFilters({applyFilters=(filters)=>{}}) {
       document.querySelector("#applyfilters").addEventListener("click",()=>{
         applyFilters(getFilters())
       })
-      setInitialized(true)
+      handleSetInitialized()
     } else {
       setTimeout(initialize, 1000);
     }
@@ -64,7 +92,7 @@ export default function FacebookFilters({applyFilters=(filters)=>{}}) {
 
   return (
     <>
-    <div dangerouslySetInnerHTML={{__html:template}} />
+    <div dangerouslySetInnerHTML={{__html:facebookFiltersState.template}} />
     </>
   )
 }

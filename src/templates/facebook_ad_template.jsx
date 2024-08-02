@@ -10,6 +10,8 @@ var facebookAdTemplate = {
   publisherPlatforms:null,
   link_url:null,
   page_ads_popup:'',
+  price:'',
+  store_revenue:0,
 
   get html() {
     return `<div id="w-node-_8922055b-736f-9646-6ca8-979550297294993-de161bc0" class="one_add_wrapper" style="position:relative;"
@@ -101,7 +103,7 @@ var facebookAdTemplate = {
         <span class="has-popup relative">
           <div class="custom-popup left-0 hidden" style="display: none; transform: scale(1);">The revenue of the whole
             store today from the <a class="font-bold" href="/sales-tracker">Sales Tracker</a>.</div>Store Rev. Today:
-          A$4,446.00
+          A$${this.store_revenue}
         </span>
       </div>
 
@@ -166,7 +168,7 @@ var facebookAdTemplate = {
             <hr>
 
             <span class="text-[14px]">
-              <p>Price: A$269.00</p>
+              <p>Price: A$${this.price}</p>
               <p></p>
               <p></p>
               <p></p>
@@ -203,7 +205,7 @@ var facebookAdTemplate = {
               <div class="pointer-events-none">
                 <div class="text-xs font-medium text-gray-800 cursor-pointer pointer-events-none">default</div>
                 <p class="text-slate-500 text-xs flex gap-1 pointer-events-none"><span
-                    class="flex pointer-events-none">A$269.00</span> <span class="flex pointer-events-none"><img
+                    class="flex pointer-events-none">A$${this.price}</span> <span class="flex pointer-events-none"><img
                       height="14px" width="14px" src="https://app.winninghunter.com/images/page-ads-slate.svg"
                       style="pointer-events:none;"> 21</span> <span class="flex pointer-events-none"><img height="13px"
                       width="13px" class="text-slate-500 ml-[4px]"
@@ -413,12 +415,12 @@ var facebookAdTemplate = {
           <div>Started: Jul 21 2024 <span
               style="width:1.5em;border:none;border-radius:0.5em;background-color:#EFEFF7;padding:3px;color:#5E6068;">1
               day ago</span></div>
-          <div class="text-dark"><b>Adsets: 1</b></div>
+          <div class="text-dark"><b>Adsets: ${this.adsets}</b></div>
           <div class="add-sub-info">
             <div>Last seen: Jul 22 2024 <span
                 style="width:1.5em;border:none;border-radius:0.5em;background-color:#EFEFF7;padding:3px;color:#5E6068;">18
                 seconds ago</span></div>
-            <div class="text-dark"><b>Adsets: 1</b></div>
+            <div class="text-dark"><b>Adsets: ${this.adsets}</b></div>
           </div>
 
         </div>

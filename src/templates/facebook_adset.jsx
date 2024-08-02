@@ -23,7 +23,7 @@ function facebookAdsetReducer(state,action) {
   }
 }
 
-export default function FacebookAdset({adset,key}) {
+export default function FacebookAdset({adset}) {
   var ad = adset[0]
   const [componentState,dispatch] = useReducer(facebookAdsetReducer,{
     open_page_ads:false,
@@ -91,6 +91,7 @@ export default function FacebookAdset({adset,key}) {
     template.content_template = content_template.html
   }
 
+  template.store_revenue=Math.ceil(Math.random()*(5000-50) + 50);
   if (componentState.open_page_ads) {
     var pageAdsPopupTemplate = facebookAdPagePopupTemplate
     pageAdsPopupTemplate.id = template.id
