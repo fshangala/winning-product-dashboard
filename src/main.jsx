@@ -1,11 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+
 import './assets/scss/style.scss'
+import './assets/vendor/jquery-3.5.1.min.js'
+import './assets/vendor/ion.rangeSlider.min.js'
+import './assets/vendor/select2.min.js'
+
 import {
   createHashRouter,
   RouterProvider
 } from 'react-router-dom'
 import { GoogleOAuthProvider } from '@react-oauth/google'
+
 import Root from './routes/root.jsx'
 import ErrorPage from './error-page.jsx'
 import Login from './routes/login.jsx'
@@ -19,6 +25,14 @@ import MetaAdvertisers from './routes/meta_advertisers.jsx'
 import SavedAds from './routes/saved_ads.jsx'
 import MagicAI from './routes/magic_ai.jsx'
 import SalesTracker from './routes/sales_tracker.jsx'
+import TestFacebookAds from './routes/test/facebook_ads.jsx'
+import Dashboard from './routes/test/dashboard.jsx'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+import SalesTrackerDetail from './routes/sales_tracker_detail.jsx'
+import CopiwinSDK from './copiwinsdk/copiwinsdk.jsx'
+
+const copiwinSDK = new CopiwinSDK()
 
 const router = createHashRouter([
   {
@@ -53,6 +67,10 @@ const router = createHashRouter([
       {
         path:'/sales-tracker',
         element:<SalesTracker />
+      },
+      {
+        path:'/sales-tracker/detail/:storeId',
+        element:<SalesTrackerDetail />
       }
     ]
   },
@@ -87,6 +105,14 @@ const router = createHashRouter([
   {
     path:'/test-magic-ai',
     element:<MagicAI />
+  },
+  {
+    path:'/test-dashboard',
+    element:<TestFacebookAds />
+  },
+  {
+    path:'/test',
+    element:<Dashboard />
   }
 ])
 
@@ -99,6 +125,7 @@ function startApp(){
     <GoogleOAuthProvider clientId="211046741429-jk2tmkimn7b1q6gq0vf49n7vvhair2ck.apps.googleusercontent.com">
       <UserProvider>
         <RouterProvider router={router} />
+        <ToastContainer />
       </UserProvider>
     </GoogleOAuthProvider>
     </React.StrictMode>,

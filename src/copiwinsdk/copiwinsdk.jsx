@@ -92,8 +92,8 @@ export default class CopiwinSDK{
     return await response.json()
   }
 
-  async facebookAds({access_token,search_term,country}) {
-    const response = await fetch(`${this.baseUrl}/facebook-ads/?search_term=${search_term}&country=${country}`,{
+  async facebookAds({access_token,keyword,country_code='US'}) {
+    const response = await fetch(`${this.baseUrl}/facebook-ads/search/?search_term=${keyword}&country_code=${country_code}`,{
       headers:{
         "Authorization":`Bearer ${access_token}`,
       }
@@ -101,8 +101,8 @@ export default class CopiwinSDK{
     return await response.json()
   }
 
-  async tiktokAds({access_token,search_term,country}) {
-    const response = await fetch(`${this.baseUrl}/tiktok-ads/?search_term=${search_term}&country=${country}`,{
+  async tiktokAds({access_token,keyword,country='US'}) {
+    const response = await fetch(`${this.baseUrl}/tiktok-ads/?search_term=${keyword}&country=${country}`,{
       headers:{
         "Authorization":`Bearer ${access_token}`,
       }
@@ -188,6 +188,21 @@ export default class CopiwinSDK{
 
     var data = await response.json()
     if (response.status == 200) {
+      return data
+    }
+    
+    throw {status:response.status,statusText:response.statusText,data:data}
+  }
+
+  async store({access_token,id}) {
+    const response = await fetch(`${this.baseUrl}/sales-tracker/${id}/`,{
+      headers:{
+        "Authorization":`Bearer ${access_token}`
+      }
+    })
+
+    var data = await response.json()
+    if(response.status == 200) {
       return data
     }
     

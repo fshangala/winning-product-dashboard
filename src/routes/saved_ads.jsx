@@ -3,6 +3,7 @@ import CopiwinSDK from "../copiwinsdk/copiwinsdk"
 import { Ad as TiktokAd } from "../components/tiktok_list_ads";
 import { Ad as FacebookAd } from "../components/facebook_list_ads";
 import { UserContext } from "../context/UserContext";
+import SavedAdsTemplate from "../templates/saved_ads";
 
 export default function SavedAds() {
   const copiwinSDK = new CopiwinSDK()
@@ -42,27 +43,29 @@ export default function SavedAds() {
     }
   }
 
-  return (
-    <>
-    <div className="header-container">
-      <div className="header">
-        <h1>Saved Ads</h1>
-      </div>
-      <hr className="divider" />
-    </div>
-    <div className="ad-container">
-      {savedAds.ads.map((ad)=>{
-        if (ad.source === 'facebook') {
-          return <FacebookAd ad={ad.content} />
-        }
-        
-        if (ad.source === 'tiktok') {
-          return <TiktokAd ad={ad.content} />
-        }
+  return <SavedAdsTemplate />
 
-        return <p>Ad source unknown</p>
-      })}
-    </div>
-    </>
-  )
+  // return (
+  //   <>
+  //   <div className="header-container">
+  //     <div className="header">
+  //       <h1>Saved Ads</h1>
+  //     </div>
+  //     <hr className="divider" />
+  //   </div>
+  //   <div className="ad-container">
+  //     {savedAds.ads.map((ad)=>{
+  //       if (ad.source === 'facebook') {
+  //         return <FacebookAd ad={ad.content} />
+  //       }
+        
+  //       if (ad.source === 'tiktok') {
+  //         return <TiktokAd ad={ad.content} />
+  //       }
+
+  //       return <p>Ad source unknown</p>
+  //     })}
+  //   </div>
+  //   </>
+  // )
 }

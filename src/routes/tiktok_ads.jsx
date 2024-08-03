@@ -5,6 +5,11 @@ import TiktokListAds from '../components/tiktok_list_ads'
 import {AlertsContainer, Alert} from '../components/alert'
 import CopiwinSDK from '../copiwinsdk/copiwinsdk'
 import { UserContext } from '../context/UserContext'
+import TiktokHeader from '../templates/tiktok_header'
+import FacebookFilters from '../templates/facebook_filters'
+import FacebookAd from '../templates/facebook_ad'
+import TiktokFilters from '../templates/tiktok_filters'
+import TiktokAd from '../templates/tiktok_ad'
 
 export default function TiktokAds() {
   const [loadAds,setLoadAds] = useState({
@@ -24,6 +29,7 @@ export default function TiktokAds() {
   }
 
   const applyFilters = (filters)=>{
+    console.log(filters,user)
     if(user) {
       setLoadAds({
         loading:true,
@@ -32,6 +38,7 @@ export default function TiktokAds() {
       setInitialized(true)
       copiwinSDK.tiktokAds({...filters,access_token:user.access_token}).then((data)=>{
         if(data.error.code == 'ok') {
+          console.log(data.data.ads)
           setLoadAds({
             ads:data.data.ads,
             loading:false,
@@ -55,20 +62,39 @@ export default function TiktokAds() {
 
   return (
     <>
-    <div className="header-container">
-    <div className="header">
-      <img src={tiktokLogo} alt="tiktok" />
-      <h1>Search Tiktok Ads</h1>
+    <div>
+      <div className="margin-bottom margin-xlarge">
+        <div>
+          <TiktokHeader />
+          <hr />
+          <TiktokFilters applyFilters={applyFilters} />
+        </div>
+      </div>
+      <div className="add_list relative" data-wg-notranslate="">
+        {loadAds.ads.map((ad)=>{
+          return <TiktokAd key={ad.id} ad={ad} />
+        })}
+      </div>
     </div>
-    <hr className="divider" />
-  </div>
-  <AlertsContainer>
-  {alerts.map((value,index,array)=>{
-    return <Alert message={value} index={index} dismiss={dismissAlert} />
-  })}
-  </AlertsContainer>
-  <TiktokAdsFilter applyFilters={applyFilters} initialized={initialized} />
-  <TiktokListAds ads={loadAds.ads} loading={loadAds.loading} />
-  </>
+    </>
   )
+
+  // return (
+  //   <>
+  //   <div className="header-container">
+  //   <div className="header">
+  //     <img src={tiktokLogo} alt="tiktok" />
+  //     <h1>Search Tiktok Ads</h1>
+  //   </div>
+  //   <hr className="divider" />
+  // </div>
+  // <AlertsContainer>
+  // {alerts.map((value,index,array)=>{
+  //   return <Alert message={value} index={index} dismiss={dismissAlert} />
+  // })}
+  // </AlertsContainer>
+  // <TiktokAdsFilter applyFilters={applyFilters} initialized={initialized} />
+  // <TiktokListAds ads={loadAds.ads} loading={loadAds.loading} />
+  // </>
+  // )
 }
