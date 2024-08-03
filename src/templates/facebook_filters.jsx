@@ -53,6 +53,11 @@ export default function FacebookFilters({applyFilters=(filters)=>{}}) {
     //keyword
     var keyword = document.querySelector("#keyword").value
     filters["keyword"] = keyword
+
+    //country code
+    var country_code = document.querySelector("#field").value
+    filters["country_code"]=country_code
+
     return filters
   }
 
