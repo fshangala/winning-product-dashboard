@@ -56,7 +56,9 @@ export default function FacebookFilters({applyFilters=(filters)=>{}}) {
 
     //country code
     var country_code = document.querySelector("#field").value
-    filters["country_code"]=country_code
+    if (country_code != '') {
+      filters["country_code"]=country_code
+    }
 
     return filters
   }
