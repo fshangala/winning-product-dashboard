@@ -36,6 +36,7 @@ export default function Root() {
               navigate("/login")
             }
           }
+          toast.error(reason.toString())
           console.log(reason)
         })
       }
