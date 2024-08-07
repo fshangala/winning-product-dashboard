@@ -3,7 +3,8 @@ import Cookie from 'js-cookie'
 export default class CopiwinSDK{
   constructor(){
     //this.baseUrl = "http://copiwin.com:8001"
-    this.baseUrl = "https://api.copiwin.com"
+    // this.baseUrl = "https://api.copiwin.com"
+    this.baseUrl = process.env.COPIWIN_BASE_URL
   }
 
   async login({username,password}){

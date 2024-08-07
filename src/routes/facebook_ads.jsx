@@ -5,6 +5,7 @@ import PageHeader from "../components/page_header"
 import FacebookFilters from '../templates/facebook_filters'
 import FacebookAdset from '../templates/facebook_adset'
 import Loading from '../components/loading'
+import CFacebookAd from '../components/copiwin_facebook_ad'
 
 function facebookAdsReducer(state,action) {
   switch (action.type) {
@@ -25,6 +26,15 @@ function facebookAdsReducer(state,action) {
         ...state,
         adsets:action.adsets
       }
+
+    case 'set-ads':
+      return {
+        ...state,
+        count:action.count,
+        next:action.next,
+        previous:action.previous,
+        ads:action.ads,
+      }
   
     default:
       break;
@@ -34,20 +44,23 @@ function facebookAdsReducer(state,action) {
 export default function FacebookAds() {
   const [facebookAds,dispatch] = useReducer(facebookAdsReducer,{
     loading:false,
-    adsets:[]
+    adsets:[],
+    count:0,
+    next:null,
+    previous:null,
+    ads:[],
   })
 
   const user = useContext(UserContext)
-  const [loadAds,setLoadAds] = useState({
-    loading:false,
-    ads:[]
-  })
   const copiwinSDK = new CopiwinSDK()
 
-  function handleSetAdsets(adsets){
+  function handleSetAds(response) {
     dispatch({
-      type:'set_adsets',
-      adsets:adsets
+      type:'set-ads',
+      count:response.count,
+      next:response.next,
+      previous:response.previous,
+      ads:response.results,
     })
   }
 
@@ -68,7 +81,7 @@ export default function FacebookAds() {
       handleSetLoading()
       copiwinSDK.facebookAds({...filters,access_token:user.access_token}).then((data)=>{
         if ('results' in data) {
-          handleSetAdsets(data.results)
+          handleSetAds(data)
         }
         console.log(data)
         handleSetLoaded()
@@ -104,8 +117,11 @@ export default function FacebookAds() {
       </div>
       <Loading visible={facebookAds.loading} />
       <div className="add_list relative" data-wg-notranslate="">
-        {facebookAds.adsets.map(function(adset,index,arr){
+        {/* {facebookAds.adsets.map(function(adset,index,arr){
           return <FacebookAdset adset={adset} key={index} />
+        })} */}
+        {facebookAds.ads.map(function(ad,index,arr){
+          return <CFacebookAd ad={ad} key={index} />
         })}
       </div>
     </div>
