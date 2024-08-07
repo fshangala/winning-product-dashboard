@@ -26,5 +26,6 @@ jobs:
             cd /data/winning-product-dashboard/
             git checkout dev
             git pull
+            npm --version
             npm install
             npm run build
