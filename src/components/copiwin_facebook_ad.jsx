@@ -40,59 +40,65 @@ export default function CFacebookAd({ad}) {
     })
   }
 
-  const template = facebookAdTemplate
-  template.id = ad.ad_archive_id
-  template.title = ad.body_html
-  template.adsets = ad.ad_creative_id
-  template.product_creation_date = ad.creation_time
-  template.page_ads = ad.page.id
-  template.page_name = ad.page.name
-  template.publisherPlatforms = ['facebook','instagram','audience','messenger'].map(function(platform,index,arr){
-    switch (platform) {
-      case 'facebook':
-        return '<img src="https://app.winninghunter.com/images/facebook-48.svg" height="20px" width="20px">'
-      
-      case 'instagram':
-        return '<img src="https://app.winninghunter.com/images/instagram.svg" height="20px" width="20px">'
+  function updateTemplate() {
+    let template = new facebookAdTemplate(
+      ad.ad_archive_id,
+    )
+    template.id = ad.ad_archive_id
+    template.title = ad.body_html
+    template.adsets = ad.ad_creative_id
+    template.product_creation_date = ad.creation_time
+    template.page_ads = ad.page.id
+    template.page_name = ad.page.name
+    template.publisherPlatforms = ['facebook','instagram','audience','messenger'].map(function(platform,index,arr){
+      switch (platform) {
+        case 'facebook':
+          return '<img src="https://app.winninghunter.com/images/facebook-48.svg" height="20px" width="20px">'
         
-      case 'audience':
-        return '<img src="https://app.winninghunter.com/images/audience_network.png" height="20px" width="20px">'
+        case 'instagram':
+          return '<img src="https://app.winninghunter.com/images/instagram.svg" height="20px" width="20px">'
+          
+        case 'audience':
+          return '<img src="https://app.winninghunter.com/images/audience_network.png" height="20px" width="20px">'
+        
+        case 'messenger':
+          return '<img src="https://app.winninghunter.com/images/messenger.svg" height="20px" width="20px">'
       
-      case 'messenger':
-        return '<img src="https://app.winninghunter.com/images/messenger.svg" height="20px" width="20px">'
+        default:
+          return '';
+      }
+    }).join("")
+    template.page_profile_picture_url = ad.page.profile_picture_url
+    switch (ad.display_format) {
+      case "image":
+        var content_template = facebookAdImageTemplate
+        content_template.image_url = ad.image
+        template.content_template = content_template.html
+        break;
+      
+      case "video":
+        var content_template = facebookAdVideoTemplate
+        content_template.image_url = ad.video_preview
+        content_template.video_url = ad.video
+        template.content_template = content_template.html
     
       default:
-        return '';
+        break;
     }
-  }).join("")
-  template.page_profile_picture_url = ad.page.profile_picture_url
-  switch (ad.display_format) {
-    case "carousel":
-      var content_template = facebookAdImageTemplate
-      content_template.image_url = ad.image
-      template.content_template = content_template.html
-      break;
-    
-    case "video":
-      var content_template = facebookAdVideoTemplate
-      content_template.image_url = ad.video_preview
-      content_template.video_url = ad.video
-      template.content_template = content_template.html
+    // if (ad.snapshot.display_format === "carousel") {
+    //   var content_template = facebookAdImageTemplate
+    //   content_template.image_url = ad.image
+    //   template.content_template = content_template.html
+    // }
   
-    default:
-      break;
-  }
-  // if (ad.snapshot.display_format === "carousel") {
-  //   var content_template = facebookAdImageTemplate
-  //   content_template.image_url = ad.image
-  //   template.content_template = content_template.html
-  // }
+    template.store_revenue=Math.ceil(Math.random()*(5000-50) + 50);
+    if (componentState.open_page_ads) {
+      var pageAdsPopupTemplate = facebookAdPagePopupTemplate
+      pageAdsPopupTemplate.id = template.id
+      template.page_ads_popup = pageAdsPopupTemplate.html
+    }
 
-  template.store_revenue=Math.ceil(Math.random()*(5000-50) + 50);
-  if (componentState.open_page_ads) {
-    var pageAdsPopupTemplate = facebookAdPagePopupTemplate
-    pageAdsPopupTemplate.id = template.id
-    template.page_ads_popup = pageAdsPopupTemplate.html
+    return template
   }
 
   function openPageAdsPopupListener(e) {
@@ -118,7 +124,7 @@ export default function CFacebookAd({ad}) {
 
   return (
     <>
-    <div dangerouslySetInnerHTML={{__html:template.html}} />
+    <div dangerouslySetInnerHTML={{__html:updateTemplate().html}} />
     </>
   )
 }

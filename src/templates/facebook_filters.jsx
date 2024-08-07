@@ -52,13 +52,21 @@ export default function FacebookFilters({applyFilters=(filters)=>{}}) {
 
     //keyword
     var keyword = document.querySelector("#keyword").value
-    filters["keyword"] = keyword
+    if(keyword != '') {
+      filters["keyword"] = keyword
+    }
 
     //country code
     var country_code = document.querySelector("#field").value
     if (country_code != '') {
       filters["country_code"]=country_code
     }
+
+    //searchkeyword
+    var search_keyword = document.querySelector("#searchkeyword").value
+    filters["search_keyword_in"]=search_keyword
+
+    var media_type = document.querySelector("#Order-2").value
 
     return filters
   }
@@ -83,9 +91,7 @@ export default function FacebookFilters({applyFilters=(filters)=>{}}) {
       })
 
       // load ads
-      var filters = getFilters()
-      filters.keyword = "dress"
-      applyFilters(filters)
+      applyFilters(getFilters())
 
       // Event listeners
       document.querySelector("#applyfilters").addEventListener("click",()=>{

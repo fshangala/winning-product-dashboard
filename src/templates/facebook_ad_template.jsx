@@ -1,17 +1,33 @@
-var facebookAdTemplate = {
-  id:null,
-  adsets:null,
-  page_ads:null,
-  product_creation_date:null,
-  content_template:null,
-  title:null,
-  page_name:null,
-  page_profile_picture_url:null,
-  publisherPlatforms:null,
-  link_url:null,
-  page_ads_popup:'',
-  price:'',
-  store_revenue:0,
+export default class FacebookAdTemplate {
+  constructor(
+    id,
+    adsets=null,
+    page_ads=null,
+    product_creation_date=null,
+    content_template=null,
+    title=null,
+    page_name=null,
+    page_profile_picture_url=null,
+    publisherPlatforms=null,
+    link_url=null,
+    page_ads_popup='',
+    price='',
+    store_revenue=0
+  ) {
+    this.id=id
+    this.adsets=adsets
+    this.page_ads=page_ads
+    this.product_creation_date=product_creation_date
+    this.content_template=content_template
+    this.title=title
+    this.page_name=page_name
+    this.page_profile_picture_url=page_profile_picture_url
+    this.publisher_platforms=publisherPlatforms
+    this.link_url=link_url
+    this.page_ads_popup=page_ads_popup
+    this.price=price
+    this.store_revenue=store_revenue
+  }
 
   get html() {
     return `<div id="w-node-_8922055b-736f-9646-6ca8-979550297294993-de161bc0" class="one_add_wrapper" style="position:relative;"
@@ -456,5 +472,3 @@ var facebookAdTemplate = {
 </div>`
   }
 }
-
-export default facebookAdTemplate

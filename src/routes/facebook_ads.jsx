@@ -1,9 +1,8 @@
-import { useState, useContext, useReducer } from 'react'
+import { useContext, useReducer } from 'react'
 import CopiwinSDK from '../copiwinsdk/copiwinsdk'
 import { UserContext } from '../context/UserContext'
 import PageHeader from "../components/page_header"
 import FacebookFilters from '../templates/facebook_filters'
-import FacebookAdset from '../templates/facebook_adset'
 import Loading from '../components/loading'
 import CFacebookAd from '../components/copiwin_facebook_ad'
 
@@ -90,20 +89,6 @@ export default function FacebookAds() {
       })
     }
   }
-
-  // useEffect(function(){
-  //   initialize({querySelector:".glide"}).then(function(elem){
-  //     var elems = Array.from(document.querySelectorAll(".glide"))
-  //     elems.forEach(function(element){
-  //       var glide = new Glide(element, {
-  //         type: 'carousel',
-  //         dragThreshold: 1,
-  //         swipeThreshold: 1,
-  //         animationDuration: 100
-  //       }).mount()
-  //     })
-  //   })
-  // },[])
 
   return (
     <>
