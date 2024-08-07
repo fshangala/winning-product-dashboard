@@ -1,4 +1,4 @@
-name: SSH Deploy - dev
+name: SSH Deploy
 on:
   workflow_dispatch:
   push:
@@ -26,4 +26,5 @@ jobs:
             cd /data/winning-product-dashboard/
             git checkout dev
             git pull
+            npm install
             npm run build
