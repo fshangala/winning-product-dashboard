@@ -66,7 +66,26 @@ export default function FacebookFilters({applyFilters=(filters)=>{}}) {
     var search_keyword = document.querySelector("#searchkeyword").value
     filters["search_keyword_in"]=search_keyword
 
+    //media type
     var media_type = document.querySelector("#Order-2").value
+    if (media_type != '') {
+      filters["media_type"] = media_type
+    }
+
+    //sort direction
+    var sort_direction_asc = document.querySelector(".filters [direction='asc']")
+    var sort_direction_desc = document.querySelector(".filters [direction='desc']")
+    if (sort_direction_asc.classList.contains("active")){
+      filters["sort_direction"]="asc"
+    } else if (sort_direction_desc.classList.contains("active")) {
+      filters["sort_direction"]="desc"
+    }
+
+    //ad creation date
+    var ad_creation_date = document.querySelector("#datepicker").value
+    if (ad_creation_date != '') {
+      filters['ad_creation_date']=ad_creation_date
+    }
 
     return filters
   }
@@ -88,6 +107,26 @@ export default function FacebookFilters({applyFilters=(filters)=>{}}) {
       var productcreation = new Lightpick({
         field:document.querySelector("#datepickerproductcreation"),
         singleDate:false,
+      })
+
+      //sort direction
+      var sort_direction_asc = document.querySelector(".filters [direction='asc']")
+      var sort_direction_desc = document.querySelector(".filters [direction='desc']")
+      sort_direction_asc.addEventListener("click",function(e){
+        if(!sort_direction_asc.classList.contains("active")) {
+          sort_direction_asc.classList.add("active")
+        }
+        if(sort_direction_desc.classList.contains("active")) {
+          sort_direction_desc.classList.remove("active")
+        }
+      })
+      sort_direction_desc.addEventListener("click",function(e){
+        if(!sort_direction_desc.classList.contains("active")) {
+          sort_direction_desc.classList.add("active")
+        }
+        if(sort_direction_asc.classList.contains("active")) {
+          sort_direction_asc.classList.remove("active")
+        }
       })
 
       // load ads

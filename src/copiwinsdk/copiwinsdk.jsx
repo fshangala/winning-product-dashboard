@@ -93,10 +93,23 @@ export default class CopiwinSDK{
     return await response.json()
   }
 
-  async facebookAds({access_token,keyword='dress',country_code='FR',search_keyword_in='All'}) {
+  async facebookAds({
+    access_token,
+    keyword='dress',
+    country_code='FR',
+    search_keyword_in='All',
+    media_type='all',
+    sort_direction='asc',
+    ad_creation_date=null,
+  }) {
     var url = `${this.baseUrl}/facebook-ads/search/?search_term=${keyword}`
     url += `&country_code=${country_code}`
     url += `&search_keyword_in=${search_keyword_in}`
+    url += `&media_type=${media_type}`
+    url += `&sort_direction=${sort_direction}`
+    if(ad_creation_date) {
+      url += `&ad_creation_date=${ad_creation_date}`
+    }
 
     const response = await fetch(url,{
       headers:{
