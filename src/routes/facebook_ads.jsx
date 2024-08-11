@@ -1,10 +1,11 @@
-import { useContext, useReducer } from 'react'
+import { useContext, useEffect, useReducer } from 'react'
 import CopiwinSDK from '../copiwinsdk/copiwinsdk'
 import { UserContext } from '../context/UserContext'
 import PageHeader from "../components/page_header"
 import FacebookFilters from '../templates/facebook_filters'
 import Loading from '../components/loading'
 import CFacebookAd from '../components/copiwin_facebook_ad'
+import useReachedBottom from '../hooks/reached_bottom'
 
 function facebookAdsReducer(state,action) {
   switch (action.type) {
@@ -12,6 +13,12 @@ function facebookAdsReducer(state,action) {
       return {
         ...state,
         loading:true,
+      }
+    
+    case 'set-bottomLoading':
+      return {
+        ...state,
+        bottomLoading:action.value,
       }
     
     case 'loaded':
@@ -43,23 +50,30 @@ function facebookAdsReducer(state,action) {
 export default function FacebookAds() {
   const [facebookAds,dispatch] = useReducer(facebookAdsReducer,{
     loading:false,
+    bottomLoading:false,
     adsets:[],
     count:0,
     next:null,
     previous:null,
     ads:[],
   })
+  const reachedBottom = useReachedBottom()
 
   const user = useContext(UserContext)
   const copiwinSDK = new CopiwinSDK()
 
-  function handleSetAds(response) {
+  function handleSetAds(response,nextPage=false) {
+    let ads = response.results
+    if (nextPage) {
+      ads = facebookAds.ads
+      ads = ads.concat(response.results)
+    }
     dispatch({
       type:'set-ads',
       count:response.count,
       next:response.next,
       previous:response.previous,
-      ads:response.results,
+      ads:ads,
     })
   }
 
@@ -72,6 +86,13 @@ export default function FacebookAds() {
   function handleSetLoaded() {
     dispatch({
       type:'loaded'
+    })
+  }
+
+  function handleSetBottomLoading(loading) {
+    dispatch({
+      type:'set-bottomLoading',
+      value:loading,
     })
   }
 
@@ -89,6 +110,26 @@ export default function FacebookAds() {
       })
     }
   }
+
+  useEffect(function(){
+    if (!facebookAds.bottomLoading) {
+      if (reachedBottom) {
+        if (facebookAds.next) {
+          handleSetBottomLoading(true)
+          copiwinSDK.nexPage({access_token:user.access_token,nextPageUrl:facebookAds.next}).then((data)=>{
+            if ('results' in data) {
+              handleSetAds(data,true)
+            }
+            console.log(data)
+            handleSetBottomLoading(false)
+          }).catch((reason)=>{
+            handleSetBottomLoading(false)
+            console.log(reason)
+          })
+        }
+      }
+    }
+  })
 
   return (
     <>
@@ -109,6 +150,7 @@ export default function FacebookAds() {
           return <CFacebookAd ad={ad} key={index} />
         })}
       </div>
+      <Loading visible={facebookAds.bottomLoading} />
     </div>
     </>
   )

@@ -119,6 +119,18 @@ export default class CopiwinSDK{
     return await response.json()
   }
 
+  async nexPage({access_token,nextPageUrl}) {
+    let urlSplit = nextPageUrl.split("/")
+    urlSplit[2]="api.copiwin.com"
+    let url = urlSplit.join("/")
+    const response = await fetch(url,{
+      headers:{
+        "Authorization":`Bearer ${access_token}`,
+      }
+    })
+    return await response.json()
+  }
+
   async tiktokAds({access_token,keyword,country='US'}) {
     const response = await fetch(`${this.baseUrl}/tiktok-ads/?search_term=${keyword}&country=${country}`,{
       headers:{
