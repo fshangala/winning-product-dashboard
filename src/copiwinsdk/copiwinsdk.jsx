@@ -95,14 +95,17 @@ export default class CopiwinSDK{
 
   async facebookAds({
     access_token,
-    keyword='dress',
+    keyword=null,
     country_code='FR',
     search_keyword_in='All',
     media_type='all',
     sort_direction='asc',
     ad_creation_date=null,
   }) {
-    var url = `${this.baseUrl}/facebook-ads/search/?search_term=${keyword}`
+    var url = `${this.baseUrl}/facebook-ads/search/?limit=100`
+    if (search_term) {
+      url += `&search_term=${keyword}`
+    }
     url += `&country_code=${country_code}`
     url += `&search_keyword_in=${search_keyword_in}`
     url += `&media_type=${media_type}`
