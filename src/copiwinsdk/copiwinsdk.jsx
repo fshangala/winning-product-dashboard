@@ -3,8 +3,8 @@ import Cookie from 'js-cookie'
 export default class CopiwinSDK{
   constructor(){
     //this.baseUrl = "http://copiwin.com:8001"
-    // this.baseUrl = "https://api.copiwin.com"
-    this.baseUrl = process.env.COPIWIN_BASE_URL
+    this.baseUrl = "https://api.copiwin.com"
+    // this.baseUrl = process.env.COPIWIN_BASE_URL
   }
 
   async login({username,password}){
@@ -96,22 +96,28 @@ export default class CopiwinSDK{
   async facebookAds({
     access_token,
     keyword=null,
-    country_code='FR',
+    country_code=null,
     search_keyword_in='All',
     media_type='all',
     sort_direction='asc',
     ad_creation_date=null,
+    randomize=null,
   }) {
     var url = `${this.baseUrl}/facebook-ads/search/?limit=100`
-    if (search_term) {
+    if (keyword) {
       url += `&search_term=${keyword}`
     }
-    url += `&country_code=${country_code}`
+    if (country_code) {
+      url += `&country_code=${country_code}`
+    }
     url += `&search_keyword_in=${search_keyword_in}`
     url += `&media_type=${media_type}`
     url += `&sort_direction=${sort_direction}`
     if(ad_creation_date) {
       url += `&ad_creation_date=${ad_creation_date}`
+    }
+    if (randomize) {
+      url += `&randomize=${randomize}`
     }
 
     const response = await fetch(url,{

@@ -97,6 +97,7 @@ export default function CFacebookAd({ad}) {
       pageAdsPopupTemplate.id = template.id
       template.page_ads_popup = pageAdsPopupTemplate.html
     }
+    template.link_url=ad.link_url
 
     return template
   }

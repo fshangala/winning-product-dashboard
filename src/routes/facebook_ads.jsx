@@ -107,6 +107,7 @@ export default function FacebookAds() {
         handleSetLoaded()
       }).catch((reason)=>{
         handleSetLoaded()
+        console.log(reason)
       })
     }
   }

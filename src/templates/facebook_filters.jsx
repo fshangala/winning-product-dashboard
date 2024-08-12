@@ -1,4 +1,5 @@
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer } from "react";
+import useAdsetsFilter from "../hooks/adsets_filter";
 
 function facebookFiltersReducer(state,action) {
   switch (action.type) {
@@ -24,6 +25,7 @@ export default function FacebookFilters({applyFilters=(filters)=>{}}) {
     template:'',
     initialized:false,
   })
+  const adsets = useAdsetsFilter()
 
   function handleSetTemplate(template) {
     dispatch({
@@ -60,6 +62,11 @@ export default function FacebookFilters({applyFilters=(filters)=>{}}) {
     var country_code = document.querySelector("#field").value
     if (country_code != '') {
       filters["country_code"]=country_code
+    }
+
+    // adsets
+    if(adsets != '') {
+      filters["adsets"] = adsets
     }
 
     //searchkeyword
