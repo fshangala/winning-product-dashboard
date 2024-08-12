@@ -49,7 +49,7 @@ export default function FacebookFilters({applyFilters=(filters)=>{}}) {
     })
   },[])
 
-  let getFilters = function() {
+  let getFilters = function(randomize=false) {
     var filters = {}
 
     //keyword
@@ -94,6 +94,9 @@ export default function FacebookFilters({applyFilters=(filters)=>{}}) {
       filters['ad_creation_date']=ad_creation_date
     }
 
+    //randomize
+    filters['randomize']=randomize
+
     return filters
   }
 
@@ -137,11 +140,18 @@ export default function FacebookFilters({applyFilters=(filters)=>{}}) {
       })
 
       // load ads
-      applyFilters(getFilters())
+      applyFilters(getFilters(true))
 
       // Event listeners
       document.querySelector("#applyfilters").addEventListener("click",()=>{
         applyFilters(getFilters())
+      })
+
+      // dropshipping buttons
+      document.querySelectorAll(".dropshipping").forEach(function(elem){
+        elem.addEventListener('click',function(e){
+          applyFilters(getFilters(true))
+        })
       })
       handleSetInitialized()
     } else {
