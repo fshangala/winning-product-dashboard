@@ -113,7 +113,7 @@ export default function FacebookAds() {
   }
 
   useEffect(function(){
-    if (!facebookAds.bottomLoading) {
+    if (!facebookAds.bottomLoading && facebookAds.ads.length > 25) {
       if (reachedBottom) {
         if (facebookAds.next) {
           handleSetBottomLoading(true)
