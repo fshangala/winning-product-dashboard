@@ -1,5 +1,4 @@
 export default class FacebookFiltersTemplate {
-  adsets_filter_popup=null
   get html() {
     return `<div class="w-form" style="margin-top:60px;" id="facebook-filters-template">
   <form id="email-form" name="email-form" data-name="Email Form" method="get" class="dashboard_form shadow-container"
@@ -276,8 +275,8 @@ export default class FacebookFiltersTemplate {
             maxlength="256" readonly="" id="adspendsummary" value="0$ - 999999$">
         </div>
         <div id="tooltipadspend" class="hidden"
-          style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(154px, 374px); padding: 15px; border: medium; background-color: white; border-radius: 0.5em; width: 350px; z-index: 9998; box-shadow: rgba(0, 0, 0, 0.1) 3px 3px 8px 0px;"
-          data-popper-placement="bottom" data-popper-reference-hidden="" data-popper-escaped="">
+          style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(-82px, -43px); padding: 15px; border: medium; background-color: white; border-radius: 0.5em; width: 350px; z-index: 9998; box-shadow: rgba(0, 0, 0, 0.1) 3px 3px 8px 0px;"
+          data-popper-placement="top" data-popper-reference-hidden="" data-popper-escaped="">
           <div class="mt-4">
             <p class="text-sm mb-3 font-medium">Enter adspend</p>
             <div class="range-slider">

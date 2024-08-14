@@ -2,6 +2,7 @@ import { useEffect, useReducer } from "react";
 import useAdsetsFilter from "../hooks/adsets_filter";
 import FacebookFiltersTemplate from "./facebook_filters_template";
 import initialize from "../utils/initialize";
+import useAdspendFilter from "../hooks/adspend_filter";
 
 function facebookFiltersReducer(state,action) {
   switch (action.type) {
@@ -29,6 +30,7 @@ export default function FacebookFilters({applyFilters=(filters)=>{}}) {
     template_obj: new FacebookFiltersTemplate()
   })
   const adsets = useAdsetsFilter()
+  const adspend = useAdspendFilter()
 
   function handleSetTemplate(template) {
     dispatch({
@@ -121,8 +123,13 @@ export default function FacebookFilters({applyFilters=(filters)=>{}}) {
     }
 
     // adsets
-    if(adsets != '') {
+    if(adsets.value != '') {
       filters["adsets"] = adsets.value
+    }
+
+    // adspend
+    if(adspend.value != '') {
+      filters["adspend"] = adspend.value
     }
 
     //searchkeyword
