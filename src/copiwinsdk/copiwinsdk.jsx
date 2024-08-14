@@ -103,7 +103,7 @@ export default class CopiwinSDK{
     ad_creation_date=null,
     randomize=null,
   }) {
-    var url = `${this.baseUrl}/facebook-ads/search/?limit=100`
+    var url = `${this.baseUrl}/facebook-ads/search/?limit=10`
     if (keyword) {
       url += `&search_term=${keyword}`
     }

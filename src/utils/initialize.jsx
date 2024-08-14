@@ -6,6 +6,7 @@ async function initialize({querySelector=''}) {
     var elem = document.querySelector(querySelector)
     if(elem != null && elem != undefined) {
       obj = elem
+      break
     }
     await new Promise(function(resolve){setTimeout(function(){resolve()},1000)})
   }

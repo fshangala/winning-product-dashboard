@@ -227,32 +227,26 @@
             class="form-input adset-count w-input dropdown select2-container select2-selection select2-selection--multipledropdowninitdropdowninitdropdowninitdropdowninit"
             maxlength="256" readonly="" id="adsetsumary" value="1 - 2650">
         </div>
-        <div id="tooltip" class="hidden"
-          style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(1214px, 321px); padding: 15px; border: medium; background-color: white; border-radius: 0.5em; width: 350px; z-index: 9998; box-shadow: rgba(0, 0, 0, 0.1) 3px 3px 8px 0px;"
-          data-popper-placement="bottom" data-popper-reference-hidden="" data-popper-escaped="">
+        <div id="tooltip" class="block" style="padding: 15px; border: medium; background-color: white; border-radius: 0.5em; width: 350px; z-index: 9998; box-shadow: rgba(0, 0, 0, 0.1) 3px 3px 8px 0px; position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(-82px, -43px);" data-popper-placement="top">
           <div class="mt-4">
             <p class="text-sm mb-3 font-medium">Active Adset Amount</p>
             <div class="range-slider">
-              <div class="slider slide">
-                <div class="progress" style="left: 2%; right: 33.9%;"></div>
-              </div>
-              <div id="total_likes_range" class="range-input range">
-              </div>
-              <div id="total_likes_values" class="price-input price">
-                <div class="select-wrapper">
-                  <div class="div-block-71">
-                    <input type="number" class="form-input select2-selection adset-count w-input itemsetcounter"
-                      maxlength="256" name="Min" data-name="Min" placeholder="Min" id="Min" required=""
-                      style="width:100%;margin-top:10px;">
+                <div class="slider slide">
+                  <div class="progress" style="left: 2%; right: 33.9%;"></div>
+                </div>
+                <div id="total_likes_range" class="range-input range">
+                </div>
+                <div id="total_likes_values" class="price-input price">
+                  <div class="select-wrapper">
+                      <div class="div-block-71">
+                        <input type="number" class="form-input select2-selection adset-count w-input itemsetcounter" maxlength="256" name="Min" data-name="Min" placeholder="Min" id="Min" required="" style="width:100%;margin-top:10px;">
+                      </div>
                   </div>
                 </div>
-              </div>
-              <div class="select-wrapper">
-                <div class="div-block-71">
-                  <input type="number" class="form-input select2-selection adset-count w-input itemsetcounter"
-                    maxlength="256" name="Max" data-name="Max" placeholder="Max" id="Max" required=""
-                    style="width:100%;margin-top:10px;">
-                </div>
+                <div class="select-wrapper">
+                  <div class="div-block-71">
+                    <input type="number" class="form-input select2-selection adset-count w-input itemsetcounter" maxlength="256" name="Max" data-name="Max" placeholder="Max" id="Max" required="" style="width:100%;margin-top:10px;">
+                  </div>
               </div>
             </div>
           </div>
@@ -637,28 +631,28 @@
     <div class="flex w-full justify-between">
       <div class="flex justify-between flex-wrap gap-1 pb-1 hidden-scroll mb-1 mt-3 preset-filters">
         <div data-active="false" id="euwinners"
-          class="whitespace-nowrap border-gray-300 hover:bg-gray-100 active:scale-[98%] h-9 px-3 cursor-pointer border border-input hover:text-accent-foreground inline-flex items-center justify-center rounded-full text-sm font-medium disabled:opacity-50 ring-offset-background hover:opacity-80">
+          class="dropshipping whitespace-nowrap border-gray-300 hover:bg-gray-100 active:scale-[98%] h-9 px-3 cursor-pointer border border-input hover:text-accent-foreground inline-flex items-center justify-center rounded-full text-sm font-medium disabled:opacity-50 ring-offset-background hover:opacity-80">
           <div class="mr-1"></div><img
             src="https://app.winninghunter.com/images/european-union-flag-on-trophee-circle.png" class="h-6 w-6">
           European winners
         </div>
         <div data-active="false" id="usawinners"
-          class="whitespace-nowrap border-gray-300 hover:bg-gray-100 active:scale-[98%] h-9 px-3 cursor-pointer border border-input hover:text-accent-foreground inline-flex items-center justify-center rounded-full text-sm font-medium disabled:opacity-50 ring-offset-background hover:opacity-80">
+          class="dropshipping whitespace-nowrap border-gray-300 hover:bg-gray-100 active:scale-[98%] h-9 px-3 cursor-pointer border border-input hover:text-accent-foreground inline-flex items-center justify-center rounded-full text-sm font-medium disabled:opacity-50 ring-offset-background hover:opacity-80">
           <div class="mr-1"></div><img src="https://app.winninghunter.com/images/usa-flag-with-uk-flag.png"
             class="h-6 w-6">USA (Big 5) winners
         </div>
         <div data-active="false" id="dropshipads"
-          class="whitespace-nowrap border-gray-300 hover:bg-gray-100 active:scale-[98%] h-9 px-3 cursor-pointer border border-input hover:text-accent-foreground inline-flex items-center justify-center rounded-full text-sm font-medium disabled:opacity-50 ring-offset-background hover:opacity-80">
+          class="dropshipping whitespace-nowrap border-gray-300 hover:bg-gray-100 active:scale-[98%] h-9 px-3 cursor-pointer border border-input hover:text-accent-foreground inline-flex items-center justify-center rounded-full text-sm font-medium disabled:opacity-50 ring-offset-background hover:opacity-80">
           <div class="mr-1"></div><img src="https://app.winninghunter.com/images/drop-shipping.png"
             class="h-6 w-6">Dropship Ads
         </div>
         <div data-active="false" id="fashionads"
-          class="whitespace-nowrap border-gray-300 hover:bg-gray-100 active:scale-[98%] h-9 px-3 cursor-pointer border border-input hover:text-accent-foreground inline-flex items-center justify-center rounded-full text-sm font-medium disabled:opacity-50 ring-offset-background hover:opacity-80">
+          class="dropshipping whitespace-nowrap border-gray-300 hover:bg-gray-100 active:scale-[98%] h-9 px-3 cursor-pointer border border-input hover:text-accent-foreground inline-flex items-center justify-center rounded-full text-sm font-medium disabled:opacity-50 ring-offset-background hover:opacity-80">
           <div class="mr-1"></div><img src="https://app.winninghunter.com/images/clothes-cool-brand.png"
             class="h-6 w-6">Fashion Dropship
         </div>
         <div data-active="false" id="topbrands"
-          class="whitespace-nowrap border-gray-300 hover:bg-gray-100 active:scale-[98%] h-9 px-3 cursor-pointer border border-input hover:text-accent-foreground inline-flex items-center justify-center rounded-full text-sm font-medium disabled:opacity-50 ring-offset-background has-popup relative">
+          class="dropshipping whitespace-nowrap border-gray-300 hover:bg-gray-100 active:scale-[98%] h-9 px-3 cursor-pointer border border-input hover:text-accent-foreground inline-flex items-center justify-center rounded-full text-sm font-medium disabled:opacity-50 ring-offset-background has-popup relative">
           <div class="custom-popup hover:opacity-100 hidden"
             style="left: 0px; text-wrap: wrap; bottom: 35px; font-size: 13px; display: none;">This preset will get more
             branded products. If you want to see dropship branded (one product or niche stores) keep the ad creation
