@@ -54,9 +54,9 @@ export default class FacebookAdTemplate {
             <div class="adscore-ping"></div>
             <div class="adscore-ping" style="background-color:#FD0250;box-shadow: 0 0 4px 0.2px #FD0250;"></div>
           </div>
-          <div id="tooltip97955029729499397679"
+          <div id="tooltip${this.id}"
             class="dropdown-container has-shadow rounded mt-1 text-size-small hidden" data-popper-placement="bottom"
-            style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(864px, 604px);">
+            style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(50px, 60px);">
             <div class="">
               <p class="text-sm font-medium"></p>
               <div class="price-input price">
@@ -109,7 +109,7 @@ export default class FacebookAdTemplate {
           <div class="threedot-more-info action-button">
             <img src="https://app.winninghunter.com/images/three-dots-vertical.svg"
               style="top:0;cursor:pointer;line-height: 26px;width: 20px;height: 18px;display:block;margin: 0 auto;"
-              aria-describedby="tooltip97955029729499397679" data-dropdown-toggle="tooltip97955029729499397679"
+              aria-describedby="tooltip${this.id}" data-dropdown-toggle="tooltip${this.id}"
               class="dropdowninit">
           </div>
         </div>
@@ -244,7 +244,7 @@ export default class FacebookAdTemplate {
                     src="https://adslibrary.eu-central-1.linodeobjects.com/19e6908814f39fbd9efdb18a3c3a30a53fd615bef7fe08a48cec60a1040d5725.jpg"
                     style="width:300px;object-fit:contain;display:block;">
                 </div>
-                <br> Ads History <canvas id="chart97955029729499397679"></canvas>
+                <br> Ads History <canvas id="chart${this.id}"></canvas>
               </div>
               <div id="w-node-b50b7bcc-f095-371f-c679-5cab2590eb82-de161bc0" class="div-block-64">
                 <div class="frameitem-details">
@@ -381,7 +381,7 @@ export default class FacebookAdTemplate {
             <!--<div class="info_body" style="background: transparent;min-width: 140%;display:block;">
               <div>
                 <h4 style="color: white;">Competitor Search</h4>
-                <div id="competitor-adds-list97955029729499397679" class="compadslist"></div>
+                <div id="competitor-adds-list${this.id}" class="compadslist"></div>
               </div>
           </div> -->
             <img src="https://app.winninghunter.com/images/close-svgrepo-com.svg" loading="lazy"
@@ -441,7 +441,7 @@ export default class FacebookAdTemplate {
 
         </div>
         <button type="button" class="dots see-details action-button"
-          comptarget="#competitor-adds-list97955029729499397679"
+          comptarget="#competitor-adds-list${this.id}"
           imageurl="https://adslibrary.eu-central-1.linodeobjects.com/ec05b39c90ab04f885f567b318d10537c6456746d9bb9d5571eb559816c4fb4b.jpg">
           View Details
         </button>
@@ -452,12 +452,12 @@ export default class FacebookAdTemplate {
         <a href="${this.link_url}" target="__BLANK" class="linkclicks">
           <div class="frameitem-titles">
             <div
-              style="line-height: 12px; max-height: 24px; -webkit-line-clamp: 2;font-size: 8px;color: #606770;-webkit-box-orient: vertical;display: -webkit-box;float: none;">
+              style="line-height: 12px; max-height: 24px; --webkit-line-clamp: 2;font-size: 8px;color: #606770;-webkit-box-orient: vertical;display: -webkit-box;float: none;">
               laboheme.shop</div>
             <div
-              style="display: -webkit-box;overflow: hidden;white-space: normal;display: -webkit-box;-webkit-box-orient: vertical;color: #1c1e21;font-size: 10px;line-height: 14px; max-height: 28px; -webkit-line-clamp: 2;">
+              style="display: -webkit-box;overflow: hidden;white-space: normal;display: -webkit-box;-webkit-box-orient: vertical;color: #1c1e21;font-size: 10px;line-height: 14px; max-height: 28px; --webkit-line-clamp: 2;">
               A/W wardrobe essentials</div>
-            <div style="line-height: 14px; max-height: 28px; -webkit-line-clamp: 2;-webkit-box-orient: vertical;
+            <div style="line-height: 14px; max-height: 28px; --webkit-line-clamp: 2;-webkit-box-orient: vertical;
                 display: -webkit-box;
                 float: none;overflow: hidden;
                 white-space: normal;    font-size: 9px;    color: #606770;"></div>

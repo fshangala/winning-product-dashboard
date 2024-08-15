@@ -3,6 +3,8 @@ import facebookAdImageTemplate from "../templates/facebook_ad_image_template";
 import facebookAdVideoTemplate from "../templates/facebook_ad_video_template";
 import facebookAdPagePopupTemplate from "../templates/facebook_ad_page_popup_template";
 import { useEffect, useReducer } from "react";
+import useFacebookAdMenu from "../hooks/facebook_ad_menu";
+import useFacebookAdDetail from "../hooks/facebook_ad_detail";
 
 function theReducer(state,action) {
   switch (action.type) {
@@ -27,6 +29,9 @@ export default function CFacebookAd({ad}) {
   const [componentState,dispatch] = useReducer(theReducer,{
     open_page_ads:false,
   })
+
+  const facebookAdMenu = useFacebookAdMenu(ad.ad_archive_id)
+  // const facebookAdDetail = useFacebookAdDetail(ad.ad_archive_id)
 
   function handleOpenPageAds() {
     dispatch({
