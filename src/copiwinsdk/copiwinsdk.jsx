@@ -130,7 +130,7 @@ export default class CopiwinSDK{
 
   async nexPage({access_token,nextPageUrl}) {
     let urlSplit = nextPageUrl.split("/")
-    urlSplit[0]="https"
+    urlSplit[0]="https:"
     urlSplit[2]="api.copiwin.com"
     let url = urlSplit.join("/")
     const response = await fetch(url,{
