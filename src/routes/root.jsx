@@ -62,6 +62,7 @@ export default function Root() {
           </header>
         </main>
       </div>
+      <div id="page-bottom"></div>
       </>
     )
   }

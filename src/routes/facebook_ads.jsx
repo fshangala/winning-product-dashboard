@@ -113,13 +113,14 @@ export default function FacebookAds() {
   }
 
   useEffect(function(){
-    if (!facebookAds.bottomLoading && facebookAds.ads.length > 25) {
+    if (!facebookAds.bottomLoading && facebookAds.ads.length >= 10) {
       if (reachedBottom) {
         if (facebookAds.next) {
           handleSetBottomLoading(true)
           copiwinSDK.nexPage({access_token:user.access_token,nextPageUrl:facebookAds.next}).then((data)=>{
             if ('results' in data) {
               handleSetAds(data,true)
+              window.scrollTo(0,window.scrollY - 20)
             }
             console.log(data)
             handleSetBottomLoading(false)

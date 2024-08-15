@@ -5,11 +5,10 @@ export default function useReachedBottom() {
 
   useEffect(function(){
     function handleScroll() {
-      let offSetHeight = document.documentElement.offsetHeight
-      let scrollTop = document.documentElement.scrollTop
+      let pageBottom = document.querySelector("#page-bottom").getBoundingClientRect().bottom
       let innerHeight = window.innerHeight
 
-      let hasReachedBottom = (offSetHeight - (scrollTop + innerHeight)) < 10
+      let hasReachedBottom = (pageBottom - innerHeight) < 10
       setReachedBottom(hasReachedBottom)
     }
 

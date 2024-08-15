@@ -105,7 +105,7 @@ export default function FacebookFilters({applyFilters=(filters)=>{}}) {
         })
       })
     })
-  })
+  },[])
 
   let getFilters = function(randomize=false) {
     var filters = {}
