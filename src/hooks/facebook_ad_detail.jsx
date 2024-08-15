@@ -3,17 +3,21 @@ import { useEffect, useState } from "react";
 export default function useFacebookAdDetail(id) {
   const [open,setOpen] = useState(false)
 
-  function handleClick(e) {
-    setOpen(function(state){
-      return !state
-    })
+  function handleOpenAd(e) {
+    setOpen(true)
+  }
+
+  function handleCloseAd(e) {
+    setOpen(false)
   }
 
   useEffect(function(){
-    document.querySelector(`#tooltip${id}`).style.display=open?"block":"none"
-
     let element = document.querySelector(`[copiwin-id="${id}"]`)
-    element.querySelector("button.see-details").addEventListener("click",handleClick)
+
+    element.querySelector(".searchadchild .add-popup").style.display=open?"block":"none"
+
+    element.querySelector("button.see-details").addEventListener("click",handleOpenAd)
+    element.querySelector(".searchadchild .close-ad").addEventListener("click",handleCloseAd)
   })
 
   return open

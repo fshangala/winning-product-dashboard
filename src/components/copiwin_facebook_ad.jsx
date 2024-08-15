@@ -31,7 +31,7 @@ export default function CFacebookAd({ad}) {
   })
 
   const facebookAdMenu = useFacebookAdMenu(ad.ad_archive_id)
-  // const facebookAdDetail = useFacebookAdDetail(ad.ad_archive_id)
+  const facebookAdDetail = useFacebookAdDetail(ad.ad_archive_id)
 
   function handleOpenPageAds() {
     dispatch({
