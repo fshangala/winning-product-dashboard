@@ -1,4 +1,4 @@
-import Cookie from 'js-cookie'
+import isDefined from "../utils/is_defined"
 
 export default class CopiwinSDK {
   #access_token=null
@@ -17,9 +17,16 @@ export default class CopiwinSDK {
     },
     body:null,
   }) {
-    const response = await fetch(`${this.baseUrl}${path}`, {
-      ...config,
-    })
+    var defaultConfig = {
+      method:isDefined(config.method)?config.method:"get",
+      headers: {
+        "Content-Type":isDefined(config.headers)?isDefined(config.headers["Content-Type"])?config.headers["Content-Type"]:"application/json":"application/json",
+        "Authorization":isDefined(config.headers)?isDefined(config.headers.Authorization)?config.headers.Authorization:`Bearer ${this.#access_token}`:`Bearer ${this.#access_token}`,
+      },
+      body:isDefined(config.body)?config.body:null
+    }
+    console.log(defaultConfig)
+    const response = await fetch(`${this.baseUrl}${path}`, {...defaultConfig})
     var data = await response.json()
     if(response.status == 200) {
       return data
@@ -166,13 +173,13 @@ export default class CopiwinSDK {
     return await this.fetchWrapper(`/facebook-ads/search/${ad_id}/`)
   }
 
-  async savedFacebookAds({access_token}) {
-    const response = await fetch(`${this.baseUrl}/facebook-ads/saved-facebook-ads/`,{
-      headers:{
-        "Authorization":`Bearer ${access_token}`,
-      }
+  async saveFacebookAd({ad_archive_id}) {
+    return await this.fetchWrapper("/facebook-ads/saved-facebook-ads/",{
+      method:"post",
+      body:JSON.stringify({
+        ad_archive_id:ad_archive_id,
+      }),
     })
-    return await response.json()
   }
 
   async savedFacebookAds({access_token}) {
