@@ -65,7 +65,7 @@ export default class FacebookAdTemplate {
                     <p class="text-xs text-slate-600">Share this ad with others:</p>
                     <input placeholder="Share Url" readonly=""
                       class="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
-                      value="/#/facebook-ads/${this.id}" onclick="copyad('${this.id}')">
+                      value="https://dashboard.copiwin.com/#/facebook-ads/${this.id}" onclick="copyad('${this.id}')">
                     <button type="button" class="dropdown-item save-ad-lid off" data-platform="facebook"
                       data-id="${this.id}"><img width="15px"
                         src="https://app.winninghunter.com/images/heart-outline.svg"> Save this ad</button>
