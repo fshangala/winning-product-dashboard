@@ -1,10 +1,31 @@
 import Cookie from 'js-cookie'
 
-export default class CopiwinSDK{
-  constructor(){
+export default class CopiwinSDK {
+  #access_token=null
+  constructor(access_token=null){
     //this.baseUrl = "http://copiwin.com:8001"
     this.baseUrl = "https://api.copiwin.com"
     // this.baseUrl = process.env.COPIWIN_BASE_URL
+    this.#access_token=access_token
+  }
+  
+  async fetchWrapper(path="/",config={
+    method:"get",
+    headers: {
+      "Content-Type":"application/json",
+      "Authorization":`Bearer ${this.#access_token}`,
+    },
+    body:null,
+  }) {
+    const response = await fetch(`${this.baseUrl}${path}`, {
+      ...config,
+    })
+    var data = await response.json()
+    if(response.status == 200) {
+      return data
+    }
+
+    throw {status:response.status,statusText:response.statusText,data:data}
   }
 
   async login({username,password}){
@@ -134,6 +155,28 @@ export default class CopiwinSDK{
     urlSplit[2]="api.copiwin.com"
     let url = urlSplit.join("/")
     const response = await fetch(url,{
+      headers:{
+        "Authorization":`Bearer ${access_token}`,
+      }
+    })
+    return await response.json()
+  }
+
+  async facebookAd({ad_id}) {
+    return await this.fetchWrapper(`/facebook-ads/search/${ad_id}/`)
+  }
+
+  async savedFacebookAds({access_token}) {
+    const response = await fetch(`${this.baseUrl}/facebook-ads/saved-facebook-ads/`,{
+      headers:{
+        "Authorization":`Bearer ${access_token}`,
+      }
+    })
+    return await response.json()
+  }
+
+  async savedFacebookAds({access_token}) {
+    const response = await fetch(`${this.baseUrl}/facebook-ads/saved-facebook-ads/`,{
       headers:{
         "Authorization":`Bearer ${access_token}`,
       }

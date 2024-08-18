@@ -1,4 +1,4 @@
-<div id="w-node-_8922055b-736f-9646-6ca8-979550297294993-de161bc0" class="one_add_wrapper" style="position:relative;"
+<div id="w-node-_8922055b-736f-9646-6ca8-${this.id}-de161bc0" class="one_add_wrapper" style="position:relative;"
   copiwin-id="${this.id}">
 
   <div class="pageadcount action-button has-popup" data-platform="facebook" data-page-id="170602576882503-97679">
@@ -33,9 +33,9 @@
                     <p class="text-xs text-slate-600">Share this ad with others:</p>
                     <input placeholder="Share Url" readonly=""
                       class="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
-                      value="https://app.winninghunter.com/ad/979550297294993" onclick="copyad('979550297294993')">
+                      value="/#/facebook-ads/${this.id}" onclick="copyad('${this.id}')">
                     <button type="button" class="dropdown-item save-ad-lid off" data-platform="facebook"
-                      data-id="979550297294993"><img width="15px"
+                      data-id="${this.id}"><img width="15px"
                         src="https://app.winninghunter.com/images/heart-outline.svg"> Save this ad</button>
                     <hr>
                     <button type="button" class="dropdown-item hide-advertiser-lid off" data-platform="facebook"
@@ -204,7 +204,7 @@
               adsets="{&quot;2024-07-21 00:00:00&quot;:&quot;1&quot;,&quot;2024-07-22 04:38:27&quot;:&quot;1&quot;,&quot;2024-07-22 04:38:32&quot;:&quot;1&quot;}"
               adspend="[]" views="null" likes="null" comments="null" shares="null">
             <input type="hidden" id="randomToken" value="97679">
-            <input type="hidden" id="productidstar" value="979550297294993">
+            <input type="hidden" id="productidstar" value="${this.id}">
             <div class="info_body" style="margin: 0 auto;">
               <div id="w-node-_3eb5300b-0206-f91c-5505-e52b666a5390-de161bc0" class="frameitem-video-wrapper">
                 <div class="html-embed-5 w-embed">
@@ -244,7 +244,7 @@
                   </div>
                 </div>
                 <button class="button w-button action-button"
-                  onclick="getAdCopy('none', '979550297294993', this)">Generate Ad Copy <svg width="24px"
+                  onclick="getAdCopy('none', '${this.id}', this)">Generate Ad Copy <svg width="24px"
                     viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(45)"
                     class="d-inline" style="margin-left:.5rem;">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -255,12 +255,12 @@
                         fill="#fff"></path>
                     </g>
                   </svg></button>
-                <div class="adcopygeneratorbox" id="adcopy979550297294993"></div>
+                <div class="adcopygeneratorbox" id="adcopy${this.id}"></div>
                 <div class="frameitem-country">
                   Share:
                   <img src="https://app.winninghunter.com/images/share-ios-export.svg"
                     style="cursor:pointer;height:30px;display:inline-block;" class="share-ios action-button"
-                    onclick="copyad('979550297294993')">
+                    onclick="copyad('${this.id}')">
                   <!-- <div class="frameitem-country-wrapper">
                   <img src="https://app.winninghunter.com/images/NZ.png" loading="lazy" alt="" class="frameitem-countr-flag">
                   <div>
@@ -287,7 +287,7 @@
                       alt="" class="frameitem-icon">
                     <div>
                       <div class="frameitem-small-text">Ad Library;</div>
-                      <a href="https://www.facebook.com/ads/library/?id=979550297294993" target="__BLANK"
+                      <a href="https://www.facebook.com/ads/library/?id=${this.id}" target="__BLANK"
                         class="frameitem-link">Ad link</a>
                     </div>
                   </div>

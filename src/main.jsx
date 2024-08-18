@@ -30,9 +30,7 @@ import Dashboard from './routes/test/dashboard.jsx'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import SalesTrackerDetail from './routes/sales_tracker_detail.jsx'
-import CopiwinSDK from './copiwinsdk/copiwinsdk.jsx'
-
-const copiwinSDK = new CopiwinSDK()
+import FacebookAd from './routes/facebook_ad.jsx'
 
 const router = createHashRouter([
   {
@@ -43,6 +41,14 @@ const router = createHashRouter([
       {
         path:'/',
         element:<FacebookAds />
+      },
+      {
+        path:'/facebook-ads',
+        element:<FacebookAds />
+      },
+      {
+        path:'/facebook-ads/:ad_id',
+        element:<FacebookAd />
       },
       {
         path:'/tiktok-ads',
