@@ -35,6 +35,9 @@ export default function useFacebookAdMenu(id) {
     let element = document.querySelector(`[copiwin-id="${id}"]`)
     element.querySelector(".threedot-more-info").addEventListener("click",handleClick)
     element.querySelector("button.save-ad-lid").addEventListener("click",handleSaveAd)
+    element.querySelector("button.dropdown-item").addEventListener("click",function(e){
+      toast.info("Importing products")
+    })
   })
 
   return open

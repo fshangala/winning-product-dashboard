@@ -6,6 +6,7 @@ import { useEffect, useReducer } from "react";
 import useFacebookAdMenu from "../hooks/facebook_ad_menu";
 import useFacebookAdDetail from "../hooks/facebook_ad_detail";
 import useFacebookAdPageads from "../hooks/facebook_ad_pageads";
+import { toast } from "react-toastify";
 
 function theReducer(state,action) {
   switch (action.type) {
@@ -35,17 +36,11 @@ export default function CFacebookAd({ad}) {
   const facebookAdDetail = useFacebookAdDetail(ad.ad_archive_id)
   const facebookPageAds = useFacebookAdPageads(ad.ad_archive_id)
 
-  function handleOpenPageAds() {
-    dispatch({
-      type:"open-page-ads"
-    })
-  }
-
-  function handleClosePageAds() {
-    dispatch({
-      type:"close-page-ads"
-    })
-  }
+  useEffect(function(){
+    window.openPiModal=function(a,b){
+      toast.info("Importing product")
+    }
+  },[])
 
   function updateTemplate() {
     let template = new facebookAdTemplate(
