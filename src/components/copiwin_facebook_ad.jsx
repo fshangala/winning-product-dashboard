@@ -5,6 +5,7 @@ import facebookAdPagePopupTemplate from "../templates/facebook_ad_page_popup_tem
 import { useEffect, useReducer } from "react";
 import useFacebookAdMenu from "../hooks/facebook_ad_menu";
 import useFacebookAdDetail from "../hooks/facebook_ad_detail";
+import useFacebookAdPageads from "../hooks/facebook_ad_pageads";
 
 function theReducer(state,action) {
   switch (action.type) {
@@ -32,6 +33,7 @@ export default function CFacebookAd({ad}) {
 
   const facebookAdMenu = useFacebookAdMenu(ad.ad_archive_id)
   const facebookAdDetail = useFacebookAdDetail(ad.ad_archive_id)
+  const facebookPageAds = useFacebookAdPageads(ad.ad_archive_id)
 
   function handleOpenPageAds() {
     dispatch({
@@ -106,27 +108,6 @@ export default function CFacebookAd({ad}) {
 
     return template
   }
-
-  function openPageAdsPopupListener(e) {
-    if (e.target.getAttribute("copiwin-id") == template.id) {
-      handleOpenPageAds()
-    }
-  }
-
-  function closePageAdsPopupListener(e) {
-    if (e.target.getAttribute("copiwin-id") == template.id) {
-      handleClosePageAds()
-    }
-  }
-
-  useEffect(function(){
-    document.addEventListener("open_page_ads_popup",openPageAdsPopupListener)
-    document.addEventListener("close_page_ads_popup",closePageAdsPopupListener)
-    return function(){
-      document.removeEventListener("open_page_ads_popup",openPageAdsPopupListener)
-      document.removeEventListener("close_page_ads_popup",closePageAdsPopupListener)
-    }
-  },[])
 
   return (
     <>

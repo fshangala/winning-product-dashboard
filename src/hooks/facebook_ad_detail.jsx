@@ -16,7 +16,7 @@ export default function useFacebookAdDetail(id) {
 
     element.querySelector(".searchadchild .add-popup").style.display=open?"block":"none"
 
-    element.querySelector("button.see-details").addEventListener("click",handleOpenAd)
+    element.querySelectorAll(".add_info button.see-details")[1].addEventListener("click",handleOpenAd)
     element.querySelector(".searchadchild .close-ad").addEventListener("click",handleCloseAd)
   })
 
