@@ -31,6 +31,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import SalesTrackerDetail from './routes/sales_tracker_detail.jsx'
 import FacebookAd from './routes/facebook_ad.jsx'
+import { PrimeReactProvider } from 'primereact/api'
 
 const router = createHashRouter([
   {
@@ -128,12 +129,14 @@ startApp()
 function startApp(){
   ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-    <GoogleOAuthProvider clientId="211046741429-jk2tmkimn7b1q6gq0vf49n7vvhair2ck.apps.googleusercontent.com">
-      <UserProvider>
-        <RouterProvider router={router} />
-        <ToastContainer />
-      </UserProvider>
-    </GoogleOAuthProvider>
+      <PrimeReactProvider>
+        <GoogleOAuthProvider clientId="211046741429-jk2tmkimn7b1q6gq0vf49n7vvhair2ck.apps.googleusercontent.com">
+          <UserProvider>
+            <RouterProvider router={router} />
+            <ToastContainer />
+          </UserProvider>
+        </GoogleOAuthProvider>
+      </PrimeReactProvider>
     </React.StrictMode>,
   )
 }
