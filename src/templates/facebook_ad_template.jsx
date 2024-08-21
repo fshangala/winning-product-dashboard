@@ -12,7 +12,9 @@ export default class FacebookAdTemplate {
     link_url=null,
     page_ads_popup='',
     price='',
-    store_revenue=0
+    store_revenue=0,
+    caption='',
+    cta_text='',
   ) {
     this.id=id
     this.adsets=adsets
@@ -27,6 +29,8 @@ export default class FacebookAdTemplate {
     this.page_ads_popup=page_ads_popup
     this.price=price
     this.store_revenue=store_revenue
+    this.caption=caption
+    this.cta_text=cta_text
   }
 
   get html() {
@@ -94,7 +98,7 @@ export default class FacebookAdTemplate {
                           d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z">
                         </path>
                       </svg> Find Competitors with Magic Ai</a>
-                    <a target="__BLANK" href="https://www.similarweb.com/website/laboheme.shop"
+                    <a target="__BLANK" href="https://www.similarweb.com/website/${this.caption}"
                       class="dropdownnode action-button dropdown-item block"><img width="20px"
                         src="https://app.winninghunter.com/images/similiarweb.png"> Website Traffic</a>
                   </div>
@@ -432,7 +436,7 @@ export default class FacebookAdTemplate {
                       class="rounded border shadow font-semibold p-2 hover:shadow-none hover:bg-gray-200 ml-3"
                       onclick="handlePageProductSwitch($(this).closest('.addmodal')[0])">Switch to Page Information</a>
                   </div>
-                  <div class="flex"><a href="https://www.asterandoak.com.au/products/butterfly-garden-print-top"
+                  <div class="flex"><a href="${this.link_url}"
                       class="flex" target="__BLANK"><img
                         src="http://www.asterandoak.com.au/cdn/shop/files/AOBFG01_BUTTERFLYGARDEN_1.jpg?v=1687409372"
                         class="page-profile-picture" onerror="this.src='/images/facebook_no_profile_pic.png'"><span
@@ -587,7 +591,7 @@ export default class FacebookAdTemplate {
                                       onclick="openPiModal('https://www.asterandoak.com.au', 'butterfly-garden-print-top')"><img
                                         width="15px" src="https://app.winninghunter.com/images/link-black-mini.svg"> Import Product</button>
                                     <a tabindex="0" class="dropdownnode action-button dropdown-item block"
-                                      href="/sales-tracker?store=https://www.asterandoak.com.au/products/butterfly-garden-print-top"
+                                      href="/sales-tracker?store=${this.link_url}"
                                       target="__BLANK"><img width="20px" src="https://app.winninghunter.com/images/track.png"> Track Store</a>
                                     <a tabindex="0" class="dropdownnode action-button dropdown-item block"
                                       href="/magic-ai?imgurl=https://adslibrary.eu-central-1.linodeobjects.com/34d9c3f57b9f7cdb791ea016763093ac3691fce8b76b87fd16c0f7c0189d4c8d.jpg"
@@ -716,7 +720,7 @@ export default class FacebookAdTemplate {
                                   src="http://www.asterandoak.com.au/cdn/shop/files/AOBFG01_BUTTERFLYGARDEN_1.jpg?v=1687409372"
                                   onerror="this.src='/images/facebook_no_profile_pic.png'"> Butterfly Garden Print Top -
                                 White / 0-3m </span>
-                              <a href="https://www.asterandoak.com.au/products/butterfly-garden-print-top"
+                              <a href="${this.link_url}"
                                 target="__BLANK"
                                 class="text-muted p-1 mt-2 rounded border w-full shadow-sm hover:shadow-none">Visit
                                 Product Page</a>
@@ -833,7 +837,7 @@ export default class FacebookAdTemplate {
                                       class="frameitem-icon">
                                     <div>
                                       <div class="frameitem-small-text">Store</div>
-                                      <a href="https://www.asterandoak.com.au/products/butterfly-garden-print-top"
+                                      <a href="${this.link_url}"
                                         target="__BLANK" class="frameitem-link">Product Page</a>
                                     </div>
                                   </div>
@@ -871,7 +875,7 @@ export default class FacebookAdTemplate {
                                     <img src="https://app.winninghunter.com/images/track.png" loading="lazy" alt="" class="frameitem-icon">
                                     <div>
                                       <a tabindex="0" class="frameitem-link"
-                                        href="/sales-tracker?store=https://www.asterandoak.com.au/products/butterfly-garden-print-top"
+                                        href="/sales-tracker?store=${this.link_url}"
                                         target="__BLANK">Track Store</a>
                                     </div>
                                   </div>
@@ -970,12 +974,12 @@ export default class FacebookAdTemplate {
                     </div>
                     <div class="frameitem-title-box">
                       <div class="frameitem-button-group" style="justify-content: space-between;">
-                        <a href="https://www.asterandoak.com.au/products/butterfly-garden-print-top" target="__BLANK"
+                        <a href="${this.link_url}" target="__BLANK"
                           class="linkclicks">
                           <div class="frameitem-titles">
                             <div
                               style="line-height: 12px; max-height: 24px; -webkit-line-clamp: 2;font-size: 8px;color: #606770;-webkit-box-orient: vertical;display: -webkit-box;float: none;">
-                              www.asterandoak.com.au</div>
+                              ${this.captiom}</div>
                             <div
                               style="display: -webkit-box;overflow: hidden;white-space: normal;display: -webkit-box;-webkit-box-orient: vertical;color: #1c1e21;font-size: 10px;line-height: 14px; max-height: 28px; -webkit-line-clamp: 2;">
                             </div>
@@ -986,8 +990,8 @@ export default class FacebookAdTemplate {
                           </div>
                         </a>
                         <div>
-                          <a href="https://www.asterandoak.com.au/products/butterfly-garden-print-top" target="__BLANK"
-                            class="frameitem-info w-button action-button">Shop Now</a>
+                          <a href="${this.link_url}" target="__BLANK"
+                            class="frameitem-info w-button action-button">${this.cta_text}</a>
                         </div>
                       </div>
                     </div>
@@ -1359,7 +1363,7 @@ export default class FacebookAdTemplate {
           <div class="frameitem-titles">
             <div
               style="line-height: 12px; max-height: 24px; --webkit-line-clamp: 2;font-size: 8px;color: #606770;-webkit-box-orient: vertical;display: -webkit-box;float: none;">
-              laboheme.shop</div>
+              ${this.caption}</div>
             <div
               style="display: -webkit-box;overflow: hidden;white-space: normal;display: -webkit-box;-webkit-box-orient: vertical;color: #1c1e21;font-size: 10px;line-height: 14px; max-height: 28px; --webkit-line-clamp: 2;">
               A/W wardrobe essentials</div>

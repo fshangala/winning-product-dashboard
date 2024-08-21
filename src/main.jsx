@@ -32,6 +32,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import SalesTrackerDetail from './routes/sales_tracker_detail.jsx'
 import FacebookAd from './routes/facebook_ad.jsx'
 import { PrimeReactProvider } from 'primereact/api'
+import "primereact/resources/themes/saga-green/theme.css";
+import Profile from './routes/profile.jsx'
+ 
 
 const router = createHashRouter([
   {
@@ -78,6 +81,10 @@ const router = createHashRouter([
       {
         path:'/sales-tracker/detail/:storeId',
         element:<SalesTrackerDetail />
+      },
+      {
+        path:'/profile',
+        element:<Profile />
       }
     ]
   },
@@ -129,7 +136,7 @@ startApp()
 function startApp(){
   ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-      <PrimeReactProvider>
+      <PrimeReactProvider value={{unstyled:false}}>
         <GoogleOAuthProvider clientId="211046741429-jk2tmkimn7b1q6gq0vf49n7vvhair2ck.apps.googleusercontent.com">
           <UserProvider>
             <RouterProvider router={router} />

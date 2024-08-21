@@ -2,9 +2,10 @@ import { Link, useNavigate } from "react-router-dom";
 import brandImage from "../assets/images/detailed-brand.png";
 import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import { useContext, useEffect, useState } from "react";
-import { SetUserContext } from "../context/UserContext";
+import { UserDispatchContext } from "../context/UserContext";
 import { supabase } from "../supabase-client";
 import CopiwinSDK from "../copiwinsdk/copiwinsdk";
+import { toast } from "react-toastify";
 
 export default function Signup(){
   const sdk = new CopiwinSDK()
@@ -16,7 +17,7 @@ export default function Signup(){
   })
   const [loading,setLoading] = useState(false)
 
-  const setUser = useContext(SetUserContext)
+  const userDispatch = useContext(UserDispatchContext)
   const navigate = useNavigate()
 
   const emailSignUp = function(){
@@ -27,7 +28,7 @@ export default function Signup(){
       last_name:credentials.last_name,
       password:credentials.password,
     }).then((response)=>{
-      alert("User successfully created, please login.")
+      toast.success("User successfully created, please login.")
       if("id" in response) {
         navigate("/login")
       }

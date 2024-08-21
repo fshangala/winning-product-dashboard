@@ -4,8 +4,8 @@ export default class CopiwinSDK {
   #access_token=null
   constructor(access_token=null){
     //this.baseUrl = "http://copiwin.com:8001"
-    this.baseUrl = "https://api.copiwin.com"
-    // this.baseUrl = process.env.COPIWIN_BASE_URL
+    // this.baseUrl = "https://api.copiwin.com"
+    this.baseUrl = process.env.COPIWIN_BASE_URL
     this.#access_token=access_token
   }
   
@@ -23,7 +23,7 @@ export default class CopiwinSDK {
         "Content-Type":isDefined(config.headers)?isDefined(config.headers["Content-Type"])?config.headers["Content-Type"]:"application/json":"application/json",
         "Authorization":isDefined(config.headers)?isDefined(config.headers.Authorization)?config.headers.Authorization:`Bearer ${this.#access_token}`:`Bearer ${this.#access_token}`,
       },
-      body:isDefined(config.body)?config.body:null
+      body:isDefined(config.body)?JSON.stringify(config.body):null
     }
     console.log(defaultConfig)
     const response = await fetch(`${this.baseUrl}${path}`, {...defaultConfig})
@@ -297,5 +297,15 @@ export default class CopiwinSDK {
     }
     
     throw {status:response.status,statusText:response.statusText,data:data}
+  }
+
+  async importProduct({store_url,product_url}){
+    return await this.fetchWrapper("/sales-tracker/import-product/",{
+      method:'post',
+      body: {
+        "store_url":store_url,
+        "product_url":product_url,
+      }
+    })
   }
 }

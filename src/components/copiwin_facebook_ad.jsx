@@ -2,24 +2,35 @@ import facebookAdTemplate from "../templates/facebook_ad_template";
 import facebookAdImageTemplate from "../templates/facebook_ad_image_template";
 import facebookAdVideoTemplate from "../templates/facebook_ad_video_template";
 import facebookAdPagePopupTemplate from "../templates/facebook_ad_page_popup_template";
-import { useEffect, useReducer } from "react";
+import { useContext, useEffect, useReducer } from "react";
 import useFacebookAdMenu from "../hooks/facebook_ad_menu";
 import useFacebookAdDetail from "../hooks/facebook_ad_detail";
 import useFacebookAdPageads from "../hooks/facebook_ad_pageads";
 import { toast } from "react-toastify";
+import CopiwinSDK from "../copiwinsdk/copiwinsdk";
+import { UserContext } from "../context/UserContext";
+import {Dialog} from 'primereact/dialog';
+import { Dropdown } from "primereact/dropdown";
+import {Button} from "primereact/button";
 
 function theReducer(state,action) {
   switch (action.type) {
-    case 'open-page-ads':
+    case 'open-import-product-dialog':
       return {
         ...state,
-        open_page_ads:true,
+        open_import_product_dialog:true,
       }
   
-    case 'close-page-ads':
+    case 'close-import-product-dialog':
       return {
         ...state,
-        open_page_ads:false,
+        open_import_product_dialog:false,
+      }
+    
+    case 'set-user-store':
+      return {
+        ...state,
+        user_store_url:action.store_url
       }
 
     default:
@@ -29,16 +40,38 @@ function theReducer(state,action) {
 
 export default function CFacebookAd({ad}) {
   const [componentState,dispatch] = useReducer(theReducer,{
-    open_page_ads:false,
+    open_import_product_dialog:false,
+    user_store_url:'',
   })
 
+  const user = useContext(UserContext)
+  const copiwinSDK = new CopiwinSDK(user.access_token)
   const facebookAdMenu = useFacebookAdMenu(ad.ad_archive_id)
   const facebookAdDetail = useFacebookAdDetail(ad.ad_archive_id)
   const facebookPageAds = useFacebookAdPageads(ad.ad_archive_id)
 
+  function handleOpenImportProductDialog() {
+    dispatch({
+      type:'open-import-product-dialog'
+    })
+  }
+
+  function handleCloseImportProductDialog() {
+    dispatch({
+      type:'close-import-product-dialog'
+    })
+  }
+
+  function handleSetUserStore(store_url) {
+    dispatch({
+      type:'set-user-store',
+      store_url:store_url,
+    })
+  }
+
   useEffect(function(){
     window.openPiModal=function(a,b){
-      toast.info("Importing product")
+      handleOpenImportProductDialog()
     }
   },[])
 
@@ -94,19 +127,41 @@ export default function CFacebookAd({ad}) {
     // }
   
     template.store_revenue=Math.ceil(Math.random()*(5000-50) + 50);
-    if (componentState.open_page_ads) {
-      var pageAdsPopupTemplate = facebookAdPagePopupTemplate
-      pageAdsPopupTemplate.id = template.id
-      template.page_ads_popup = pageAdsPopupTemplate.html
-    }
     template.link_url=ad.link_url
+    template.caption=ad.caption
+    template.cta_text=ad.cta_text
 
     return template
   }
 
+  function importProduct() {
+    copiwinSDK.importProduct({store_url:componentState.user_store_url,product_url:ad.link_url}).then(function(response){
+      console.log(response)
+    }).catch(function(reason){
+      console.log(reason)
+      if("data" in reason) {
+        if ("non_field_errors" in reason.data) {
+          reason.data.non_field_errors.forEach(item => {
+            toast.error(item)
+          });
+        }
+      }
+    })
+  }
+
+  const userStores = [
+    {title:"My Custom Cars",url:"https://mycustom-cars.com"}
+  ]
+
   return (
     <>
     <div dangerouslySetInnerHTML={{__html:updateTemplate().html}} />
+    <Dialog header={ad.link_url} visible={componentState.open_import_product_dialog} style={{width:"50vw"}} onHide={handleCloseImportProductDialog}>
+      <div>
+        <Dropdown value={componentState.user_store_url} onChange={function(e){handleSetUserStore(e.value)}} options={userStores} optionLabel="title" optionValue="url" />
+        <Button label="Import" onClick={importProduct} />
+      </div>
+    </Dialog>
     </>
   )
 }
