@@ -45,7 +45,7 @@ export default function CFacebookAd({ad}) {
   })
 
   const user = useContext(UserContext)
-  const copiwinSDK = new CopiwinSDK(user.access_token)
+  const copiwinSDK = new CopiwinSDK(user.auth.access_token)
   const facebookAdMenu = useFacebookAdMenu(ad.ad_archive_id)
   const facebookAdDetail = useFacebookAdDetail(ad.ad_archive_id)
   const facebookPageAds = useFacebookAdPageads(ad.ad_archive_id)
@@ -158,7 +158,9 @@ export default function CFacebookAd({ad}) {
     <div dangerouslySetInnerHTML={{__html:updateTemplate().html}} />
     <Dialog header={ad.link_url} visible={componentState.open_import_product_dialog} style={{width:"50vw"}} onHide={handleCloseImportProductDialog}>
       <div>
-        <Dropdown value={componentState.user_store_url} onChange={function(e){handleSetUserStore(e.value)}} options={userStores} optionLabel="title" optionValue="url" />
+        <Dropdown value={componentState.user_store_url} onChange={function(e){handleSetUserStore(e.value)}} options={user.profile?user.profile.my_stores.map(function(store){
+          return {title:store.store.title,url:store.store.url}
+        }):[]} optionLabel="title" optionValue="url" />
         <Button label="Import" onClick={importProduct} />
       </div>
     </Dialog>

@@ -308,4 +308,14 @@ export default class CopiwinSDK {
       }
     })
   }
+
+  async addUserStore({store_url,access_token}) {
+    return await this.fetchWrapper("/sales-tracker/user-shopify-store/",{
+      method:"post",
+      body:{
+        "url":store_url,
+        "access_token":access_token,
+      }
+    })
+  }
 }

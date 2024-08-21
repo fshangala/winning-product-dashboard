@@ -1374,7 +1374,7 @@ export default class FacebookAdTemplate {
           </div>
         </a>
         <div>
-          <a href="${this.link_url}" target="__BLANK" class="frameitem-info w-button action-button">Shop Now</a>
+          <a href="${this.link_url}" target="__BLANK" class="frameitem-info w-button action-button">${this.cta_text}</a>
         </div>
       </div>
     </div>

@@ -1,4 +1,37 @@
+import { useContext, useEffect, useState } from "react"
+import { UserContext } from "../context/UserContext"
+import CopiwinSDK from "../copiwinsdk/copiwinsdk"
+import { toast } from "react-toastify"
+
 export default function Profile() {
+  const user = useContext(UserContext)
+  const [storeUrl,setStoreUrl] = useState('')
+  const [access_token,setAccessToken] = useState('')
+  const copiwinSDK = new CopiwinSDK(user.auth.access_token)
+
+  function handleAddStore() {
+    toast.info("Adding store...")
+    copiwinSDK.addUserStore({store_url:storeUrl,access_token:access_token}).then(function(response){
+      if("id" in response) {
+        toast.success(`${response.store.title} successfully added!`)
+      }
+      console.log(response)
+    }).catch(function(reason){
+      if ("data" in reason) {
+        if ("detail" in reason.data) {
+          toast.error(reason.data.detail)
+        }
+        if ("access_token" in reason.data) {
+          toast.error("access_token: "+reason.data.access_token[0])
+        }
+        if ("url" in reason.data) {
+          toast.error("url: "+reason.data.url[0])
+        }
+      }
+      console.log(reason)
+    })
+  }
+
   return (
     <>
     <div>
@@ -63,7 +96,7 @@ export default function Profile() {
             <form id="wf-form-Updated-Email" name="wf-form-Updated-Email" data-name="Updated Email" method="get" data-ms-form="email" className="profile-form" aria-label="Updated Email">
               <div id="w-node-abe465fc-6310-c419-0cff-0d7914a9f5ae-da3bb3ff" className="form-field-wrapper">
                 <label for="Email-4" id="w-node-abe465fc-6310-c419-0cff-0d7914a9f5af-da3bb3ff"> Email</label>
-                <input type="email" className="form-input w-input" maxlength="256" name="Email" disabled="" data-name="Email" placeholder="Email" id="Email-4" data-ms-member="email" required="" value="malaky31@hotmail.fr" />
+                <input type="email" className="form-input w-input" maxlength="256" name="Email" disabled="" data-name="Email" placeholder="Email" id="Email-4" data-ms-member="email" required="" value={user.profile?user.profile.email:''} />
               </div>
             </form>
           </div>
@@ -87,6 +120,42 @@ export default function Profile() {
               </div>
               <button type="submit" className="login button w-button">
                 Update Password
+                <div className="shadow"></div>
+                <div className="glow" style={{willChange: "transform", transform: "translate3d(49.976%, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg)", transformStyle: "preserve-3d"}}></div>
+              </button>
+            </form>
+          </div>
+        </div>
+        <div className="profile-section">
+          <div>
+            <div className="profile-header">
+              <div className="text-block-20">User stores</div>
+              <div className="div-block-60"></div>
+            </div>
+          </div>
+          <div>
+            <div style={{display:"flex",flexDirection:"column",gap:"10px"}}>
+              {user.profile?user.profile.my_stores.map(function(store){
+                return (
+                  <>
+                  <div key={store.id}>{store.store.title}</div>
+                  </>
+                )
+              }):null}
+            </div>
+          </div>
+          <div className="w-form">
+            <form id="update-user-stores" name="update-user-stores" data-name="Add Store" method="post" data-ms-form="url" className="profile-form" aria-label="Add Store">
+              <div className="form-field-wrapper">
+                <label for="store_url" id="w-node-abe465fc-6310-c419-0cff-0d7914a9f5af-da3bb3ff"> Store URL</label>
+                <input type="url" className="form-input w-input" maxlength="256" name="store_url" data-name="Store URL" placeholder="Store URL" id="store_url" data-ms-member="url" required={true} value={storeUrl} onChange={function(e){setStoreUrl(e.target.value)}} />
+              </div>
+              <div className="form-field-wrapper">
+                <label for="store_url"> Access Token</label>
+                <input type="text" className="form-input w-input" name="access_token" data-name="Access Token" placeholder="Access Token" id="access_token" data-ms-member="access_token" required={true} value={access_token} onChange={function(e){setAccessToken(e.target.value)}} />
+              </div>
+              <button type="button" className="login button w-button" onClick={handleAddStore}>
+                Add Store
                 <div className="shadow"></div>
                 <div className="glow" style={{willChange: "transform", transform: "translate3d(49.976%, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg)", transformStyle: "preserve-3d"}}></div>
               </button>
