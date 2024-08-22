@@ -130,7 +130,8 @@ export default function CFacebookAd({ad}) {
     template.link_url=ad.link_url
     template.caption=ad.caption
     template.cta_text=ad.cta_text
-    template.shopify=ad.shopifyProduct !== null
+    // template.shopify=ad.shopifyProduct !== null
+    template.shopify=true
 
     return template
   }
