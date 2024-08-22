@@ -157,11 +157,11 @@ export default function CFacebookAd({ad}) {
     <>
     <div dangerouslySetInnerHTML={{__html:updateTemplate().html}} />
     <Dialog header={ad.link_url} visible={componentState.open_import_product_dialog} style={{width:"50vw"}} onHide={handleCloseImportProductDialog}>
-      <div>
+      <div style={{display:"flex",flexDirection:"column",padding:"10px",gap:"8px"}}>
         <Dropdown value={componentState.user_store_url} onChange={function(e){handleSetUserStore(e.value)}} options={user.profile?user.profile.my_stores.map(function(store){
           return {title:store.store.title,url:store.store.url}
         }):[]} optionLabel="title" optionValue="url" />
-        <Button label="Import" onClick={importProduct} />
+        <Button style={{padding:"10px",color:"white"}} label="Import" onClick={importProduct} />
       </div>
     </Dialog>
     </>
