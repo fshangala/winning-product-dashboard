@@ -130,12 +130,16 @@ export default function CFacebookAd({ad}) {
     template.link_url=ad.link_url
     template.caption=ad.caption
     template.cta_text=ad.cta_text
+    template.shopify=ad.shopifyProduct !== null
 
     return template
   }
 
   function importProduct() {
     copiwinSDK.importProduct({store_url:componentState.user_store_url,product_url:ad.link_url}).then(function(response){
+      if ("product" in response) {
+        toast.success(`${response.product.title} successfully imported!`)
+      }
       console.log(response)
     }).catch(function(reason){
       console.log(reason)
@@ -145,13 +149,12 @@ export default function CFacebookAd({ad}) {
             toast.error(item)
           });
         }
+        if ("content" in reason) {
+          toast.error(reason.content.toString())
+        }
       }
     })
   }
-
-  const userStores = [
-    {title:"My Custom Cars",url:"https://mycustom-cars.com"}
-  ]
 
   return (
     <>

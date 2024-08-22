@@ -15,6 +15,7 @@ export default class FacebookAdTemplate {
     store_revenue=0,
     caption='',
     cta_text='',
+    shopify=false,
   ) {
     this.id=id
     this.adsets=adsets
@@ -31,6 +32,7 @@ export default class FacebookAdTemplate {
     this.store_revenue=store_revenue
     this.caption=caption
     this.cta_text=cta_text
+    this.shopify=shopify
   }
 
   get html() {
@@ -78,15 +80,16 @@ export default class FacebookAdTemplate {
                       data-id="170602576882503"><img loading="lazy" width="17px"
                         src="https://app.winninghunter.com/images/eye-closed.svg"> Hide this advertiser</button>
                     <hr>
-
-                    <a target="__BLANK" href="https://laboheme.shop/collections/all?sort_by=best-selling"
-                      class="dropdownnode action-button dropdown-item"><img width="20px"
-                        src="https://app.winninghunter.com/images/SH.svg"> Best Selling</a>
-                    <hr>
-                    <button type="button" class="dropdown-item"
-                      onclick="openPiModal('https://laboheme.shop', 'la-boheme-girls-clyde-shirt-denim')"><img
-                        width="15px" src="https://app.winninghunter.com/images/link-black-mini.svg"> Import
-                      Product</button>
+                    ${this.shopify?`
+                      <a target="__BLANK" href="https://laboheme.shop/collections/all?sort_by=best-selling"
+                        class="dropdownnode action-button dropdown-item"><img width="20px"
+                          src="https://app.winninghunter.com/images/SH.svg"> Best Selling</a>
+                      <hr>
+                      <button type="button" class="dropdown-item"
+                        onclick="openPiModal('https://laboheme.shop', 'la-boheme-girls-clyde-shirt-denim')"><img
+                          width="15px" src="https://app.winninghunter.com/images/link-black-mini.svg"> Import
+                        Product</button>
+                    `:''}
                     <a tabindex="0" class="dropdownnode action-button dropdown-item block"
                       href="/sales-tracker?store=${this.link_url}" target="__BLANK"><img width="20px"
                         src="https://app.winninghunter.com/images/track.png"> Track Store</a>
@@ -582,10 +585,11 @@ export default class FacebookAdTemplate {
                                       class="dropdownnode action-button dropdown-item" style="padding-left:7px"><img
                                         width="15px" src="https://app.winninghunter.com/images/picture-edit.svg"> Edit Image</a>
                                     <hr>
+                                    ${this.shopify?`
                                     <a target="__BLANK"
-                                      href="https://www.asterandoak.com.au/collections/all?sort_by=best-selling"
-                                      class="dropdownnode action-button dropdown-item"><img width="20px"
-                                        src="https://app.winninghunter.com/images/SH.svg"> Best Selling</a>
+                                    href="https://www.asterandoak.com.au/collections/all?sort_by=best-selling"
+                                    class="dropdownnode action-button dropdown-item"><img width="20px"
+                                      src="https://app.winninghunter.com/images/SH.svg"> Best Selling</a>
                                     <hr>
                                     <button type="button" class="dropdown-item"
                                       onclick="openPiModal('https://www.asterandoak.com.au', 'butterfly-garden-print-top')"><img
@@ -593,6 +597,7 @@ export default class FacebookAdTemplate {
                                     <a tabindex="0" class="dropdownnode action-button dropdown-item block"
                                       href="/sales-tracker?store=${this.link_url}"
                                       target="__BLANK"><img width="20px" src="https://app.winninghunter.com/images/track.png"> Track Store</a>
+                                    `:''}
                                     <a tabindex="0" class="dropdownnode action-button dropdown-item block"
                                       href="/magic-ai?imgurl=https://adslibrary.eu-central-1.linodeobjects.com/34d9c3f57b9f7cdb791ea016763093ac3691fce8b76b87fd16c0f7c0189d4c8d.jpg"
                                       target="__BLANK"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -879,6 +884,7 @@ export default class FacebookAdTemplate {
                                         target="__BLANK">Track Store</a>
                                     </div>
                                   </div>
+                                  ${this.shopify?`
                                   <div class="frameitem-link-item">
                                     <img src="https://app.winninghunter.com/images/link-black-mini.svg" loading="lazy" alt="" class="frameitem-icon">
                                     <div>
@@ -887,6 +893,7 @@ export default class FacebookAdTemplate {
                                         Import Product</a>
                                     </div>
                                   </div>
+                                  `:''}
 
                                   <div class="frameitem-link-item">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
