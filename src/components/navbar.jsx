@@ -2,12 +2,25 @@ import { Link, useLocation } from "react-router-dom";
 import brandImage from "../assets/images/detailed-brand.png";
 import userAvatarImage from "../assets/images/user-icon.svg";
 import { useContext, useState } from "react";
-import { UserContext } from "../context/UserContext";
+import { UserContext, UserDispatchContext } from "../context/UserContext";
 
 export default function Navbar() {
   const location = useLocation()
   const [openProfileDropdown,setOpenProfileDropdown] = useState(false)
   const user = useContext(UserContext)
+  const userDispatch = useContext(UserDispatchContext)
+
+  function logout() {
+    localStorage.removeItem("auth")
+    userDispatch({
+      type:"set-auth",
+      auth:null,
+    })
+    userDispatch({
+      type:"set-profile",
+      profile:null,
+    })
+  }
 
   return (
     <>
@@ -18,14 +31,14 @@ export default function Navbar() {
           <p className="text-gray-500 text-size-tiny">{user.profile?user.profile.email:''}</p>
         </div>
         <hr/>
-        <a href="/#/profile" className="dropdown-item dark-hover text-size-small rounded">
+        <Link to="/profile" className="dropdown-item dark-hover text-size-small rounded">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
             className="d-inline mr-5" width="1.5rem">
             <path stroke-linecap="round" stroke-linejoin="round"
               d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z">
             </path>
           </svg>
-          My Account</a>
+          My Account</Link>
         <a href="/payment/portal" className="dropdown-item dark-hover text-size-small rounded">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
             className="d-inline mr-5" width="1.5rem">
@@ -63,14 +76,14 @@ export default function Navbar() {
           </svg>
           Support</a>
         <hr/>
-        <a href="/logout" className="dropdown-item dark-hover text-size-small rounded">
+        <button onClick={logout} className="dropdown-item dark-hover text-size-small rounded">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
             className="d-inline mr-5" width="1.5rem">
             <path stroke-linecap="round" stroke-linejoin="round"
               d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9">
             </path>
           </svg>
-          Logout</a>
+          Logout</button>
       </div>
     </div>
     <div data-animation="default" className="navbar_component p-bottom-top-0" data-easing2="ease" fs-scrolldisable-element="smart-nav" data-easing="ease" data-collapse="medium" data-w-id="fbbd3357-a308-4244-f630-6ac7f084078e" role="banner" data-duration="400">
