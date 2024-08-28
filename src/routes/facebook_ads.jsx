@@ -2,7 +2,7 @@ import { useContext, useEffect, useReducer } from 'react'
 import CopiwinSDK from '../copiwinsdk/copiwinsdk'
 import { UserContext } from '../context/UserContext'
 import PageHeader from "../components/page_header"
-import FacebookFilters from '../templates/facebook_filters'
+import FacebookFilters from '../components/facebook_filters'
 import Loading from '../components/loading'
 import CFacebookAd from '../components/copiwin_facebook_ad'
 import useReachedBottom from '../hooks/reached_bottom'

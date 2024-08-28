@@ -32,8 +32,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import SalesTrackerDetail from './routes/sales_tracker_detail.jsx'
 import FacebookAd from './routes/facebook_ad.jsx'
 import { PrimeReactProvider } from 'primereact/api'
-import "primereact/resources/themes/saga-green/theme.css";
+import "primereact/resources/themes/saga-green/theme.css"
+import 'primeicons/primeicons.css'
 import Profile from './routes/profile.jsx'
+import 'select2/dist/css/select2.min.css'
+// import 'select2/dist/js/select2.js'
  
 
 const router = createHashRouter([
