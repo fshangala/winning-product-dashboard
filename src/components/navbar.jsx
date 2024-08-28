@@ -76,7 +76,8 @@ export default function Navbar() {
           </svg>
           Support</a>
         <hr/>
-        {user.profile.is_staff?
+        {user.profile?
+        user.profile.is_staff?
         <button onClick={function(e){}} className="dropdown-item dark-hover text-size-small rounded">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
             className="d-inline mr-5" width="1.5rem">
@@ -85,6 +86,7 @@ export default function Navbar() {
             </path>
           </svg>
           Admin</button>
+        :null
         :null}
         <button onClick={logout} className="dropdown-item dark-hover text-size-small rounded">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"

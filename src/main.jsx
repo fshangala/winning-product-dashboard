@@ -36,6 +36,8 @@ import "primereact/resources/themes/saga-green/theme.css"
 import 'primeicons/primeicons.css'
 import Profile from './routes/profile.jsx'
 import 'select2/dist/css/select2.min.css'
+import AdminRoot from './routes/admin/admin_root.jsx'
+import AdminDashboard from './routes/admin/admin_dashboard.jsx'
 // import 'select2/dist/js/select2.js'
  
 
@@ -88,6 +90,16 @@ const router = createHashRouter([
       {
         path:'/profile',
         element:<Profile />
+      }
+    ]
+  },
+  {
+    path:'/admin',
+    element: <AdminRoot />,
+    children: [
+      {
+        path:'/dashboard',
+        element: <AdminDashboard />
       }
     ]
   },
