@@ -8,8 +8,9 @@ export default function AdminRoot() {
 
   const panelItems = [
     {
-      label:"Home",
-      icon:"pi pi-home",
+      label:"Dashboard",
+      icon:"pi pi-th-large",
+      url:"/#/admin/dashboard",
     }
   ]
 
