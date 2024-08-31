@@ -11,7 +11,12 @@ export default function AdminRoot() {
       label:"Dashboard",
       icon:"pi pi-th-large",
       url:"/#/admin/dashboard",
-    }
+    },
+    {
+      label:"Exit",
+      icon:"pi pi-sign-out",
+      url:"/#/",
+    },
   ]
 
   function headerTemplate(options) {
