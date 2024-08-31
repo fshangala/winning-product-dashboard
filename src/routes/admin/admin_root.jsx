@@ -1,9 +1,46 @@
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom"
+import {Panel} from 'primereact/panel'
+import {Avatar} from 'primereact/avatar'
+import brandImage from "../../assets/images/detailed-brand.png";
+import { PanelMenu } from 'primereact/panelmenu'
 
 export default function AdminRoot() {
+
+  const panelItems = [
+    {
+      label:"Home",
+      icon:"pi pi-home",
+    }
+  ]
+
+  function headerTemplate(options) {
+    return (
+      <div>
+        <div style={{fontWeight:"bolder",fontSize:"26px"}}>Admin Panel</div>
+      </div>
+    )
+  }
+
   return (
     <>
-    <Outlet />
+    <div style={{display:"flex",padding:"8px",boxShadow:"0 1px 4px #5b8a3a",marginBottom:"8px"}}>
+      <div>
+        <img src={brandImage} style={{height:"50px"}} alt="brand" />
+      </div>
+      <div style={{flexGrow:1,display:"flex",justifyContent:"end",alignItems:"center"}}>
+        <Avatar image="https://picsum.photos/200/200" shape="circle"/>
+      </div>
+    </div>
+    <div style={{display:"flex",flexDirection:"row"}}>
+      <div style={{width:"200px"}}>
+        <Panel headerTemplate={headerTemplate} style={{padding:"8px"}}>
+          <PanelMenu model={panelItems} />
+        </Panel>
+      </div>
+      <div style={{flexGrow:1}}>
+        <Outlet />
+      </div>
+    </div>
     </>
   )
 }

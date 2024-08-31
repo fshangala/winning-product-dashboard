@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import brandImage from "../assets/images/detailed-brand.png";
 import userAvatarImage from "../assets/images/user-icon.svg";
 import { useContext, useState } from "react";
@@ -9,6 +9,7 @@ export default function Navbar() {
   const [openProfileDropdown,setOpenProfileDropdown] = useState(false)
   const user = useContext(UserContext)
   const userDispatch = useContext(UserDispatchContext)
+  const navigate = useNavigate()
 
   function logout() {
     localStorage.removeItem("auth")
@@ -78,7 +79,7 @@ export default function Navbar() {
         <hr/>
         {user.profile?
         user.profile.is_staff?
-        <button onClick={function(e){}} className="dropdown-item dark-hover text-size-small rounded">
+        <button onClick={function(e){navigate("/admin/dashboard")}} className="dropdown-item dark-hover text-size-small rounded">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
             className="d-inline mr-5" width="1.5rem">
             <path stroke-linecap="round" stroke-linejoin="round"

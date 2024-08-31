@@ -98,7 +98,7 @@ const router = createHashRouter([
     element: <AdminRoot />,
     children: [
       {
-        path:'/dashboard',
+        path:'dashboard',
         element: <AdminDashboard />
       }
     ]
