@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
 
-export default function SelectCountry() {
+export default function SelectCountry({value="",onChange=function({value}){}}) {
   const refElem = useRef(null)
 
   useEffect(function(){
@@ -14,7 +14,9 @@ export default function SelectCountry() {
   return (
     <div className="select-wrapper">
       <div className="select-label">Countries</div>
-      <select className="js-select2 form-input select-box-2 pb w-select" ref={refElem}>
+      <select className="js-select2 form-input select-box-2 pb w-select" ref={refElem} value={value} onChange={function(e){
+        onChange({value:e.target.value})
+      }}>
         <option value="US" data-badge="">USA</option>
         <option value="GB" data-badge="">United Kingdom</option>
         <option value="DK" data-badge="">Denmark</option>
