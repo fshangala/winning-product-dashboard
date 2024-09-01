@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import SelectCountry from "./filters/country";
 import InputActiveAdsets from "./filters/input_active_adsets";
 import InputAdspend from "./filters/input_adspend";
@@ -68,6 +68,10 @@ export default function FacebookFilters({applyFilters}) {
     media_type:"",
     ad_creation_date:"",
   })
+
+  useEffect(function(){
+    applyFilters(componentState)
+  },[])
 
   return (
     <>
