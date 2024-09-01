@@ -22,7 +22,7 @@ export default function AdminRoot() {
   function headerTemplate(options) {
     return (
       <div>
-        <div style={{fontWeight:"bolder",fontSize:"26px"}}>Admin Panel</div>
+        <div style={{fontWeight:"bolder",fontSize:"26px",textAlign:"center",color:"rgb(94, 148, 52)"}}>Admin Panel</div>
       </div>
     )
   }
@@ -37,13 +37,13 @@ export default function AdminRoot() {
         <Avatar image="https://picsum.photos/200/200" shape="circle"/>
       </div>
     </div>
-    <div style={{display:"flex",flexDirection:"row"}}>
+    <div style={{display:"flex",flexDirection:"row",backgroundColor:"#f8f9fa"}}>
       <div style={{width:"200px"}}>
         <Panel headerTemplate={headerTemplate} style={{padding:"8px"}}>
           <PanelMenu model={panelItems} />
         </Panel>
       </div>
-      <div style={{flexGrow:1}}>
+      <div style={{flexGrow:1,padding:"0 8px"}}>
         <Outlet />
       </div>
     </div>
