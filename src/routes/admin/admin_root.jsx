@@ -13,6 +13,18 @@ export default function AdminRoot() {
       url:"/#/admin/dashboard",
     },
     {
+      label:"Ads",
+      icon:"pi pi-search",
+      items: [
+        {
+          label:"Facebook Ads",
+        },
+        {
+          label:"Tiktok Ads",
+        }
+      ]
+    },
+    {
       label:"Exit",
       icon:"pi pi-sign-out",
       url:"/#/",
