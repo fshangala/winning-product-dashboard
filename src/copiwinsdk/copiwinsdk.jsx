@@ -123,25 +123,31 @@ export default class CopiwinSDK {
 
   async facebookAds({
     access_token,
-    keyword=null,
-    search_keyword='All',
-    countries=null,
-    sort_direction='asc',
-    media_type='all',
-    ad_creation_date=null,
-    randomize=null,
+    keyword="",
+    search_keyword='',
+    countries="",
+    sort_direction='',
+    media_type='',
+    ad_creation_date="",
+    randomize="",
   }) {
     var url = `${this.baseUrl}/facebook-ads/search/?limit=10`
     if (keyword) {
       url += `&search_term=${keyword}`
     }
-    if (countries) {
+    if (countries !== "") {
       url += `&country_code=${countries}`
     }
-    url += `&search_keyword_in=${search_keyword}`
-    url += `&media_type=${media_type}`
-    url += `&sort_direction=${sort_direction}`
-    if(ad_creation_date) {
+    if (search_keyword !== "") {
+      url += `&search_keyword_in=${search_keyword}`
+    }
+    if (media_type !== "") {
+      url += `&media_type=${media_type}`
+    }
+    if (sort_direction !== "") {
+      url += `&sort_direction=${sort_direction}`
+    }
+    if(ad_creation_date !== "") {
       url += `&ad_creation_date=${ad_creation_date}`
     }
     if (randomize) {

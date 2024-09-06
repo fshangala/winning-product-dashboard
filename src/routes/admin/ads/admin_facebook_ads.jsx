@@ -1,9 +1,10 @@
 import { Card } from "primereact/card"
 import {DataView} from "primereact/dataview"
-import { useContext, useEffect, useReducer } from "react"
+import { useContext, useEffect, useReducer, useRef } from "react"
 import CopiwinSDK from "../../../copiwinsdk/copiwinsdk";
 import {UserContext} from "../../../context/UserContext";
 import {Button} from 'primereact/button';
+import {Menu} from 'primereact/menu';
 
 function adminFacebookAdsReducer(state,action) {
   switch (action.type) {
@@ -31,6 +32,7 @@ export default function AdminFacebookAds() {
   })
   const user = useContext(UserContext)
   const copiwinSDK = new CopiwinSDK(user.auth.access_token)
+  const facebookAdsPopupMenu = useRef(null)
 
   useEffect(function(){
     dispatch({type:'set-loading',loading:true})
@@ -81,7 +83,18 @@ export default function AdminFacebookAds() {
 
   return (
     <div>
-      <Card title="Facebook Ads" style={{padding:"8px"}}>
+      <Card title={(
+        <div style={{display:"flex"}}>
+          <div style={{flexGrow:1}}>Facebook Ads</div>
+          <div>
+            <Button icon="pi pi-ellipsis-v" aria-controls="facebook-ads-popup-menu"
+            onClick={function(e){
+              facebookAdsPopupMenu.current.toggle(e)
+            }} aria-haspopup />
+            <Menu ref={facebookAdsPopupMenu} id="facebook-ads-popup-menu" popup />
+          </div>
+        </div>
+      )} style={{padding:"8px"}}>
         <DataView value={componentState.ads} listTemplate={listTemplate} />
       </Card>
     </div>
