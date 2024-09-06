@@ -1,10 +1,11 @@
-import { Outlet } from "react-router-dom"
+import { Outlet, useNavigate } from "react-router-dom"
 import {Panel} from 'primereact/panel'
 import {Avatar} from 'primereact/avatar'
 import brandImage from "../../assets/images/detailed-brand.png";
 import { PanelMenu } from 'primereact/panelmenu'
 
 export default function AdminRoot() {
+  const navigate = useNavigate()
 
   const panelItems = [
     {
@@ -14,15 +15,29 @@ export default function AdminRoot() {
     },
     {
       label:"Ads",
-      icon:"pi pi-search",
       items: [
         {
           label:"Facebook Ads",
+          command:function(){
+            navigate("/admin/facebook-ads")
+          }
+        },
+        {
+          label:"Meta Advertisers",
+          command:function(){
+            navigate("/admin/meta-advertisers")
+          }
         },
         {
           label:"Tiktok Ads",
-        }
+        },
+        {
+          label:"Websites",
+        },
       ]
+    },
+    {
+      label:"Sales Tracker",
     },
     {
       label:"Exit",
@@ -50,7 +65,7 @@ export default function AdminRoot() {
       </div>
     </div>
     <div style={{display:"flex",flexDirection:"row",backgroundColor:"#f8f9fa"}}>
-      <div style={{width:"200px"}}>
+      <div>
         <Panel headerTemplate={headerTemplate} style={{padding:"8px"}}>
           <PanelMenu model={panelItems} />
         </Panel>

@@ -3,7 +3,7 @@ import isDefined from "../utils/is_defined"
 export default class CopiwinSDK {
   #access_token=null
   constructor(access_token=null){
-    //this.baseUrl = "http://copiwin.com:8001"
+    // this.baseUrl = "http://localhost:8000"
     // this.baseUrl = "https://api.copiwin.com"
     this.baseUrl = process.env.COPIWIN_BASE_URL
     this.#access_token=access_token
@@ -135,7 +135,7 @@ export default class CopiwinSDK {
     if (keyword) {
       url += `&search_term=${keyword}`
     }
-    if (country_code) {
+    if (countries) {
       url += `&country_code=${countries}`
     }
     url += `&search_keyword_in=${search_keyword}`
@@ -318,4 +318,13 @@ export default class CopiwinSDK {
       }
     })
   }
+
+  async adminFacebookAds() {
+    return await this.fetchWrapper("/api-admin/facebook-ads/")
+  }
+
+  async adminMetaAdvertisers() {
+    return await this.fetchWrapper("/api-admin/meta-advertisers/")
+  }
 }
+
