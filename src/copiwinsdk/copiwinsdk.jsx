@@ -3,7 +3,7 @@ import isDefined from "../utils/is_defined"
 export default class CopiwinSDK {
   #access_token=null
   constructor(access_token=null){
-    //this.baseUrl = "http://copiwin.com:8001"
+    // this.baseUrl = "http://localhost:8000"
     // this.baseUrl = "https://api.copiwin.com"
     this.baseUrl = process.env.COPIWIN_BASE_URL
     this.#access_token=access_token
@@ -123,25 +123,31 @@ export default class CopiwinSDK {
 
   async facebookAds({
     access_token,
-    keyword=null,
-    country_code=null,
-    search_keyword_in='All',
-    media_type='all',
-    sort_direction='asc',
-    ad_creation_date=null,
-    randomize=null,
+    keyword="",
+    search_keyword='',
+    countries="",
+    sort_direction='',
+    media_type='',
+    ad_creation_date="",
+    randomize="",
   }) {
     var url = `${this.baseUrl}/facebook-ads/search/?limit=10`
     if (keyword) {
       url += `&search_term=${keyword}`
     }
-    if (country_code) {
-      url += `&country_code=${country_code}`
+    if (countries !== "") {
+      url += `&country_code=${countries}`
     }
-    url += `&search_keyword_in=${search_keyword_in}`
-    url += `&media_type=${media_type}`
-    url += `&sort_direction=${sort_direction}`
-    if(ad_creation_date) {
+    if (search_keyword !== "") {
+      url += `&search_keyword_in=${search_keyword}`
+    }
+    if (media_type !== "") {
+      url += `&media_type=${media_type}`
+    }
+    if (sort_direction !== "") {
+      url += `&sort_direction=${sort_direction}`
+    }
+    if(ad_creation_date !== "") {
       url += `&ad_creation_date=${ad_creation_date}`
     }
     if (randomize) {
@@ -318,4 +324,13 @@ export default class CopiwinSDK {
       }
     })
   }
+
+  async adminFacebookAds() {
+    return await this.fetchWrapper("/api-admin/facebook-ads/")
+  }
+
+  async adminMetaAdvertisers() {
+    return await this.fetchWrapper("/api-admin/meta-advertisers/")
+  }
 }
+

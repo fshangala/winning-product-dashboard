@@ -4,9 +4,11 @@ import tiktokLogo from '../../assets/images/tiktok.svg'
 import metaLogo from '../../assets/images/meta.png'
 import { Chart } from 'primereact/chart';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function AdminDashboard() {
   const [chartData,setChartData] = useState({})
+  const navigate = useNavigate()
 
   useEffect(function(){
     setChartData({
@@ -29,11 +31,11 @@ export default function AdminDashboard() {
     return (
       <>
       <div style={{display:"grid",gridTemplateColumns:"auto auto auto",gap:"24px", width:"100%"}}>
-        <Card style={{padding:"8px",background:"linear-gradient(to right,green,#039be5)"}}>
+        <Card style={{padding:"8px",background:"linear-gradient(to right,green,#039be5)",cursor:"pointer"}} onClick={function(){navigate("/admin/facebook-ads/")}}>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",color:"white"}}>
             <div style={{display:'flex',flexDirection:'column'}}>
               <span style={{textShadow:"0 0 8px white"}}>Facebook Ads</span>
-              <span style={{fontWeight:700,fontSize:"24px"}}>9999</span>
+              <span style={{fontWeight:700,fontSize:"24px"}}>8076</span>
             </div>
             <span>
               <img src={facebookLogo} width="50" height="50" alt='facebook' />
@@ -44,18 +46,18 @@ export default function AdminDashboard() {
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",color:"white"}}>
             <div style={{display:'flex',flexDirection:'column'}}>
               <span style={{textShadow:"0 0 8px white"}}>Tiktok Ads</span>
-              <span style={{fontWeight:700,fontSize:"24px"}}>9999</span>
+              <span style={{fontWeight:700,fontSize:"24px"}}>6435</span>
             </div>
             <span>
               <img src={tiktokLogo} width="50" height="50" alt='tiktok' />
             </span>
           </div>
         </Card>
-        <Card style={{padding:"8px",background:"linear-gradient(to right,green,white)"}}>
+        <Card style={{padding:"8px",background:"linear-gradient(to right,green,white)",cursor:"pointer"}} onClick={function(){navigate("/admin/meta-advertisers/")}}>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",color:"white"}}>
             <div style={{display:'flex',flexDirection:'column'}}>
               <span style={{textShadow:"0 0 8px white"}}>Meta Advertisers</span>
-              <span style={{fontWeight:700,fontSize:"24px"}}>9999</span>
+              <span style={{fontWeight:700,fontSize:"24px"}}>519</span>
             </div>
             <span>
               <img src={metaLogo} width="50" height="50" alt='meta' />
@@ -64,7 +66,7 @@ export default function AdminDashboard() {
         </Card>
       </div>
       <br />
-      <Card>
+      <Card style={{padding:"8px"}}>
         <Chart type='bar' data={chartData} options={{}} />
       </Card>
       </>

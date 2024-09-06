@@ -34,10 +34,13 @@ import FacebookAd from './routes/facebook_ad.jsx'
 import { PrimeReactProvider } from 'primereact/api'
 import "primereact/resources/themes/saga-green/theme.css"
 import 'primeicons/primeicons.css'
+import 'primereact/resources/primereact.min.css'
 import Profile from './routes/profile.jsx'
 import 'select2/dist/css/select2.min.css'
 import AdminRoot from './routes/admin/admin_root.jsx'
 import AdminDashboard from './routes/admin/admin_dashboard.jsx'
+import AdminFacebookAds from './routes/admin/ads/admin_facebook_ads.jsx'
+import AdminMetaAdvertisers from './routes/admin/ads/meta_advertisers.jsx'
 // import 'select2/dist/js/select2.js'
  
 
@@ -100,6 +103,14 @@ const router = createHashRouter([
       {
         path:'dashboard',
         element: <AdminDashboard />
+      },
+      {
+        path:'facebook-ads',
+        element:<AdminFacebookAds />
+      },
+      {
+        path:'meta-advertisers',
+        element:<AdminMetaAdvertisers />
       }
     ]
   },

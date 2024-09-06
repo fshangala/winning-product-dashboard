@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import SelectCountry from "./filters/country";
 import InputActiveAdsets from "./filters/input_active_adsets";
 import InputAdspend from "./filters/input_adspend";
@@ -68,6 +68,10 @@ export default function FacebookFilters({applyFilters}) {
     media_type:"",
     ad_creation_date:"",
   })
+
+  useEffect(function(){
+    applyFilters(componentState)
+  },[])
 
   return (
     <>
@@ -142,7 +146,8 @@ export default function FacebookFilters({applyFilters}) {
           </div>
           <div className="div-block-57 self-end">
             <a href="#" className="cancel w-button" onClick="document.getElementById('email-form').reset(); $('.select2-selection__choice__remove').click(); picker.reset(); lastseenpicker.reset(); productcreationpicker.reset();">Cancel</a>
-            <button type="button" className="button applly-filter w-button" id="applyfilters">Apply<div className="shadow"></div><div className="glow" style={{willChange:"transform",transform:"translate3d(50%, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg)",transformStyle:"preserve-3d"}}></div></button>
+            <button type="button" className="button applly-filter w-button" id="applyfilters"
+            onClick={function(e){applyFilters(componentState)}}>Apply<div className="shadow"></div><div className="glow" style={{willChange:"transform",transform:"translate3d(50%, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg)",transformStyle:"preserve-3d"}}></div></button>
           </div>
         </div>
       </form>
