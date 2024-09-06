@@ -1,0 +1,308 @@
+var salesTrackerDetailTemplate = {
+  id:null,
+  store_hostname:null,
+  store_name:null,
+  table:null,
+  today:'',
+  product_count:null,
+  locale:null,
+  theme:null,
+  get html() {
+    return `<div copiwin-id="${this.id}">
+  <h5>
+    <a href="/sales-tracker"><img src="https://app.winninghunter.com/assets/images/icon/arrow-left.svg" alt="avatar" class="img-fluid"></a>
+    <span class="store_image_canon" height="30px"><img
+        src="https://app.winninghunter.com//jeffreestarcosmetics.com/cdn/shop/t/242/assets/safari-pinned-tab.svg?v=46483616013751105681698318736"
+        height="32px" width="32px" class="storeicon" onerror="this.src='https://app.winninghunter.com/images/no_photo.png'"></span>
+    <span id="store-name" class="text-block-11">${this.store_name}</span>
+    <div class="skeleton paragraph" id="w-node-_544716c1-6c9e-21c4-9979-c7b13acda4f0-d24c9106" style="display: none;">
+    </div>
+  </h5>
+  <hr>
+  <div id="w-node-bfb992b0-7585-0a33-9da3-1a9994bc6259-d24c9106" class="div-block-37 table-responsive">
+    <div class="div-block-35 shadow-backdrop mt-4">
+      <div id="w-node-_1bcc1799-8c26-b3e1-7091-deaa51207f61-d24c9106" class="div-block-36">
+        <div>
+          <a href="https://jeffreestarcosmetics.com" target="__BLANK" class="link-block w-inline-block">
+            <div id="store-url">${this.store_hostname}</div>
+            <div class="new-tab w-embed">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h48v48H0z" fill="none"></path>
+                <g id="Shopicon">
+                  <polygon points="44,30 40,30 40,38 8,38 8,10 20,10 20,6 4,6 4,42 44,42  " fill="currentColor">
+                  </polygon>
+                  <polygon points="26,26.828 40,12.828 40,24 44,24 44,6 26,6 26,10 37.172,10 23.172,24  "
+                    fill="currentColor"></polygon>
+                </g>
+              </svg>
+            </div>
+          </a>
+          <div class="skeleton paragraph" style="display: none;"></div>
+        </div>
+      </div>
+      <div id="w-node-_544716c1-6c9e-21c4-9979-c7b13acda4f0-d24c9106" class="div-block-42">
+        <div class="download-btn w-node-_8fe5c732-6070-c33a-9351-58b0188fd30e-d24c9106" style="border: medium;"></div>
+        <div class="skeleton download_btn" style="display: none;"></div>
+        <div class="w-embed changedate">
+          <input type="text" id="datepicker" class="form-input ad" readonly="">
+          <div class="skeleton datepicker-skeleton" style="display: none;"></div>
+          <button type="button" class="applly-filter w-button" id="applybutton">Apply</button>
+          <div class="skeleton apply-skeleton" style="display: none;"></div>
+        </div>
+      </div>
+    </div>
+    <div class="div-block-35 shadow-backdrop">
+      <div id="w-node-_1bcc1799-8c26-b3e1-7091-deaa51207f61-d24c9106" class="div-block-36">
+        <div class="div-block-440">
+          <div>
+            <p class="text-block-4">Tracked by</p>
+            <p class="text-block-9 revenue-title trackedby">0 Others</p>
+          </div>
+          <div>
+            <p class="text-block-4">Based In</p>
+            <p class="text-block-9 revenue-title country">${this.locale}</p>
+          </div>
+          <div>
+            <p class="text-block-4">Product Amount</p>
+            <p class="text-block-9 revenue-title product_amount">${this.product_count}</p>
+          </div>
+          <div>
+            <p class="text-block-4">Collection Amount</p>
+            <p class="text-block-9 revenue-title collection_amount">77</p>
+          </div>
+          <!--                         <div>
+            <p class="text-block-4">Store Creation</p>
+            <p class="text-block-9 revenue-title storecreation">-</p>
+          </div> -->
+          <div>
+            <p class="text-block-4">Average Order Value</p>
+            <p class="text-block-9 revenue-title averageordervalue">$29.00</p>
+          </div>
+        </div>
+        <div id="tiktokads">
+          <div class="add-popup mainpopup" style="display: none;">
+            <div class="addmodal">
+              <div class="items-wrapper">
+                <div class="margin-bottom margin-xlarge">
+                  <h4>Facebook Ads</h4>
+                  <div class="add_list" data-wg-notranslate="">
+                    <div id="w-node-cc50fc7e-477f-686e-dc07-6b48083f7366-de161bc0" class="skeletonadd">
+                      <div class="frameitem-promo">
+                        <div class="skeleton paragraph" style="display: none;"></div>
+                        <div class="skeleton paragraph" style="display: none;"></div>
+                        <div class="skeleton paragraph" style="display: none;"></div>
+                      </div>
+                      <div class="skeleton frameitem_video" style="display: none;"></div>
+                      <div class="frameitem-title-box">
+                        <div class="frameitem-button-group">
+                          <div class="skeleton paragraph" style="display: none;"></div>
+                          <div class="skeleton frameitem_button" style="display: none;"></div>
+                        </div>
+                      </div>
+                      <div class="add_info">
+                        <div class="add-sub-info">
+                          <div class="skeleton paragraph" style="display: none;"></div>
+                          <div class="skeleton paragraph" style="display: none;"></div>
+                        </div>
+                        <div class="add-sub-info">
+                          <div class="skeleton info_button" style="display: none;"></div>
+                          <div class="skeleton info_button" style="display: none;"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="w-node-cc50fc7e-477f-686e-dc07-6b48083f7366-de161bc0" class="skeletonadd">
+                      <div class="frameitem-promo">
+                        <div class="skeleton paragraph" style="display: none;"></div>
+                        <div class="skeleton paragraph" style="display: none;"></div>
+                        <div class="skeleton paragraph" style="display: none;"></div>
+                      </div>
+                      <div class="skeleton frameitem_video" style="display: none;"></div>
+                      <div class="frameitem-title-box">
+                        <div class="frameitem-button-group">
+                          <div class="skeleton paragraph" style="display: none;"></div>
+                          <div class="skeleton frameitem_button" style="display: none;"></div>
+                        </div>
+                      </div>
+                      <div class="add_info">
+                        <div class="add-sub-info">
+                          <div class="skeleton paragraph" style="display: none;"></div>
+                          <div class="skeleton paragraph" style="display: none;"></div>
+                        </div>
+                        <div class="add-sub-info">
+                          <div class="skeleton info_button" style="display: none;"></div>
+                          <div class="skeleton info_button" style="display: none;"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="w-node-cc50fc7e-477f-686e-dc07-6b48083f7366-de161bc0" class="skeletonadd">
+                      <div class="frameitem-promo">
+                        <div class="skeleton paragraph" style="display: none;"></div>
+                        <div class="skeleton paragraph" style="display: none;"></div>
+                        <div class="skeleton paragraph" style="display: none;"></div>
+                      </div>
+                      <div class="skeleton frameitem_video" style="display: none;"></div>
+                      <div class="frameitem-title-box">
+                        <div class="frameitem-button-group">
+                          <div class="skeleton paragraph" style="display: none;"></div>
+                          <div class="skeleton frameitem_button" style="display: none;"></div>
+                        </div>
+                      </div>
+                      <div class="add_info">
+                        <div class="add-sub-info">
+                          <div class="skeleton paragraph" style="display: none;"></div>
+                          <div class="skeleton paragraph" style="display: none;"></div>
+                        </div>
+                        <div class="add-sub-info">
+                          <div class="skeleton info_button" style="display: none;"></div>
+                          <div class="skeleton info_button" style="display: none;"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="w-node-cc50fc7e-477f-686e-dc07-6b48083f7366-de161bc0" class="skeletonadd">
+                      <div class="frameitem-promo">
+                        <div class="skeleton paragraph" style="display: none;"></div>
+                        <div class="skeleton paragraph" style="display: none;"></div>
+                        <div class="skeleton paragraph" style="display: none;"></div>
+                      </div>
+                      <div class="skeleton frameitem_video" style="display: none;"></div>
+                      <div class="frameitem-title-box">
+                        <div class="frameitem-button-group">
+                          <div class="skeleton paragraph" style="display: none;"></div>
+                          <div class="skeleton frameitem_button" style="display: none;"></div>
+                        </div>
+                      </div>
+                      <div class="add_info">
+                        <div class="add-sub-info">
+                          <div class="skeleton paragraph" style="display: none;"></div>
+                          <div class="skeleton paragraph" style="display: none;"></div>
+                        </div>
+                        <div class="add-sub-info">
+                          <div class="skeleton info_button" style="display: none;"></div>
+                          <div class="skeleton info_button" style="display: none;"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="margin-bottom margin-xlarge" id="loader">
+                  <div>
+                    <center><img src="https://app.winninghunter.com/images/Pulse-1.1s-207px.gif" height="100px;"
+                        style="display:block;margin: 0 auto; "></center>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <img src="https://app.winninghunter.com/images/close-svgrepo-com.svg" loading="lazy" data-w-id="23888445-fbd2-6de8-2cf2-fe405a990048"
+              alt="" class="close-ad">
+          </div>
+          <a class="showtiktokads">
+            <div style="display: inline-block;width:33px;margin-bottom: -10px;">
+              <img src="https://app.winninghunter.com/images/facebook.svg">
+            </div>
+            <span>Facebook Ads</span>
+          </a>
+        </div>
+        <div>
+          <div>
+            <img src="https://app.winninghunter.com/images/meta-logo-facebook-svgrepo-com.svg" height="30px" width="30px">
+            <span><a class="adlibrary" target="__BLANK"
+                href="https://www.facebook.com/ads/library/?active_status=all&amp;ad_type=all&amp;country=ALL&amp;q=${this.store_hostname}">Facebook</a></span>
+          </div>
+        </div>
+      </div>
+      <div id="w-node-_544716c1-6c9e-21c4-9979-c7b13acda4f0-d24c9106" class="div-block-42">
+
+        <div class="skeleton download_btn" style="display: none;"></div>
+      </div>
+    </div>
+    <div class="div-block-4123">
+      <div class="details-wrapper flex-wrapper-left-big shadow-backdrop">
+        <div class="div-block-38">
+          <div class="div-block-43">
+            <div class="revenue-title">Total Revenue </div>
+            <div class="text-block-12 tracking-timeframe">Jun 26, 2024 - Jul 26, 2024</div><span
+              class="text-block-12 store-timezone text-slate-500">(GMT -07:00)</span>
+            <div class="skeleton product-revenue" style="display: none;"></div>
+
+          </div>
+          <div>
+            <span class="isolation-auto inline-flex rounded-md">
+              <button type="button" period="1"
+                class="relative inline-flex items-center rounded-tl-md rounded-bl-md bg-white pl-3 pr-3 pt-2 pb-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 date-button">Today</button>
+              <button type="button" period="7"
+                class="relative -ml-px inline-flex items-center bg-white pl-3 pr-3 pt-2 pb-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 date-button">Week</button>
+              <button type="button" period="30"
+                class="relative -ml-px inline-flex items-center rounded-tr-md rounded-br-md bg-white pl-3 pr-3 pt-2 pb-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 date-button bg-gray-100">Month</button>
+            </span>
+            <a href="#" class="button-ternary w-inline-block"></a>
+          </div>
+        </div>
+        <div class="div-block-39">
+          <div id="revenue" class="text-block-13">$${this.today}</div>
+          <div class="skeleton product-revenue" style="display: none;"></div>
+        </div>
+        <div id="revenue-chart-container">
+          <canvas id="revenue-chart" width="1278" height="383" role="img"
+            style="box-sizing: border-box; height: 306px; width: 1022px;"></canvas>
+        </div>
+        <div class="ali-table-placeholder" style="display: none;">
+          <div class="ali-empty ali-empty-normal">
+            <div class="ali-empty-image"><svg width="64" height="41" viewBox="0 0 64 41"
+                xmlns="http://www.w3.org/2000/svg">
+                <g transform="translate(0 1)" fill="none" fill-rule="evenodd">
+                  <ellipse fill="#F5F5F5" cx="32" cy="33" rx="32" ry="7"></ellipse>
+                  <g fill-rule="nonzero" stroke="#D9D9D9">
+                    <path
+                      d="M55 12.76L44.854 1.258C44.367.474 43.656 0 42.907 0H21.093c-.749 0-1.46.474-1.947 1.257L9 12.761V22h46v-9.24z">
+                    </path>
+                    <path
+                      d="M41.613 15.931c0-1.605.994-2.93 2.227-2.931H55v18.137C55 33.26 53.68 35 52.05 35h-40.1C10.32 35 9 33.259 9 31.137V13h11.16c1.233 0 2.227 1.323 2.227 2.928v.022c0 1.605 1.005 2.901 2.237 2.901h14.752c1.232 0 2.237-1.308 2.237-2.913v-.007z"
+                      fill="#FAFAFA"></path>
+                  </g>
+                </g>
+              </svg></div>
+            <p class="ali-empty-description">No Data</p>
+          </div>
+        </div>
+        <div class="skeleton graph-container" style="display: none;"></div>
+      </div>
+      <div class="details-wrapper flex-wrapper-right-small shadow-backdrop">
+        <!-- <div class="description-title">Description </div>
+        <p id="description">Created by Jeffree Star. Highly Pigmented Makeup and High-Performance Skincare with Powerful
+          Ingredients. Shop Bestsellers, Limited Edition Products and Viral Beauty Favorites. </p>
+        <div class="skeleton graph-container" style="display: none;"></div>
+        <p></p> -->
+        <div class="stacked-divs show-after-skeleton-flex" style="display: flex;">
+          <p>Theme</p>
+          <p id="theme" class="has-popup">
+          <div style="margin-right:6px;" class="relative">
+            <span class="underline decoration-dotted cursor-pointer">${this.theme}</span>
+          </div>
+          </p>
+        </div>
+        <div class="stacked-divs show-after-skeleton-flex" style="display: flex;">
+          <p>Pixels</p>
+          <p id="pixels"><img src="https://app.winninghunter.com/images/GM.svg" height="20px" width="20px"></p>
+        </div>
+        <div class="stacked-divs show-after-skeleton-flex" style="display: flex;">
+          <p>Socials</p>
+          <p id="socials"><a target="__BLANK" href="https://www.facebook.com/jeffreeStar"><img
+                style="padding-left:10px;" src="https://app.winninghunter.com/images/fb-black.png" class="h-[20px]"></a><a target="__BLANK"
+              href="https://www.tiktok.com/@jeffreestarcosmetics"><img style="padding-left:10px;"
+                src="https://app.winninghunter.com/images/tt-black.png" class="h-[20px]"></a><a target="__BLANK"
+              href="https://www.instagram.com/jeffreestarcosmetics/"><img style="padding-left:10px;"
+                src="https://app.winninghunter.com/images/ig-black.png" class="h-[20px]"></a><a target="__BLANK"
+              href="https://www.youtube.com/user/jeffreestar"><img style="padding-left:10px;" src="https://app.winninghunter.com/images/yt-black.png"
+                class="h-[20px]"></a></p>
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive">
+      ${this.table}
+    </div>
+  </div>
+</div>`
+  }
+}
+
+export default salesTrackerDetailTemplate

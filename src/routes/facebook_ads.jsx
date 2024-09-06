@@ -1,63 +1,159 @@
-import { useState, useEffect } from 'react'
-import facebookLogo from '../assets/images/facebook.svg'
-import { Alert, AlertsContainer } from '../components/alert'
-import FaceBookAdsFilter from '../components/facebook_ads_filter'
-import FacebookListAds from '../components/facebook_list_ads'
+import { useContext, useEffect, useReducer } from 'react'
 import CopiwinSDK from '../copiwinsdk/copiwinsdk'
+import { UserContext } from '../context/UserContext'
+import PageHeader from "../components/page_header"
+import FacebookFilters from '../components/facebook_filters'
+import Loading from '../components/loading'
+import CFacebookAd from '../components/copiwin_facebook_ad'
+import useReachedBottom from '../hooks/reached_bottom'
+
+function facebookAdsReducer(state,action) {
+  switch (action.type) {
+    case 'loading':
+      return {
+        ...state,
+        loading:true,
+      }
+    
+    case 'set-bottomLoading':
+      return {
+        ...state,
+        bottomLoading:action.value,
+      }
+    
+    case 'loaded':
+      return {
+        ...state,
+        loading:false,
+      }
+    
+    case 'set_adsets':
+      return {
+        ...state,
+        adsets:action.adsets
+      }
+
+    case 'set-ads':
+      return {
+        ...state,
+        count:action.count,
+        next:action.next,
+        previous:action.previous,
+        ads:action.ads,
+      }
+  
+    default:
+      break;
+  }
+}
 
 export default function FacebookAds() {
-  const [loadAds,setLoadAds] = useState({
+  const [facebookAds,dispatch] = useReducer(facebookAdsReducer,{
     loading:false,
-    ads:[]
+    bottomLoading:false,
+    adsets:[],
+    count:0,
+    next:null,
+    previous:null,
+    ads:[],
   })
-  const [alerts,setAlerts] = useState([])
+  const reachedBottom = useReachedBottom()
+
+  const user = useContext(UserContext)
   const copiwinSDK = new CopiwinSDK()
 
-  const dismissAlert = function(index) {
-    var a = alerts.filter(function(value,i,array){
-      return index != i
+  function handleSetAds(response,nextPage=false) {
+    let ads = response.results
+    if (nextPage) {
+      ads = facebookAds.ads
+      ads = ads.concat(response.results)
+    }
+    dispatch({
+      type:'set-ads',
+      count:response.count,
+      next:response.next,
+      previous:response.previous,
+      ads:ads,
     })
-    setAlerts(a)
+  }
+
+  function handleSetLoading() {
+    dispatch({
+      type:'loading'
+    })
+  }
+
+  function handleSetLoaded() {
+    dispatch({
+      type:'loaded'
+    })
+  }
+
+  function handleSetBottomLoading(loading) {
+    dispatch({
+      type:'set-bottomLoading',
+      value:loading,
+    })
   }
 
   const applyFilters = function(filters) {
-    setLoadAds({
-      loading: true,
-      ads:loadAds.ads,
-    })
-    copiwinSDK.facebookAds(filters).then((data)=>{
-      setLoadAds({
-        loading:false,
-        ads:data.data,
+    if(user) {
+      handleSetLoading()
+      copiwinSDK.facebookAds({...filters,access_token:user.access_token}).then((data)=>{
+        if ('results' in data) {
+          handleSetAds(data)
+        }
+        console.log(data)
+        handleSetLoaded()
+      }).catch((reason)=>{
+        handleSetLoaded()
+        console.log(reason)
       })
-    }).catch((reason)=>{
-      alerts.push(reason.toString())
-      setAlerts(alerts)
-      setLoadAds({
-        loading:false,
-        ads:loadAds.ads,
-      })
-    })
+    }
   }
+
+  useEffect(function(){
+    if (!facebookAds.bottomLoading && facebookAds.ads.length >= 10) {
+      if (reachedBottom) {
+        if (facebookAds.next) {
+          handleSetBottomLoading(true)
+          copiwinSDK.nexPage({access_token:user.access_token,nextPageUrl:facebookAds.next}).then((data)=>{
+            if ('results' in data) {
+              handleSetAds(data,true)
+              window.scrollTo(0,window.scrollY - 20)
+            }
+            console.log(data)
+            handleSetBottomLoading(false)
+          }).catch((reason)=>{
+            handleSetBottomLoading(false)
+            console.log(reason)
+          })
+        }
+      }
+    }
+  })
 
   return (
     <>
-    <div className="header-container">
-    <div className="header">
-      <img src={facebookLogo} alt="facebook" />
-      <h1>Search Facebook Ads</h1>
+    <div>
+      <div className="margin-bottom margin-xlarge">
+        <div>
+          <PageHeader />
+          <hr />
+          <FacebookFilters applyFilters={applyFilters} />
+        </div>
+      </div>
+      <Loading visible={facebookAds.loading} />
+      <div className="add_list relative" data-wg-notranslate="">
+        {/* {facebookAds.adsets.map(function(adset,index,arr){
+          return <FacebookAdset adset={adset} key={index} />
+        })} */}
+        {facebookAds.ads.map(function(ad,index,arr){
+          return <CFacebookAd ad={ad} key={index} />
+        })}
+      </div>
+      <Loading visible={facebookAds.bottomLoading} />
     </div>
-    <hr className="divider" />
-  </div>
-  {(alerts.length > 0) ? (
-  <AlertsContainer>
-  {alerts.map((value,index,array)=>{
-    return <Alert message={value} key={index} index={index} dismiss={dismissAlert} />
-  })}
-  </AlertsContainer>
-  ) : null}
-  <FaceBookAdsFilter applyFilters={applyFilters} />
-  <FacebookListAds ads={loadAds.ads} loading={loadAds.loading} />
-  </>
+    </>
   )
 }

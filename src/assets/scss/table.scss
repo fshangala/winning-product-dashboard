@@ -1,0 +1,47 @@
+.table-container {
+  .top-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+  }
+  .table {
+    width: 100%;
+    border-radius: $border-radius;
+    border: 1px solid $secondary-color;
+    box-shadow: $shadow;
+    border-collapse: collapse;
+    
+    thead {
+      tr {
+        th {
+          border-bottom: 1px solid $secondary-color;
+          padding: $padding;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+  .paginator {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    padding: $padding;
+
+    .btn {
+      border: none;
+      padding: 12px;
+      background: none;
+      border-radius: $border-radius;
+
+      &:hover {
+        border: 1px solid $primary-color;
+        cursor: pointer;
+      }
+    }
+
+    .placeholder {
+      border: none;
+      background: none;
+    }
+  }
+}

@@ -1,0 +1,338 @@
+<div class="page-wrapper">
+  <div class="global-styles w-embed">
+    <style>
+      /* Get rid of top margin on first element in any rich text element */
+      .w-richtext> :not(div):first-child,
+      .w-richtext>div:first-child> :first-child {
+        margin-top: 0 !important;
+      }
+
+      /* Get rid of bottom margin on last element in any rich text element */
+      .w-richtext>:last-child,
+      .w-richtext ol li:last-child,
+      .w-richtext ul li:last-child {
+        margin-bottom: 0 !important;
+      }
+
+      /* 
+Make the following elements inherit typography styles from the parent and not have hardcoded values. 
+Important: You will not be able to style for example "All Links" in Designer with this CSS applied.
+Uncomment this CSS to use it in the project. Leave this message for future hand-off.
+*/
+      /*
+a,
+.w-input,
+.w-select,
+.w-tab-link,
+.w-nav-link,
+.w-dropdown-btn,
+.w-dropdown-toggle,
+.w-dropdown-link {
+color: inherit;
+text-decoration: inherit;
+font-size: inherit;
+}
+*/
+      /* Prevent all click and hover interaction with an element */
+      .pointer-events-off {
+        pointer-events: none;
+      }
+
+      /* Enables all click and hover interaction with an element */
+      .pointer-events-on {
+        pointer-events: auto;
+      }
+
+      /* Snippet enables you to add class of div-square which creates and maintains a 1:1 dimension of a div.*/
+      .div-square::after {
+        content: "";
+        display: block;
+        padding-bottom: 100%;
+      }
+
+      /*Hide focus outline for main content element*/
+      main:focus-visible {
+        outline: -webkit-focus-ring-color auto 0px;
+      }
+
+      /* Make sure containers never lose their center alignment*/
+      .container-medium,
+      .container-small,
+      .container-large {
+        margin-right: auto !important;
+        margin-left: auto !important;
+      }
+
+      /*Reset selects, buttons, and links styles*/
+      .w-input,
+      .w-select,
+      a {
+        color: inherit;
+        text-decoration: inherit;
+        font-size: inherit;
+      }
+
+      /*Apply "..." after 3 lines of text */
+      .text-style-3lines {
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+      }
+
+      /* Apply "..." after 2 lines of text */
+      .text-style-2lines {
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+      }
+
+      /* Apply "..." at 100% width */
+      .truncate-width {
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      /* Removes native scrollbar */
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        overflow: -moz-scrollbars-none;
+      }
+
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* Adds inline flex display */
+      .display-inlineflex {
+        display: inline-flex;
+      }
+
+      /* These classes are never overwritten */
+      .hide {
+        display: none !important;
+      }
+
+      @media screen and (max-width: 991px) {
+
+        .hide,
+        .hide-tablet {
+          display: none !important;
+        }
+      }
+
+      @media screen and (max-width: 767px) {
+        .hide-mobile-landscape {
+          display: none !important;
+        }
+      }
+
+      @media screen and (max-width: 479px) {
+        .hide-mobile {
+          display: none !important;
+        }
+      }
+
+      .margin-0 {
+        margin: 0rem !important;
+      }
+
+      .padding-0 {
+        padding: 0rem !important;
+      }
+
+      .spacing-clean {
+        padding: 0rem !important;
+        margin: 0rem !important;
+      }
+
+      .margin-top {
+        margin-right: 0rem !important;
+        margin-bottom: 0rem !important;
+        margin-left: 0rem !important;
+      }
+
+      .padding-top {
+        padding-right: 0rem !important;
+        padding-bottom: 0rem !important;
+        padding-left: 0rem !important;
+      }
+
+      .margin-right {
+        margin-top: 0rem !important;
+        margin-bottom: 0rem !important;
+        margin-left: 0rem !important;
+      }
+
+      .padding-right {
+        padding-top: 0rem !important;
+        padding-bottom: 0rem !important;
+        padding-left: 0rem !important;
+      }
+
+      .margin-bottom {
+        margin-top: 0rem !important;
+        margin-right: 0rem !important;
+        margin-left: 0rem !important;
+      }
+
+      .padding-bottom {
+        padding-top: 0rem !important;
+        padding-right: 0rem !important;
+        padding-left: 0rem !important;
+      }
+
+      .margin-left {
+        margin-top: 0rem !important;
+        margin-right: 0rem !important;
+        margin-bottom: 0rem !important;
+      }
+
+      .padding-left {
+        padding-top: 0rem !important;
+        padding-right: 0rem !important;
+        padding-bottom: 0rem !important;
+      }
+
+      .margin-horizontal {
+        margin-top: 0rem !important;
+        margin-bottom: 0rem !important;
+      }
+
+      .padding-horizontal {
+        padding-top: 0rem !important;
+        padding-bottom: 0rem !important;
+      }
+
+      .margin-vertical {
+        margin-right: 0rem !important;
+        margin-left: 0rem !important;
+      }
+
+      .padding-vertical {
+        padding-right: 0rem !important;
+        padding-left: 0rem !important;
+      }
+    </style>
+  </div>
+  <script src="https://app.winninghunter.com/js/memberstack.js?t=1720973628" type="text/javascript"></script>
+
+  <a href="/#/signup">
+    <div style="padding:10px;background:rgb(94, 148, 52);">
+      <h2 style="font-size:14px;color:white;text-align:center;">🎉 Sales Tracker back with 98% accuracy, <span
+          style="text-decoration:underline;">Try it out &gt;</span></h2>
+    </div>
+  </a>
+
+  <!-- nav section @S -->
+  <nav class="navbar header-section navbar-expand-lg navbar-light">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <img id="logo" src="" alt="Logo" class="img-fluid" width="230px">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fa fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav m-auto">
+          <li class="nav-item">
+            <a class="nav-link " href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/pricing">Pricing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/faq">FAQs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://partner.winninghunter.com">Affiliates</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/contact">Contact</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <a href="/#/login" class="no-underline w--current">Log In</a>
+          <a href="/#/signup" class="no-underline">Start for Free <i class="fa fa-angle-right"></i></a>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <!-- nav section @E -->
+  <main class="main-wrapper" id="login-template">
+    <header class="section_login">
+      <div class="padding-global">
+        <div class="container-large">
+          <div class="padding-section-small">
+            <div class="div-block-7">
+              <div class="form-max-width">
+                <div class="margin-bottom margin-medium">
+                  <h2 id="w-node-c1572839-8b91-ca06-a814-c91c69f9a8e1-eb95c9ec" class="heading-style-h3">Sign In</h2>
+                </div>
+                <div class="w-form">
+                  <form id="email-form" name="email-form" data-name="Email Form" method="get" data-ms-form="login"
+                    class="form" aria-label="Email Form"><input type="name" class="form-input w-input" maxlength="256"
+                      name="Email" data-name="Email" placeholder="Email" id="Email-2" data-ms-member="email"
+                      required=""><input type="password" class="form-input w-input" maxlength="256" name="Password"
+                      data-name="Password" placeholder="Password" id="Password" data-ms-member="password"
+                      required=""><button type="submit" class="button login w-button">Login<div class="shadow"></div>
+                      <div class="glow"
+                        style="will-change: transform; transform: translate3d(50.024%, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg); transform-style: preserve-3d;">
+                      </div>
+                    </button>
+                    <div id="w-node-_65bd6a39-ffff-803f-b873-7582380be57b-eb95c9ec" class="div-block-8"><label
+                        class="w-checkbox form-checkbox hidden">
+                        <div
+                          class="w-checkbox-input w-checkbox-input--inputType-custom form-checkbox-icon w--redirected-checked">
+                        </div><input type="checkbox" id="checkbox" name="remember_me" data-name="Checkbox"
+                          checked="true" style="opacity:0;position:absolute;z-index:-1"><span
+                          class="form-checkbox-label w-form-label" for="checkbox">Remember Me</span>
+                      </label>
+                      <a href="/#/login" class="link-text-blue">Forgot Password?</a>
+                    </div>
+                    <div id="w-node-_105eb0fd-7d36-6214-e94a-22aa0056e779-eb95c9ec" class="div-block-12">
+                      <div class="divider-wrapper">
+                        <div class="divider"></div>
+                        <div class="text-block-3">Sign In With</div>
+                        <div class="divider"></div>
+                      </div>
+                      <div class="">
+                        <a href="/#/login" class="social-login dark-hover" id="google-login-btn"><img
+                            src="https://app.winninghunter.com/images/google.e2bcd127.svg" loading="lazy" alt="">
+                          <div>Google</div>
+                        </a>
+                      </div>
+                    </div>
+                    <div id="w-node-_17b6b49b-0bf7-f986-f08d-69cd901aed38-eb95c9ec" class="div-block-13">
+                      <div>Don't have an account?</div>
+                      <a href="/#/signup" class="link-text-blue">Get Started</a>
+                    </div>
+                  </form>
+                  <div class="w-form-done" tabindex="-1" role="region" aria-label="Email Form success">
+                    <div id="done">Thank you! Your submission has been received!</div>
+                  </div>
+                  <div class="w-form-fail" tabindex="-1" role="region" aria-label="Email Form failure">
+                    <div id="failed">Oops! Something went wrong while submitting the form.</div>
+                  </div>
+                </div>
+              </div>
+              <div id="w-node-_99454069-766c-a84d-152a-b23671a443d4-eb95c9ec" class="div-block-14">
+                <div class="margin-bottom margin-medium">
+                  <h2 id="w-node-bcb28611-5973-8412-565a-5a3b6ac4aaab-eb95c9ec" class="heading-style-h3">Find Winning
+                    Products</h2>
+                </div>
+                <div class="margin-bottom margin-medium">
+                  <p>Find Winning Products And add stores to the live Sales Tracker to be ahead of your competitors.</p>
+                </div><img id="product-demo" src="" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  </main>
+</div>

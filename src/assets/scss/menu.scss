@@ -1,6 +1,27 @@
 .dropdown {
   position: relative;
 
+  .dropdown-btn {
+    background-color: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    padding: 4px;
+
+    .dot {
+      width: 4px;
+      height: 4px;
+      background-color: black;
+      margin: 2px;
+      border-radius: 100%;
+    }
+
+    &:hover {
+      box-shadow: $shadow;
+      border-radius: 100%;
+    }
+  }
+
   .dropdown-content {
     position: absolute;
     z-index: 1;

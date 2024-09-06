@@ -1,0 +1,162 @@
+.creative-container {
+  display: flex;
+
+  .search-section {
+    flex-grow: 1;
+    padding: $padding;
+
+    .search-card {
+      box-shadow: $shadow;
+      padding: $padding;
+      border-radius: $border-radius;
+      background-color: white;
+
+      .input-group {
+        margin-bottom: 8px;
+        .input {
+          display: block;
+          width: 100%;
+          box-sizing: border-box;
+        }
+
+        button.input {
+          cursor: pointer;
+
+          &:hover {
+            background-color: $secondary-background;
+          }
+        }
+      }
+    }
+  }
+
+  .download-section {
+    flex-grow: 2;
+    box-sizing: border-box;
+
+    .download-card {
+      box-shadow: $shadow;
+      padding: $padding;
+      border-radius: $border-radius;
+      background-color: white;
+
+      .output-section {
+        display: flex;
+        flex-direction: row;
+  
+        .details {
+          //flex: 60%;
+          box-sizing: border-box;
+          flex-grow: 2;
+          flex-shrink: 0;
+          padding: $padding;
+
+          .input-group {
+            margin-bottom: $padding;
+            .input {
+              width: 100%;
+              box-sizing: border-box;
+            }
+          }
+
+          .about {
+            .about-container {
+              background-color: $secondary-background;
+              border-radius: $border-radius;
+              padding: $padding;
+              font-weight: 600;
+              color: $secondary-color;
+              display: flex;
+              flex-direction: row;
+
+              .about-item {
+                flex: 50%;
+              }
+            }
+          }
+
+          .performance {
+            .performance-container {
+              display: flex;
+              flex-direction: row;
+              flex-wrap: wrap;
+
+              .performance-item {
+                flex: 30%;
+                flex-grow: 0;
+                background-color: $secondary-background;
+                border-radius: $border-radius;
+                padding: $padding;
+                margin: $padding;
+                box-sizing: border-box;
+                font-weight: 600;
+                color: $secondary-color;
+              }
+            }
+          }
+        }
+  
+        .video-ouput {
+          flex: 40%;
+          box-sizing: border-box;
+          flex-grow: 0;
+          flex-shrink: 0;
+          padding: $padding;
+  
+          .ad-content {
+            display: flex;
+            flex-direction: column;
+
+            .video {
+              display: block;
+              background-color: $secondary-background;
+              border-radius: $border-radius;
+              padding: $padding;
+            }
+
+            a.download-btn {
+              text-decoration: none;
+              font-weight: 600;
+              width: 100%;
+              text-align: center;
+              border-radius: $border-radius;
+              padding: $padding;
+
+              &:link,&:visited {
+                color: black;
+                background-color: $secondary-background;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+  
+.ad-content {
+  display: flex;
+  flex-direction: column;
+
+  .video {
+    display: block;
+    background-color: $secondary-background;
+    border-radius: $border-radius;
+    padding: $padding;
+  }
+
+  a.download-btn {
+    text-decoration: none;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+    border-radius: $border-radius;
+    padding: $padding;
+
+    &:link,&:visited {
+      color: black;
+      background-color: $secondary-background;
+    }
+  }
+}

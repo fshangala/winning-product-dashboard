@@ -1,36 +1,70 @@
 .ad-container {
-  margin: 6vw 0 6vw 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
 
   .ad {
-    flex: 30%;
+    flex: 18%;
+    margin: 8px;
     flex-grow: 0;
-    margin: 1%;
     border-radius: $border-radius;
     box-shadow: $shadow;
-    padding: $padding;
+    height: fit-content;
+    position: relative;
 
     .ad-top {
       .btn {
         background-color: $primary-color;
         color: $on-primary-color;
+        border: none;
         border-radius: 0 0 8px 8px;
         margin-left: 16px;
+        font-size: x-large;
+        font-weight: 300;
       }
     }
 
-    .ad-video {
-      width: 100%;
+    .ad-header {
+      padding: $padding;
+      display: flex;
+      flex-direction: row;
+      justify-content: end;
+
+      .ad-adsets {
+        flex-grow: 1;
+        .ad-adsetCount {
+          font-weight: 600;
+          font-size: 20px;
+          color: $primary-color;
+        }
+      }
     }
 
-    .ad-image {
-      width: 100%;
+    .ad-content {
+      position: relative;
+
+      .date {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: $secondary-color;
+        color: $on-primary-color;
+        padding: $padding;
+        border-radius: $border-radius;
+        margin: $padding;
+        opacity: 0.9;
+      }
+
+      .ad-video, .ad-image {
+        width: 100%;
+      }
+
     }
 
     .ad-revenue {
       padding: $padding;
+
       .container {
         display: flex;
         flex-direction: row;
@@ -45,6 +79,12 @@
             align-items: start;
           }
         }
+      }
+      .revenue-btn {
+        border: 1px solid black;
+        border-radius: $border-radius;
+        padding: $padding;
+        text-align: center;
       }
     }
 
@@ -72,6 +112,8 @@
 
           .avatar {
             border-radius: 50%;
+            width: 64px;
+            height: 64px;
           }
 
           .description {
@@ -81,10 +123,15 @@
       }
     }
 
+    .ad-details {
+      padding:$padding;
+    }
+
     .ad-footer {
       display: flex;
       flex-direction: row;
       padding: $padding;
+      background-color: $secondary-color;
 
       .ad-link {
         flex-grow: 1;
@@ -108,6 +155,7 @@
           border: none;
           border-radius: $border-radius;
           padding: $padding;
+          background-color: white;
           cursor: pointer;
 
           &:link, &:visited {
@@ -116,7 +164,7 @@
           }
           
           &:hover {
-            background-color: $secondary-color;
+            box-shadow: $shadow;
           }
         }
       }

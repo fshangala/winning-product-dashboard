@@ -1,0 +1,40 @@
+.signup-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .container {
+    .divider-container {
+      width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      .divider {
+        flex-grow: 1;
+        border-bottom: 1px solid $secondary-color;
+      }
+      .text {
+        padding: 0 8px;
+      }
+    }
+
+    .signup-form {
+      .input-group {
+        margin: 16px 0;
+
+        .input {
+          width: 100%;
+          box-sizing: border-box;
+          padding: 12px;
+        }
+
+        .btn {
+          width: 100%;
+          box-sizing: border-box;
+          padding: 12px;
+        }
+      }
+    }
+  }
+
+}

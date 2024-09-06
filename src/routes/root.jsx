@@ -1,56 +1,66 @@
-import { Link, Outlet, useNavigate } from "react-router-dom"
-import brandImage from "../assets/images/detailed-brand.png"
-import userIcon from "../assets/images/user-icon.svg"
+import { Outlet, useNavigate } from "react-router-dom"
 import { useContext, useEffect, useState } from "react"
-import { UserContext } from "../context/UserContext"
+import { UserDispatchContext, UserContext } from "../context/UserContext"
+import CopiwinSDK from "../copiwinsdk/copiwinsdk"
+import Navbar from "../components/navbar"
+import { toast } from "react-toastify"
 
 export default function Root() {
   const user = useContext(UserContext)
+  const userDispatch = useContext(UserDispatchContext)
   const navigate = useNavigate()
-
-  const [profile,setProfile] = useState(null)
+  let sdk = new CopiwinSDK()
 
   useEffect(()=>{
-    if(user == null) {
-      navigate("/login")
+    if(user.auth === null) {
+      var userauth = localStorage.getItem("auth")
+      if (userauth === null) {
+        navigate("/login")
+      } else {
+        userDispatch({type:'set-auth',auth:JSON.parse(userauth)})
+      }
+    } else {
+      if (user.profile === null) {
+        sdk.me({access_token:user.auth.access_token}).then((response)=>{
+          if("profile" in response) {
+            userDispatch({type:'set-profile',profile:response})
+          }
+        }).catch((reason)=>{
+          if("statusText" in reason) {
+            toast.warn(reason.statusText)
+            if(reason.status === 401) {
+              navigate("/login")
+            }
+          }
+          console.log(reason)
+        })
+      }
     }
-  },[user])
+  })
 
-  return (
-    <>
-    <nav className="navbar">
-      <div className="container">
-        <a href="home.html" className="brand">
-          <img src={brandImage} alt="logo" />
-        </a>
-        <div className="topnav">
-          <Link to="/" className="topnav-link">Facebook Ads</Link>
-          <a href="#" className="topnav-link">Meta Advertisers</a>
-          <Link to="/tiktok-ads" className="topnav-link">Tiktok Ads</Link>
-          <a href="#" className="topnav-link">Tiktok Creative Center</a>
-          <a href="#" className="topnav-link">Sales Tracker</a>
-          <a href="#" className="topnav-link">Magic AI</a>
-          <a href="#" className="topnav-link">Saved Ads</a>
-        </div>
-        <div className="actions">
-          {user?(
-            <>
-              <button className="btn btn-primary">Upgrade</button>
-              <button className="btn">Tutorials</button>
-              <button className="btn-avatar">
-                <img src={user.profile.picture_url} alt="user" className="avatar" />
-              </button>
-            </>
-          ):(
-          <>
-            <button className="btn">Tutorials</button>
-          </>)}
-        </div>
+  if (user.auth) {
+
+    return (
+      <>
+      <div className="page-wrapper">
+        <div className="global-styles w-embed"></div>
+        <main className="main-wrapper">
+          <Navbar />
+          <header className="section_dashboard">
+            <div className="padding-global">
+              <div>
+                <div className="padding-section-medium">
+                  <Outlet />
+                </div>
+              </div>
+            </div>
+          </header>
+        </main>
       </div>
-    </nav>
-    <div className="main">
-      <Outlet />
-    </div>
-    </>
-  )
+      <div id="page-bottom"></div>
+      </>
+    )
+  }
+
+  return null
 }
