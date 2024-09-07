@@ -1,14 +1,10 @@
 name: SSH Deploy
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - dev
   pull_request:
     types:
       - closed
     branches:
-      - dev
       - main
 jobs:
   ssh-deploy:
@@ -26,7 +22,7 @@ jobs:
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
             cd /data/winning-product-dashboard/
-            git checkout dev
+            git checkout main
             git pull
             npm install
             npm run build
