@@ -41,6 +41,7 @@ import AdminRoot from './routes/admin/admin_root.jsx'
 import AdminDashboard from './routes/admin/admin_dashboard.jsx'
 import AdminFacebookAds from './routes/admin/ads/admin_facebook_ads.jsx'
 import AdminMetaAdvertisers from './routes/admin/ads/meta_advertisers.jsx'
+import AdminSiteSettings from './routes/admin/admin_site_settings.jsx'
 // import 'select2/dist/js/select2.js'
  
 
@@ -111,6 +112,10 @@ const router = createHashRouter([
       {
         path:'meta-advertisers',
         element:<AdminMetaAdvertisers />
+      },
+      {
+        path:'site-settings',
+        element:<AdminSiteSettings />
       }
     ]
   },
