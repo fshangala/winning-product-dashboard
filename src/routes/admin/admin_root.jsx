@@ -40,9 +40,18 @@ export default function AdminRoot() {
       label:"Sales Tracker",
     },
     {
+      label:"Settings",
+      icon:"pi pi-cog",
+      command: function() {
+        navigate("/admin/site-settings/")
+      }
+    },
+    {
       label:"Exit",
       icon:"pi pi-sign-out",
-      url:"/#/",
+      command:function(){
+        navigate("/")
+      }
     },
   ]
 
