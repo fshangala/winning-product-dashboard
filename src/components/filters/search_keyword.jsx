@@ -14,13 +14,17 @@ export default function SearchKeyword({value="",onChange=function({value}){}}) {
   useEffect(function(){
     $(refElem.current).select2({
       data:searchKeywordData,
+      templateSelection:function(state) {
+        onChange({value:state.id})
+        return state.text
+      }
     })
   },[])
 
   return (
     <div className="select-wrapper">
       <div className="select-label">Search Keyword In...</div>
-      <select ref={refElem} className="form-input select-box-2 w-select" onChange={function(){onChange({value:e.target.value})}} value={value}></select>
+      <select ref={refElem} className="form-input select-box-2 w-select" value={value}></select>
     </div>
   )
 }
