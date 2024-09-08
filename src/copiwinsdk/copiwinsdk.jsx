@@ -332,5 +332,20 @@ export default class CopiwinSDK {
   async adminMetaAdvertisers() {
     return await this.fetchWrapper("/api-admin/meta-advertisers/")
   }
+
+  async adminGetSiteSettings() {
+    return await this.fetchWrapper("/api-admin/site-settings/")
+  }
+
+  async adminSaveSiteSettings({
+    auto_load_facebook_ads,
+  }) {
+    return await this.fetchWrapper("/api-admin/site-settings/",{
+      method:"post",
+      body:{
+        "auto_load_facebook_ads":auto_load_facebook_ads,
+      }
+    })
+  }
 }
 
