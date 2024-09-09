@@ -3,9 +3,11 @@ import isDefined from "../utils/is_defined"
 export default class CopiwinSDK {
   #access_token=null
   constructor(access_token=null){
-    // this.baseUrl = "http://localhost:8000"
-    // this.baseUrl = "https://api.copiwin.com"
-    this.baseUrl = process.env.COPIWIN_BASE_URL
+    this.scheme = process.env.COPIWIN_SCHEME
+    this.host = process.env.COPIWIN_HOST
+    this.port = process.env.COPIWIN_PORT
+    this.baseUrl = `${this.scheme}://${this.host}:${this.port}`
+
     this.#access_token=access_token
   }
   
@@ -173,6 +175,12 @@ export default class CopiwinSDK {
       }
     })
     return await response.json()
+  }
+
+  async nextPage({nextPageUrl}) {
+    let urlSplit = nextPageUrl.split("/")
+    let url = urlSplit.slice(3).join("/")
+    return this.fetchWrapper(`/${url}`)
   }
 
   async facebookAd({ad_id}) {
