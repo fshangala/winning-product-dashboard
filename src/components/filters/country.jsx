@@ -3,20 +3,34 @@ import { useEffect, useRef } from "react"
 export default function SelectCountry({value="",onChange=function({value}){}}) {
   const refElem = useRef(null)
 
+  function updateValue(valueList) {
+    let result = valueList.map((item) => item.id).join(",")
+    onChange({value:result})
+  }
+
   useEffect(function(){
-    $(refElem.current).select2({
+    function handleChange(e) {
+      updateValue($(refElem.current).select2("data"))
+    }
+
+    let elem = $(refElem.current).select2({
       placeholder:'Select countries',
       multiple:true,
       allowClear:true,
     })
+    updateValue($(refElem.current).select2("data"))
+
+    elem.on("change",handleChange)
+
+    return function(){
+      elem.off("change",handleChange)
+    }
   },[])
 
   return (
     <div className="select-wrapper">
       <div className="select-label">Countries</div>
-      <select className="js-select2 form-input select-box-2 pb w-select" ref={refElem} value={value} onChange={function(e){
-        onChange({value:e.target.value})
-      }}>
+      <select className="js-select2 form-input select-box-2 pb w-select" ref={refElem} value={value} onChange={function(e){}}>
         <option value="US" data-badge="">USA</option>
         <option value="GB" data-badge="">United Kingdom</option>
         <option value="DK" data-badge="">Denmark</option>
