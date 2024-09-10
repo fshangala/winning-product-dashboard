@@ -128,6 +128,7 @@ export default class CopiwinSDK {
     keyword="",
     search_keyword='',
     countries="",
+    websites="",
     sort_direction='',
     media_type='',
     ad_creation_date="",
@@ -139,6 +140,9 @@ export default class CopiwinSDK {
     }
     if (countries !== "") {
       url += `&country_code=${countries}`
+    }
+    if(websites) {
+      url += `&website=${websites}`
     }
     if (search_keyword !== "") {
       url += `&search_keyword_in=${search_keyword}`
