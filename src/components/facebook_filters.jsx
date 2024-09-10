@@ -42,6 +42,12 @@ function facebookFiltersReducer(state,action) {
         websites:action.websites,
       }
 
+    case "set-languages":
+      return {
+        ...state,
+        languages:action.languages,
+      }
+
     case "set-sort-direction":
       return {
         ...state,
@@ -71,6 +77,7 @@ export default function FacebookFilters({applyFilters}) {
     search_keyword:"",
     countries:"",
     websites:"",
+    languages:"",
     sort_direction:"asc",
     media_type:"",
     ad_creation_date:"",
@@ -113,7 +120,12 @@ export default function FacebookFilters({applyFilters}) {
               websites:value,
             })
           }} />
-          <SelectLanguage />
+          <SelectLanguage onChange={function({value}){
+            dispatch({
+              type:'set-languages',
+              languages:value,
+            })
+          }} />
           <InputActiveAdsets />
           <InputAdspend />
           <SelectSortBy />

@@ -5,14 +5,6 @@ export default function SelectLanguage({value,onChange=function({value}){}}) {
   const refElem = useRef(null)
   useSelect2ChangeHandler(refElem,onChange)
 
-  useEffect(function(){
-    $(refElem.current).select2({
-      placeholder:'Select language ...',
-      multiple:true,
-      allowClear:true,
-    })
-  },[])
-
   return (
     <div className="select-wrapper language-select">
       <div className="select-label inline-flex items-center min-w-full gap-0.5 has-popup cursor-pointer">
@@ -35,7 +27,7 @@ export default function SelectLanguage({value,onChange=function({value}){}}) {
         <option value="it">Italian</option>
         <option value="pt">Portuguese</option>
         <option value="es">Spanish</option>
-        <option value="fi">Finnish</option>                              
+        <option value="fi">Finnish</option>
       </select>
     </div>
   )
