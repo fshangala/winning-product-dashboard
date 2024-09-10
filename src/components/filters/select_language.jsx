@@ -1,7 +1,9 @@
 import { useEffect, useRef } from "react"
+import useSelect2ChangeHandler from "../../hooks/select2_change_handler"
 
-export default function SelectLanguage() {
+export default function SelectLanguage({value,onChange=function({value}){}}) {
   const refElem = useRef(null)
+  useSelect2ChangeHandler(refElem,onChange)
 
   useEffect(function(){
     $(refElem.current).select2({

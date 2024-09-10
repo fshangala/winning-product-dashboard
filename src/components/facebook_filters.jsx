@@ -35,6 +35,12 @@ function facebookFiltersReducer(state,action) {
         ...state,
         countries:action.countries,
       }
+    
+    case "set-websites":
+      return {
+        ...state,
+        websites:action.websites,
+      }
 
     case "set-sort-direction":
       return {
@@ -64,6 +70,7 @@ export default function FacebookFilters({applyFilters}) {
     keyword:"",
     search_keyword:"",
     countries:"",
+    websites:"",
     sort_direction:"asc",
     media_type:"",
     ad_creation_date:"",
@@ -100,7 +107,12 @@ export default function FacebookFilters({applyFilters}) {
               countries:value,
             })
           }} />
-          <SelectWebsite />
+          <SelectWebsite value={componentState.websites} onChange={function({value}){
+            dispatch({
+              type:"set-websites",
+              websites:value,
+            })
+          }} />
           <SelectLanguage />
           <InputActiveAdsets />
           <InputAdspend />
