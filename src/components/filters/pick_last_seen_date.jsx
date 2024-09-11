@@ -1,11 +1,14 @@
 import { useEffect } from "react"
 
-export default function PickLastSeenDate() {
+export default function PickLastSeenDate({value,onChange=function({value}){}}) {
 
   useEffect(function(){
     var picker = new Lightpick({
       field:document.querySelector("#last-seen-date-picker"),
       singleDate:false,
+      onSelect: function(start,end) {
+        onChange({value:`${start?start.format("DD/MM/YYYY"):null} - ${end?end.format("DD/MM/YYYY"):null}`})
+      },
     })
   },[])
 

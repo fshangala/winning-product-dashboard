@@ -125,36 +125,72 @@ export default class CopiwinSDK {
 
   async facebookAds({
     access_token,
-    keyword="",
-    search_keyword='',
-    countries="",
-    websites="",
-    sort_direction='',
-    media_type='',
-    ad_creation_date="",
-    randomize="",
+    keyword,
+    search_keyword,
+    countries,
+    websites,
+    languages,
+    active_adsets,
+    adspend,
+    sort_by,
+    sort_direction,
+    scaling,
+    media_type,
+    page_type,
+    niche,
+    ad_creation_date,
+    last_seen_date,
+    product_creation_date,
+    randomize,
   }) {
     var url = `${this.baseUrl}/facebook-ads/search/?limit=10`
     if (keyword) {
       url += `&search_term=${keyword}`
     }
-    if (countries !== "") {
+    if (search_keyword) {
+      url += `&search_keyword_in=${search_keyword}`
+    }
+    if (countries) {
       url += `&country_code=${countries}`
     }
     if(websites) {
       url += `&website=${websites}`
     }
-    if (search_keyword !== "") {
-      url += `&search_keyword_in=${search_keyword}`
+    if(languages) {
+      url += `&languages=${languages}`
     }
-    if (media_type !== "") {
-      url += `&media_type=${media_type}`
+    if (active_adsets) {
+      url += `&active_adsets=${active_adsets}`
     }
-    if (sort_direction !== "") {
+    if (adspend) {
+      url += `&adspend=${adspend}`
+    }
+    if (sort_by) {
+      url += `&sort_by=${sort_by}`
+    }
+    if (sort_direction) {
       url += `&sort_direction=${sort_direction}`
     }
-    if(ad_creation_date !== "") {
+    if (scaling) {
+      url += `&scaling=${scaling}`
+    }
+    if (media_type) {
+      url += `&media_type=${media_type}`
+    }
+    if (page_type) {
+      url += `&page_type=${page_type}`
+    }
+    if (niche) {
+      url += `&niche=${niche}`
+    }
+    if(ad_creation_date) {
       url += `&ad_creation_date=${ad_creation_date}`
+    }
+    if(last_seen_date) {
+      url += `&last_seen_date=${last_seen_date}`
+    }
+    if(product_creation_date) {
+      url += `&product_creation_date=${product_creation_date}`
     }
     if (randomize) {
       url += `&randomize=${randomize}`

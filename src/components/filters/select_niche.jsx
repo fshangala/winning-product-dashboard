@@ -1,14 +1,10 @@
 import { useEffect, useRef } from "react"
+import useSelect2ChangeHandler from "../../hooks/select2_change_handler"
 
-export default function SelectNiche() {
+export default function SelectNiche({value,onChange=function({value}){}}) {
   const refElem = useRef(null)
-
-  useEffect(function(){
-    $(refElem.current).select2({
-      multiple:true,
-      allowClear:true,
-    })
-  },[])
+  
+  useSelect2ChangeHandler(refElem,onChange)
 
   return (
     <div className="select-wrapper niche-select">

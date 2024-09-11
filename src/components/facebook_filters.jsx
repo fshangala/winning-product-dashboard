@@ -47,11 +47,35 @@ function facebookFiltersReducer(state,action) {
         ...state,
         languages:action.languages,
       }
+    
+    case "set-active-adsets":
+      return {
+        ...state,
+        active_adsets:action.active_adsets,
+      }
+    
+    case "set-adspend":
+      return {
+        ...state,
+        adspend:action.adspend,
+      }
+    
+    case "set-sort-by":
+      return {
+        ...state,
+        sort_by:action.sort_by,
+      }
 
     case "set-sort-direction":
       return {
         ...state,
         sort_direction:action.sort_direction,
+      }
+
+    case "set-scaling":
+      return {
+        ...state,
+        scaling:action.scaling,
       }
 
     case "set-media-type":
@@ -60,10 +84,34 @@ function facebookFiltersReducer(state,action) {
         media_type:action.media_type,
       }
 
+    case "set-page-type":
+      return {
+        ...state,
+        page_type:action.page_type,
+      }
+
+    case "set-niche":
+      return {
+        ...state,
+        niche:action.niche,
+      }
+
     case "set-ad-creation-date":
       return {
         ...state,
         ad_creation_date:action.ad_creation_date,
+      }
+
+    case "set-last-seen-date":
+      return {
+        ...state,
+        last_seen_date:action.last_seen_date,
+      }
+
+    case "set-product-creation-date":
+      return {
+        ...state,
+        product_creation_date:action.product_creation_date,
       }
   
     default:
@@ -78,13 +126,17 @@ export default function FacebookFilters({applyFilters}) {
     countries:"",
     websites:"",
     languages:"",
+    active_adsets:"",
+    adspend:"",
+    sort_by:"",
     sort_direction:"asc",
+    scaling:"",
     media_type:"",
+    page_type:"",
+    niche:"",
     ad_creation_date:"",
-  })
-
-  useEffect(function(){
-    console.log(componentState)
+    last_seen_date:"",
+    product_creation_date:"",
   })
 
   useEffect(function(){
@@ -126,30 +178,68 @@ export default function FacebookFilters({applyFilters}) {
               languages:value,
             })
           }} />
-          <InputActiveAdsets />
-          <InputAdspend />
-          <SelectSortBy />
+          <InputActiveAdsets the_value={componentState.active_adsets} onChange={function({value}){dispatch({
+            type:"set-active-adsets",
+            active_adsets:value,
+          })}} />
+          <InputAdspend the_value={componentState.adspend} onChange={function({value}){
+            dispatch({
+              type:"set-adspend",
+              adspend:value,
+            })
+          }} />
+          <SelectSortBy value={componentState.value} the_onChange={function({value}){
+            dispatch({
+              type:"set-sort-by",
+              sort_by:value
+            })
+          }} />
           <SelectSortDirection value={componentState.sort_direction} onChange={function({value}){dispatch({
             type:"set-sort-direction",
             sort_direction:value,
           })}} />
-          <SelectScaling />
-          <SelectMediaType value={componentState.media_type} onChange={function({value}){
+          <SelectScaling value={componentState.scaling} the_onChange={function({value}){
+            dispatch({
+              type:'set-scaling',
+              scaling:value,
+            })
+          }} />
+          <SelectMediaType value={componentState.media_type} the_onChange={function({value}){
             dispatch({
               type:"set-media-type",
               media_type:value,
             })
           }} />
-          <SelectPageType />
-          <SelectNiche />
+          <SelectPageType value={componentState.page_type} the_onChange={function({value}){
+            dispatch({
+              type:"set-page-type",
+              page_type:value,
+            })
+          }} />
+          <SelectNiche value={componentState.niche} onChange={function({value}){
+            dispatch({
+              type:"set-niche",
+              niche:value,
+            })
+          }} />
           <PickAdCreationDate value={componentState.ad_creation_date} onChange={function({value}){
             dispatch({
               type:"set-ad-creation-date",
               ad_creation_date:value,
             })
           }} />
-          <PickLastSeenDate />
-          <PickProductCreationDate />
+          <PickLastSeenDate value={componentState.last_seen_date} onChange={function({value}){
+            dispatch({
+              type:'set-last-seen-date',
+              last_seen_date:value,
+            })
+          }} />
+          <PickProductCreationDate value={componentState.product_creation_date} onChange={function({value}){
+            dispatch({
+              type:'set-product-creation-date',
+              product_creation_date:value,
+            })
+          }} />
         </div>
         <hr/>
         <div className="flex w-full justify-between">

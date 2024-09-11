@@ -1,10 +1,9 @@
 import { useEffect } from "react"
 
-
-export default function useSelect2ChangeHandler(refElem,onChange=function({value}){}) {
+export default function useSelect2SingleChangeHandler(refElem,onChange=function({value}){}) {
 
   function updateValue(valueList) {
-    let result = valueList.map((item) => item.id).join(",")
+    let result = valueList[0].id
     onChange({value:result})
   }
 
@@ -14,8 +13,7 @@ export default function useSelect2ChangeHandler(refElem,onChange=function({value
     }
 
     let elem = $(refElem.current).select2({
-      placeholder:"Filter",
-      multiple:true,
+      placeholder:'Filter',
       allowClear:true,
     })
     updateValue($(refElem.current).select2("data"))
