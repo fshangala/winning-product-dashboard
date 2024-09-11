@@ -40,7 +40,7 @@ export default function Navbar() {
             </path>
           </svg>
           My Account</Link>
-        <a href="/payment/portal" className="dropdown-item dark-hover text-size-small rounded">
+        <a href="/#/billing" className="dropdown-item dark-hover text-size-small rounded">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
             className="d-inline mr-5" width="1.5rem">
             <path stroke-linecap="round" stroke-linejoin="round"
