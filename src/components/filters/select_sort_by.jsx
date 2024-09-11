@@ -1,13 +1,10 @@
 import { useEffect, useRef } from "react"
+import useSelect2SingleChangeHandler from "../../hooks/select2_single_change_handler"
 
-export default function SelectSortBy() {
+export default function SelectSortBy({value,the_onChange=function({value}){}}) {
   const refElem = useRef(null)
-
-  useEffect(function(){
-    $(refElem.current).select2({
-      allowClear:true,
-    })
-  },[])
+  
+  useSelect2SingleChangeHandler(refElem,the_onChange)
 
   return (
     <div className="select-wrapper">

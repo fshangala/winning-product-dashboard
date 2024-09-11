@@ -59,6 +59,12 @@ function facebookFiltersReducer(state,action) {
         ...state,
         adspend:action.adspend,
       }
+    
+    case "set-sort-by":
+      return {
+        ...state,
+        sort_by:action.sort_by,
+      }
 
     case "set-sort-direction":
       return {
@@ -92,6 +98,7 @@ export default function FacebookFilters({applyFilters}) {
     languages:"",
     active_adsets:"",
     adspend:"",
+    sort_by:"",
     sort_direction:"asc",
     media_type:"",
     ad_creation_date:"",
@@ -150,7 +157,12 @@ export default function FacebookFilters({applyFilters}) {
               adspend:value,
             })
           }} />
-          <SelectSortBy />
+          <SelectSortBy value={componentState.value} the_onChange={function({value}){
+            dispatch({
+              type:"set-sort-by",
+              sort_by:value
+            })
+          }} />
           <SelectSortDirection value={componentState.sort_direction} onChange={function({value}){dispatch({
             type:"set-sort-direction",
             sort_direction:value,
