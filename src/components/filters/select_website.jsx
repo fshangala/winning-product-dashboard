@@ -1,15 +1,9 @@
 import { useEffect, useRef } from "react"
+import useSelect2ChangeHandler from "../../hooks/select2_change_handler"
 
-export default function SelectWebsite() {
+export default function SelectWebsite({value,onChange=function({value}){}}) {
   const refElem = useRef(null)
-
-  useEffect(function(){
-    $(refElem.current).select2({
-      placeholder:'Select website ...',
-      multiple:true,
-      allowClear:true,
-    })
-  },[])
+  useSelect2ChangeHandler(refElem,onChange)
 
   return (
     <div className="select-wrapper">
@@ -25,10 +19,10 @@ export default function SelectWebsite() {
         </div>
       </div>
       <select className="js-select2 form-input select-box-2 pb w-select" ref={refElem}>
-        <option value="SH" data-badge="">Shopify</option>
+        <option value="shopify" data-badge="">Shopify</option>
         <option value="TP" data-badge="">Trustpilot</option>
         <option value="BU" data-badge="">Bundle App</option>
-        <option value="SL" data-badge="">ShopLazza</option>
+        <option value="shoplazza" data-badge="">ShopLazza</option>
         <option value="TA" data-badge="">TripleWhale</option>
         <option value="GG" data-badge="">Gorgias</option>
         <option value="FU" data-badge="">Funnelish</option>

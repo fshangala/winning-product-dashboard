@@ -1,15 +1,9 @@
 import { useEffect, useRef } from "react"
+import useSelect2ChangeHandler from "../../hooks/select2_change_handler"
 
-export default function SelectLanguage() {
+export default function SelectLanguage({value,onChange=function({value}){}}) {
   const refElem = useRef(null)
-
-  useEffect(function(){
-    $(refElem.current).select2({
-      placeholder:'Select language ...',
-      multiple:true,
-      allowClear:true,
-    })
-  },[])
+  useSelect2ChangeHandler(refElem,onChange)
 
   return (
     <div className="select-wrapper language-select">
@@ -33,7 +27,7 @@ export default function SelectLanguage() {
         <option value="it">Italian</option>
         <option value="pt">Portuguese</option>
         <option value="es">Spanish</option>
-        <option value="fi">Finnish</option>                              
+        <option value="fi">Finnish</option>
       </select>
     </div>
   )

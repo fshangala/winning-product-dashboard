@@ -1,7 +1,7 @@
 import { OverlayPanel } from 'primereact/overlaypanel'
 import { useRef, useState } from 'react'
 
-export default function InputActiveAdsets() {
+export default function InputActiveAdsets({the_value,onChange=function({value}){}}) {
   const op = useRef(null)
   const [value,setValue] = useState({
     min:1,
@@ -12,7 +12,7 @@ export default function InputActiveAdsets() {
     <div className="select-wrapper">
       <div className="select-label">Active Adsets</div>
       <div>
-        <input type="text" onClick={function(e){op.current.toggle(e)}} className="form-input adset-count w-input dropdown select2-container select2-selection" readOnly={true} value={`${value.min} - ${value.max}`} />
+        <input type="text" onClick={function(e){op.current.toggle(e)}} className="form-input adset-count w-input dropdown select2-container select2-selection" readOnly={true} value={`${value.min} - ${value.max}`} onChange={function(e){onChange({value:e.target.value})}} />
       </div>
       <OverlayPanel ref={op}  style={{position:"absolute",inset:"0px auto auto 0px",margin:"0px",padding:"15px",border:"medium",backgroundColor:"white",borderRadius:"0.5em",width:"350px",zIndex:"9998",boxShadow:"rgba(0, 0, 0, 0.1) 3px 3px 8px 0px"}}>
         <div className="mt-4">
@@ -20,12 +20,18 @@ export default function InputActiveAdsets() {
           <div className="range-slider">
               <div className="select-wrapper">
                 <div className="div-block-71">
-                  <input type="number" value={value.min} onChange={function(e){setValue({...value,min:e.target.value})}} className="form-input select2-selection adset-count w-input itemsetcounter" placeholder="Min" style={{width:"100%",marginTop:"10px"}} />
+                  <input type="number" value={value.min} onChange={function(e){
+                    setValue({...value,min:e.target.value})
+                    onChange({value:`${e.target.value} - ${value.max}`})
+                  }} className="form-input select2-selection adset-count w-input itemsetcounter" placeholder="Min" style={{width:"100%",marginTop:"10px"}} />
                 </div>
               </div>
               <div className="select-wrapper">
                 <div className="div-block-71">
-                  <input type="number" value={value.max} onChange={function(e){setValue({...value,max:e.target.value})}} className="form-input select2-selection adset-count w-input itemsetcounter" placeholder="Max" style={{width:"100%",marginTop:"10px"}} />
+                  <input type="number" value={value.max} onChange={function(e){
+                    setValue({...value,max:e.target.value})
+                    onChange({value:`${value.min} - ${e.target.value}`})
+                  }} className="form-input select2-selection adset-count w-input itemsetcounter" placeholder="Max" style={{width:"100%",marginTop:"10px"}} />
                 </div>
             </div>
           </div>

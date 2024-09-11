@@ -1,10 +1,8 @@
-import { Link, useNavigate } from "react-router-dom";
-import brandImage from "../assets/images/detailed-brand.png";
-import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
-import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useGoogleLogin } from "@react-oauth/google";
+import { useContext, useState } from "react";
 import { UserDispatchContext } from "../context/UserContext";
 import CopiwinSDK from "../copiwinsdk/copiwinsdk";
-import facebookAdsImage from "../assets/images/facebook-ads.svg"
 import LoginTemplate from "../templates/login";
 import { toast } from "react-toastify";
 

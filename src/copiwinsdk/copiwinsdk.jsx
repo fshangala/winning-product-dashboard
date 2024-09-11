@@ -3,9 +3,14 @@ import isDefined from "../utils/is_defined"
 export default class CopiwinSDK {
   #access_token=null
   constructor(access_token=null){
-    // this.baseUrl = "http://localhost:8000"
-    // this.baseUrl = "https://api.copiwin.com"
-    this.baseUrl = process.env.COPIWIN_BASE_URL
+    this.scheme = process.env.COPIWIN_SCHEME
+    this.host = process.env.COPIWIN_HOST
+    this.port = process.env.COPIWIN_PORT
+    this.baseUrl = `${this.scheme}://${this.host}`
+    if (this.port !== "80") {
+      this.baseUrl += `:${this.port}`
+    }
+
     this.#access_token=access_token
   }
   
@@ -123,32 +128,72 @@ export default class CopiwinSDK {
 
   async facebookAds({
     access_token,
-    keyword="",
-    search_keyword='',
-    countries="",
-    sort_direction='',
-    media_type='',
-    ad_creation_date="",
-    randomize="",
+    keyword,
+    search_keyword,
+    countries,
+    websites,
+    languages,
+    active_adsets,
+    adspend,
+    sort_by,
+    sort_direction,
+    scaling,
+    media_type,
+    page_type,
+    niche,
+    ad_creation_date,
+    last_seen_date,
+    product_creation_date,
+    randomize,
   }) {
     var url = `${this.baseUrl}/facebook-ads/search/?limit=10`
     if (keyword) {
       url += `&search_term=${keyword}`
     }
-    if (countries !== "") {
-      url += `&country_code=${countries}`
-    }
-    if (search_keyword !== "") {
+    if (search_keyword) {
       url += `&search_keyword_in=${search_keyword}`
     }
-    if (media_type !== "") {
-      url += `&media_type=${media_type}`
+    if (countries) {
+      url += `&country_code=${countries}`
     }
-    if (sort_direction !== "") {
+    if(websites) {
+      url += `&website=${websites}`
+    }
+    if(languages) {
+      url += `&languages=${languages}`
+    }
+    if (active_adsets) {
+      url += `&active_adsets=${active_adsets}`
+    }
+    if (adspend) {
+      url += `&adspend=${adspend}`
+    }
+    if (sort_by) {
+      url += `&sort_by=${sort_by}`
+    }
+    if (sort_direction) {
       url += `&sort_direction=${sort_direction}`
     }
-    if(ad_creation_date !== "") {
+    if (scaling) {
+      url += `&scaling=${scaling}`
+    }
+    if (media_type) {
+      url += `&media_type=${media_type}`
+    }
+    if (page_type) {
+      url += `&page_type=${page_type}`
+    }
+    if (niche) {
+      url += `&niche=${niche}`
+    }
+    if(ad_creation_date) {
       url += `&ad_creation_date=${ad_creation_date}`
+    }
+    if(last_seen_date) {
+      url += `&last_seen_date=${last_seen_date}`
+    }
+    if(product_creation_date) {
+      url += `&product_creation_date=${product_creation_date}`
     }
     if (randomize) {
       url += `&randomize=${randomize}`
@@ -173,6 +218,12 @@ export default class CopiwinSDK {
       }
     })
     return await response.json()
+  }
+
+  async nextPage({nextPageUrl}) {
+    let urlSplit = nextPageUrl.split("/")
+    let url = urlSplit.slice(3).join("/")
+    return this.fetchWrapper(`/${url}`)
   }
 
   async facebookAd({ad_id}) {
