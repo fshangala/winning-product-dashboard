@@ -6,7 +6,10 @@ export default class CopiwinSDK {
     this.scheme = process.env.COPIWIN_SCHEME
     this.host = process.env.COPIWIN_HOST
     this.port = process.env.COPIWIN_PORT
-    this.baseUrl = `${this.scheme}://${this.host}:${this.port}`
+    this.baseUrl = `${this.scheme}://${this.host}`
+    if (this.port !== "80") {
+      this.baseUrl += `:${this.port}`
+    }
 
     this.#access_token=access_token
   }
