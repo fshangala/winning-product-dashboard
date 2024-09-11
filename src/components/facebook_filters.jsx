@@ -140,10 +140,6 @@ export default function FacebookFilters({applyFilters}) {
   })
 
   useEffect(function(){
-    console.log(componentState)
-  })
-
-  useEffect(function(){
     applyFilters(componentState)
   },[])
 
