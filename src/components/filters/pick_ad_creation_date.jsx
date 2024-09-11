@@ -1,11 +1,14 @@
 import { useEffect, useRef } from "react"
 
-export default function PickAdCreationDate({value="",onChange=function({value}){}}) {
+export default function PickAdCreationDate({value,onChange=function({value}){}}) {
 
   useEffect(function(){
     var picker = new Lightpick({
       field:document.querySelector("#ad-creation-date-picker"),
       singleDate:false,
+      onSelect: function(start,end) {
+        onChange({value:`${start?start.format("DD/MM/YYYY"):null} - ${end?end.format("DD/MM/YYYY"):null}`})
+      },
     })
   },[])
 
@@ -20,9 +23,7 @@ export default function PickAdCreationDate({value="",onChange=function({value}){
         </div>
       </div>
       <div className="w-embed">
-        <input value={value} onChange={function(e){
-          onChange({value:e.target.value})
-        }} placeholder="Ad Creation Date" type="text" id="ad-creation-date-picker" className="form-input ad select2-selection select2-selection--multiple" readOnly=""/> 
+        <input placeholder="Ad Creation Date" type="text" id="ad-creation-date-picker" className="form-input ad select2-selection select2-selection--multiple" readOnly=""/> 
       </div>
     </div>
   )
