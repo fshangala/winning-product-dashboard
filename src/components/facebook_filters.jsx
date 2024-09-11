@@ -47,6 +47,12 @@ function facebookFiltersReducer(state,action) {
         ...state,
         languages:action.languages,
       }
+    
+    case "set-active-adsets":
+      return {
+        ...state,
+        active_adsets:action.active_adsets,
+      }
 
     case "set-sort-direction":
       return {
@@ -78,6 +84,7 @@ export default function FacebookFilters({applyFilters}) {
     countries:"",
     websites:"",
     languages:"",
+    active_adsets:"",
     sort_direction:"asc",
     media_type:"",
     ad_creation_date:"",
@@ -126,7 +133,10 @@ export default function FacebookFilters({applyFilters}) {
               languages:value,
             })
           }} />
-          <InputActiveAdsets />
+          <InputActiveAdsets value={componentState.active_adsets} onChange={function({value}){dispatch({
+            type:"set-active-adsets",
+            active_adsets:value,
+          })}} />
           <InputAdspend />
           <SelectSortBy />
           <SelectSortDirection value={componentState.sort_direction} onChange={function({value}){dispatch({
