@@ -72,6 +72,12 @@ function facebookFiltersReducer(state,action) {
         sort_direction:action.sort_direction,
       }
 
+    case "set-scaling":
+      return {
+        ...state,
+        scaling:action.scaling,
+      }
+
     case "set-media-type":
       return {
         ...state,
@@ -100,6 +106,7 @@ export default function FacebookFilters({applyFilters}) {
     adspend:"",
     sort_by:"",
     sort_direction:"asc",
+    scaling:"",
     media_type:"",
     ad_creation_date:"",
   })
@@ -167,7 +174,12 @@ export default function FacebookFilters({applyFilters}) {
             type:"set-sort-direction",
             sort_direction:value,
           })}} />
-          <SelectScaling />
+          <SelectScaling value={componentState.scaling} the_onChange={function({value}){
+            dispatch({
+              type:'set-scaling',
+              scaling:value,
+            })
+          }} />
           <SelectMediaType value={componentState.media_type} onChange={function({value}){
             dispatch({
               type:"set-media-type",
