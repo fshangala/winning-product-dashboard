@@ -180,7 +180,7 @@ export default function FacebookFilters({applyFilters}) {
               scaling:value,
             })
           }} />
-          <SelectMediaType value={componentState.media_type} onChange={function({value}){
+          <SelectMediaType value={componentState.media_type} the_onChange={function({value}){
             dispatch({
               type:"set-media-type",
               media_type:value,
