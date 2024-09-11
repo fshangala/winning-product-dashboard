@@ -42,6 +42,9 @@ import AdminDashboard from './routes/admin/admin_dashboard.jsx'
 import AdminFacebookAds from './routes/admin/ads/admin_facebook_ads.jsx'
 import AdminMetaAdvertisers from './routes/admin/ads/meta_advertisers.jsx'
 import AdminSiteSettings from './routes/admin/admin_site_settings.jsx'
+import BillingPortal from './routes/billing/billing.jsx'
+import BillingDashboard from './routes/billing/billing_dashboard.jsx'
+import BillingUpdate from './routes/billing/billing_update.jsx'
 // import 'select2/dist/js/select2.js'
  
 
@@ -116,6 +119,20 @@ const router = createHashRouter([
       {
         path:'site-settings',
         element:<AdminSiteSettings />
+      }
+    ]
+  },
+  {
+    path:'/billing',
+    element:<BillingPortal />,
+    children: [
+      {
+        path:'',
+        element:<BillingDashboard />
+      },
+      {
+        path:'update',
+        element:<BillingUpdate />
       }
     ]
   },
