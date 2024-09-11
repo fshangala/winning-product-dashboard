@@ -14,6 +14,7 @@ export default function useSelect2ChangeHandler(refElem,onChange=function({value
     }
 
     let elem = $(refElem.current).select2({
+      placeholder:"Filter",
       multiple:true,
       allowClear:true,
     })

@@ -95,6 +95,12 @@ function facebookFiltersReducer(state,action) {
         ...state,
         ad_creation_date:action.ad_creation_date,
       }
+
+    case "set-niche":
+      return {
+        ...state,
+        niche:action.niche,
+      }
   
     default:
       break;
@@ -115,6 +121,7 @@ export default function FacebookFilters({applyFilters}) {
     scaling:"",
     media_type:"",
     page_type:"",
+    niche:"",
     ad_creation_date:"",
   })
 
@@ -199,7 +206,12 @@ export default function FacebookFilters({applyFilters}) {
               page_type:value,
             })
           }} />
-          <SelectNiche />
+          <SelectNiche value={componentState.niche} onChange={function({value}){
+            dispatch({
+              type:"set-niche",
+              niche:value,
+            })
+          }} />
           <PickAdCreationDate value={componentState.ad_creation_date} onChange={function({value}){
             dispatch({
               type:"set-ad-creation-date",
