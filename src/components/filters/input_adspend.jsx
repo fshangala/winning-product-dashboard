@@ -1,7 +1,7 @@
 import { OverlayPanel } from 'primereact/overlaypanel'
 import { useRef, useState } from 'react'
 
-export default function InputAdspend() {
+export default function InputAdspend({the_value,onChange=function({value}){}}) {
   const op = useRef(null)
   const [value,setValue] = useState({
     min:0,
@@ -32,12 +32,18 @@ export default function InputAdspend() {
           <div className="range-slider">
               <div className="select-wrapper">
                 <div className="div-block-71">
-                  <input type="number" value={value.min} onChange={function(e){setValue({...value,min:e.target.value})}} className="form-input select2-selection adset-count w-input itemsetcounter" placeholder="Min" style={{width:"100%",marginTop:"10px"}} />
+                  <input type="number" value={value.min} onChange={function(e){
+                    setValue({...value,min:e.target.value})
+                    onChange({value:`${e.target.value} - ${value.max}`})
+                  }} className="form-input select2-selection adset-count w-input itemsetcounter" placeholder="Min" style={{width:"100%",marginTop:"10px"}} />
                 </div>
               </div>
               <div className="select-wrapper">
                 <div className="div-block-71">
-                  <input type="number" value={value.max} onChange={function(e){setValue({...value,max:e.target.value})}} className="form-input select2-selection adset-count w-input itemsetcounter" placeholder="Max" style={{width:"100%",marginTop:"10px"}} />
+                  <input type="number" value={value.max} onChange={function(e){
+                    setValue({...value,max:e.target.value})
+                    onChange({value:`${value.min} - ${e.target.value}`})
+                  }} className="form-input select2-selection adset-count w-input itemsetcounter" placeholder="Max" style={{width:"100%",marginTop:"10px"}} />
                 </div>
             </div>
           </div>

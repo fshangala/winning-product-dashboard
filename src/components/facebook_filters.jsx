@@ -53,6 +53,12 @@ function facebookFiltersReducer(state,action) {
         ...state,
         active_adsets:action.active_adsets,
       }
+    
+    case "set-adspend":
+      return {
+        ...state,
+        adspend:action.adspend,
+      }
 
     case "set-sort-direction":
       return {
@@ -85,6 +91,7 @@ export default function FacebookFilters({applyFilters}) {
     websites:"",
     languages:"",
     active_adsets:"",
+    adspend:"",
     sort_direction:"asc",
     media_type:"",
     ad_creation_date:"",
@@ -133,11 +140,16 @@ export default function FacebookFilters({applyFilters}) {
               languages:value,
             })
           }} />
-          <InputActiveAdsets value={componentState.active_adsets} onChange={function({value}){dispatch({
+          <InputActiveAdsets the_value={componentState.active_adsets} onChange={function({value}){dispatch({
             type:"set-active-adsets",
             active_adsets:value,
           })}} />
-          <InputAdspend />
+          <InputAdspend the_value={componentState.adspend} onChange={function({value}){
+            dispatch({
+              type:"set-adspend",
+              adspend:value,
+            })
+          }} />
           <SelectSortBy />
           <SelectSortDirection value={componentState.sort_direction} onChange={function({value}){dispatch({
             type:"set-sort-direction",
