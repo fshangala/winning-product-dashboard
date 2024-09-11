@@ -1,11 +1,14 @@
 import { useEffect } from "react"
 
-export default function PickProductCreationDate() {
+export default function PickProductCreationDate({value,onChange=function({value}){}}) {
 
   useEffect(function(){
     var picker = new Lightpick({
       field:document.querySelector("#product-creation-date-picker"),
       singleDate:false,
+      onSelect: function(start,end) {
+        onChange({value:`${start?start.format("DD/MM/YYYY"):null} - ${end?end.format("DD/MM/YYYY"):null}`})
+      },
     })
   },[])
   

@@ -90,16 +90,28 @@ function facebookFiltersReducer(state,action) {
         page_type:action.page_type,
       }
 
+    case "set-niche":
+      return {
+        ...state,
+        niche:action.niche,
+      }
+
     case "set-ad-creation-date":
       return {
         ...state,
         ad_creation_date:action.ad_creation_date,
       }
 
-    case "set-niche":
+    case "set-last-seen-date":
       return {
         ...state,
-        niche:action.niche,
+        last_seen_date:action.last_seen_date,
+      }
+
+    case "set-product-creation-date":
+      return {
+        ...state,
+        product_creation_date:action.product_creation_date,
       }
   
     default:
@@ -123,6 +135,8 @@ export default function FacebookFilters({applyFilters}) {
     page_type:"",
     niche:"",
     ad_creation_date:"",
+    last_seen_date:"",
+    product_creation_date:"",
   })
 
   useEffect(function(){
@@ -218,8 +232,18 @@ export default function FacebookFilters({applyFilters}) {
               ad_creation_date:value,
             })
           }} />
-          <PickLastSeenDate />
-          <PickProductCreationDate />
+          <PickLastSeenDate value={componentState.last_seen_date} onChange={function({value}){
+            dispatch({
+              type:'set-last-seen-date',
+              last_seen_date:value,
+            })
+          }} />
+          <PickProductCreationDate value={componentState.product_creation_date} onChange={function({value}){
+            dispatch({
+              type:'set-product-creation-date',
+              product_creation_date:value,
+            })
+          }} />
         </div>
         <hr/>
         <div className="flex w-full justify-between">
