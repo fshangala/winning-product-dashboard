@@ -84,6 +84,12 @@ function facebookFiltersReducer(state,action) {
         media_type:action.media_type,
       }
 
+    case "set-page-type":
+      return {
+        ...state,
+        page_type:action.page_type,
+      }
+
     case "set-ad-creation-date":
       return {
         ...state,
@@ -108,6 +114,7 @@ export default function FacebookFilters({applyFilters}) {
     sort_direction:"asc",
     scaling:"",
     media_type:"",
+    page_type:"",
     ad_creation_date:"",
   })
 
@@ -186,7 +193,12 @@ export default function FacebookFilters({applyFilters}) {
               media_type:value,
             })
           }} />
-          <SelectPageType />
+          <SelectPageType value={componentState.page_type} the_onChange={function({value}){
+            dispatch({
+              type:"set-page-type",
+              page_type:value,
+            })
+          }} />
           <SelectNiche />
           <PickAdCreationDate value={componentState.ad_creation_date} onChange={function({value}){
             dispatch({
