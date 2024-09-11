@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import facebookAdsImage from "../assets/images/facebook-ads.svg"
+import brandImage from "../assets/images/detailed-brand.png";
 
 export default function LoginTemplate({googleLogin=()=>{},emailLogin=({username='',password=''})=>{},alerts=[],setAlerts=([])=>{}}) {
   const [template,setTemplate] = useState("")
@@ -55,8 +57,8 @@ export default function LoginTemplate({googleLogin=()=>{},emailLogin=({username=
       }
       
       // images
-      document.querySelector("#logo").src = sessionStorage.getItem("logo")
-      document.querySelector("#product-demo").src = sessionStorage.getItem("product_demo")
+      document.querySelector("#logo").src = brandImage
+      document.querySelector("#product-demo").src = facebookAdsImage
 
       setInitialized(true)
     } else {
